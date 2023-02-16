@@ -6,9 +6,17 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderPostRequest;
+use App\Services\OrderService;
 
 class ApiOrderController extends Controller
 {
+
+    protected $orderService;
+
+    public function __construct(OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +24,7 @@ class ApiOrderController extends Controller
      */
     public function index()
     {
-        //
+        return $this->orderService->get();
     }
 
     /**
@@ -25,14 +33,9 @@ class ApiOrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderPostRequest $request)
     {
-        Customer::create($request->customer);
-        // Order::create()
-
-        return response()->json([
-            'message' => 'Uspešno snimljena porudžbenica'
-        ], 200);
+        return $this->orderService->save($request);
     }
 
     /**
@@ -43,7 +46,7 @@ class ApiOrderController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->orderService->getOne($id);
     }
 
     /**

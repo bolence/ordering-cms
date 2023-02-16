@@ -5331,7 +5331,11 @@ __webpack_require__.r(__webpack_exports__);
         password: this.password
       };
       axios.post("/login", data).then(function (resp) {
-        window.href.location = "";
+        var token = resp.data.token;
+        var user = JSON.stringify(resp.data.user);
+        localStorage.setItem("bedzevi.jwt", token);
+        localStorage.setItem("bedzevi.user", user);
+        window.location.href = "/";
       })["catch"](function (error) {
         _this.$awn.alert(error.response.data.message);
         _this.errors = error.response.data.errors;
@@ -5356,9 +5360,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      name: null,
-      email: null,
-      password: null,
+      data: {
+        name: null,
+        email: null,
+        password: null,
+        password_confirmation: null
+      },
       errors: {}
     };
   },
@@ -5366,14 +5373,15 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     doRegister: function doRegister() {
       var _this = this;
-      if (!this.email && !this.password && !this.name) return;
-      var data = {
-        name: this.name,
-        email: this.email,
-        password: this.password
-      };
-      axios.post("/register", data).then(function (resp) {
-        window.href.location = "";
+      if (!this.data.email && !this.data.password && !this.data.name && !this.password_confirmation) {
+        return;
+      }
+      axios.post("/register", this.data).then(function (resp) {
+        var jwt = resp.data.token;
+        var user = JSON.stringify(resp.data.user);
+        localStorage.setItem("bedzevi.jwt", token);
+        localStorage.setItem("bedzevi.user", user);
+        window.location.href = "/";
       })["catch"](function (error) {
         _this.$awn.alert(error.response.data.message);
         _this.errors = error.response.data.errors;
@@ -5412,7 +5420,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         tip_kacenja: [],
         plastifikacija: [],
         quantity: 0,
-        type: "Bedž"
+        type: "bedž"
       }],
       kacenja: [{
         id: 1,
@@ -5442,7 +5450,8 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         badge_size: null,
         tip_kacenja: [],
         plastifikacija: [],
-        quantity: 0
+        quantity: 0,
+        type: "bedž"
       });
     },
     removeForm: function removeForm(index) {
@@ -5491,22 +5500,28 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     BadgeForm: _BadgeFormComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
-    var _delivery, _data;
+    var _delivery;
     return {
       date: moment__WEBPACK_IMPORTED_MODULE_4___default()().format("DD.MM.YYYY"),
-      data: (_data = {
+      data: {
         customer: {
           name: null,
           company: null,
           phone: null,
-          email: null
+          email: null,
+          customer_details: false
         },
         delivery: (_delivery = {
           street: null,
           city: null
         }, _defineProperty(_delivery, "street", null), _defineProperty(_delivery, "phone2", null), _defineProperty(_delivery, "delivery_name", null), _delivery),
-        order_from: null
-      }, _defineProperty(_data, "delivery", null), _defineProperty(_data, "enter_date", null), _defineProperty(_data, "order_type", null), _defineProperty(_data, "payment", null), _defineProperty(_data, "napomena", null), _data)
+        order_from: null,
+        delivery_type: null,
+        order_date: null,
+        order_type: null,
+        payment: null,
+        napomena: null
+      }
     };
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
@@ -5518,8 +5533,9 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
   })), {}, {
     makeOrder: function makeOrder() {
       var _this = this;
+      Object.assign(this.data, this.newOrder);
       this.saveOrder(this.data).then(function (resp) {
-        console.log(_this.newOrder);
+        _this.$awn.success(resp.message);
       })["catch"](function (error) {
         _this.$awn.alert(error.message);
       });
@@ -5559,10 +5575,11 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
   data: function data() {
     return {
       forms: [{
-        color: null,
+        tshirt_color: null,
         tshirt_type: null,
-        size: null,
-        quantity: null
+        tshirt_size: null,
+        quantity: null,
+        type: "majica"
       }]
     };
   },
@@ -5572,10 +5589,11 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
   methods: {
     addForm: function addForm() {
       this.forms.push({
-        color: null,
+        tshirt_color: null,
         tshirt_type: null,
-        size: null,
-        quantity: null
+        tshirt_size: null,
+        quantity: null,
+        type: "majica"
       });
     },
     removeForm: function removeForm(index) {
@@ -5722,7 +5740,9 @@ var render = function render() {
       display: "block !important",
       "font-size": "17px !important"
     }
-  }, [_vm._v("\n                                                " + _vm._s(_vm.errors.password[0]) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _vm._m(5), _vm._v(" "), _vm._m(6), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                                " + _vm._s(_vm.errors.password[0]) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
+  }), _vm._v(" "), _vm._m(5), _vm._v(" "), _c("div", {
     staticClass: "col-12"
   }, [_c("div", {
     staticClass: "d-grid"
@@ -5815,26 +5835,6 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "col-md-6"
-  }, [_c("div", {
-    staticClass: "form-check form-switch"
-  }, [_c("input", {
-    staticClass: "form-check-input",
-    attrs: {
-      type: "checkbox",
-      id: "flexSwitchCheckChecked",
-      checked: ""
-    }
-  }), _vm._v(" "), _c("label", {
-    staticClass: "form-check-label",
-    attrs: {
-      "for": "flexSwitchCheckChecked"
-    }
-  }, [_vm._v("Zapamti me")])])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
     staticClass: "col-md-6 text-end"
   }, [_c("a", {
     attrs: {
@@ -5891,8 +5891,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.name,
-      expression: "name"
+      value: _vm.data.name,
+      expression: "data.name"
     }],
     staticClass: "form-control",
     "class": {
@@ -5905,12 +5905,12 @@ var render = function render() {
       placeholder: "Jhon"
     },
     domProps: {
-      value: _vm.name
+      value: _vm.data.name
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.name = $event.target.value;
+        _vm.$set(_vm.data, "name", $event.target.value);
       }
     }
   }), _vm._v(" "), _vm.errors.name ? _c("div", {
@@ -5930,8 +5930,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.email,
-      expression: "email"
+      value: _vm.data.email,
+      expression: "data.email"
     }],
     staticClass: "form-control",
     "class": {
@@ -5944,12 +5944,12 @@ var render = function render() {
       placeholder: "example@user.com"
     },
     domProps: {
-      value: _vm.email
+      value: _vm.data.email
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.email = $event.target.value;
+        _vm.$set(_vm.data, "email", $event.target.value);
       }
     }
   }), _vm._v(" "), _vm.errors.email ? _c("div", {
@@ -5971,8 +5971,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.password,
-      expression: "password"
+      value: _vm.data.password,
+      expression: "data.password"
     }],
     staticClass: "form-control border-end-0",
     "class": {
@@ -5985,12 +5985,12 @@ var render = function render() {
       placeholder: "Unesi šifru"
     },
     domProps: {
-      value: _vm.password
+      value: _vm.data.password
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.password = $event.target.value;
+        _vm.$set(_vm.data, "password", $event.target.value);
       }
     }
   }), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm.errors.password ? _c("div", {
@@ -5999,7 +5999,48 @@ var render = function render() {
       display: "block !important",
       "font-size": "17px !important"
     }
-  }, [_vm._v("\n                                                " + _vm._s(_vm.errors.password[0]) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _vm._m(5), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                                " + _vm._s(_vm.errors.password[0]) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c("div", {
+    staticClass: "col-12"
+  }, [_c("label", {
+    staticClass: "form-label",
+    attrs: {
+      "for": "inputChoosePassword"
+    }
+  }, [_vm._v("Unesi šifru")]), _vm._v(" "), _c("div", {
+    staticClass: "input-group"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.data.password_confirmation,
+      expression: "\n                                                    data.password_confirmation\n                                                "
+    }],
+    staticClass: "form-control border-end-0",
+    "class": {
+      "is-invalid": _vm.errors.password_confirmation
+    },
+    attrs: {
+      name: "password",
+      type: "password",
+      value: "12345678",
+      placeholder: "Unesi šifru"
+    },
+    domProps: {
+      value: _vm.data.password_confirmation
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.data, "password_confirmation", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _vm._m(5), _vm._v(" "), _vm.errors.password_confirmation ? _c("div", {
+    staticClass: "invalid-feedback",
+    staticStyle: {
+      display: "block !important",
+      "font-size": "17px !important"
+    }
+  }, [_vm._v("\n                                                " + _vm._s(_vm.errors.password_confirmation[0]) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _vm._m(6), _vm._v(" "), _c("div", {
     staticClass: "col-12"
   }, [_c("div", {
     staticClass: "d-grid"
@@ -6074,6 +6115,17 @@ var staticRenderFns = [function () {
   return _c("div", {
     staticClass: "login-separater text-center mb-4"
   }, [_c("span", [_vm._v("OR SIGN UP WITH EMAIL")]), _vm._v(" "), _c("hr")]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("a", {
+    staticClass: "input-group-text bg-transparent",
+    attrs: {
+      href: "javascript:;"
+    }
+  }, [_c("i", {
+    staticClass: "bx bx-hide"
+  })]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -6392,6 +6444,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
 var render = function render() {
+  var _vm$errors, _vm$errors2;
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
@@ -6483,24 +6536,25 @@ var render = function render() {
       width: "100%"
     },
     attrs: {
-      name: "enter_date",
+      name: "order_date",
       format: "dd MMM yyyy",
+      type: "date",
       "input-class": {
         "form-control": true,
-        "form-control-danger": _vm.errors.enter_date
+        "form-control-danger": (_vm$errors = _vm.errors) === null || _vm$errors === void 0 ? void 0 : _vm$errors.order_date
       },
       "calendar-button-icon": "fa fa-calendar"
     },
     model: {
-      value: _vm.data.enter_date,
+      value: _vm.data.order_date,
       callback: function callback($$v) {
-        _vm.$set(_vm.data, "enter_date", $$v);
+        _vm.$set(_vm.data, "order_date", $$v);
       },
-      expression: "data.enter_date"
+      expression: "data.order_date"
     }
-  })], 1), _vm._v(" "), _vm.errors.enter_date ? _c("div", {
+  })], 1), _vm._v(" "), (_vm$errors2 = _vm.errors) !== null && _vm$errors2 !== void 0 && _vm$errors2.order_date ? _c("div", {
     staticClass: "invalid-feedback error-message"
-  }, [_vm._v("\n                            " + _vm._s(_vm.errors.enter_date[0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                            " + _vm._s(_vm.errors.order_date[0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-3"
   }, [_c("label", {
     staticClass: "form-label",
@@ -6785,12 +6839,12 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.data.delivery,
-      expression: "data.delivery"
+      value: _vm.data.delivery_type,
+      expression: "data.delivery_type"
     }],
     staticClass: "form-check-input",
     "class": {
-      "is-invalid": _vm.errors.delivery
+      "is-invalid": _vm.errors.delivery_type
     },
     attrs: {
       type: "radio",
@@ -6799,11 +6853,11 @@ var render = function render() {
       name: "delivery"
     },
     domProps: {
-      checked: _vm._q(_vm.data.delivery, "personal")
+      checked: _vm._q(_vm.data.delivery_type, "personal")
     },
     on: {
       change: function change($event) {
-        return _vm.$set(_vm.data, "delivery", "personal");
+        return _vm.$set(_vm.data, "delivery_type", "personal");
       }
     }
   }), _vm._v(" "), _c("label", {
@@ -6817,12 +6871,12 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.data.delivery,
-      expression: "data.delivery"
+      value: _vm.data.delivery_type,
+      expression: "data.delivery_type"
     }],
     staticClass: "form-check-input",
     "class": {
-      "is-invalid": _vm.errors.delivery
+      "is-invalid": _vm.errors.delivery_type
     },
     attrs: {
       type: "radio",
@@ -6831,11 +6885,11 @@ var render = function render() {
       name: "delivery"
     },
     domProps: {
-      checked: _vm._q(_vm.data.delivery, "dostava")
+      checked: _vm._q(_vm.data.delivery_type, "dostava")
     },
     on: {
       change: function change($event) {
-        return _vm.$set(_vm.data, "delivery", "dostava");
+        return _vm.$set(_vm.data, "delivery_type", "dostava");
       }
     }
   }), _vm._v(" "), _c("label", {
@@ -6843,9 +6897,9 @@ var render = function render() {
     attrs: {
       "for": "dostava"
     }
-  }, [_vm._v("Dostava")])])]), _vm._v(" "), _vm.errors.delivery ? _c("div", {
+  }, [_vm._v("Dostava")])])]), _vm._v(" "), _vm.errors.delivery_type ? _c("div", {
     staticClass: "invalid-feedback error-message"
-  }, [_vm._v("\n                            " + _vm._s(_vm.errors.delivery[0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                            " + _vm._s(_vm.errors.delivery_type[0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-12"
   }, [_c("label", {
     staticClass: "form-label",
@@ -6883,11 +6937,44 @@ var render = function render() {
     attrs: {
       type: _vm.data.order_type
     }
-  }), _vm._v(" "), _vm.data.delivery == "dostava" ? _c("div", {
+  }), _vm._v(" "), _vm.data.delivery_type == "dostava" ? _c("div", {
     staticClass: "row pt-3"
+  }, [_c("div", {
+    staticClass: "d-flex justify-content-between align-items-center"
   }, [_c("h5", {
     staticClass: "mb-0 text-uppercase pb-3"
-  }, [_vm._v("\n                            Podaci za dostavu\n                        ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                Podaci za dostavu\n                            ")]), _vm._v(" "), _c("span", {
+    staticClass: "float-end"
+  }, [_c("div", {
+    staticClass: "form-check form-check-inline mt-2"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.data.customer.customer_details,
+      expression: "\n                                            data.customer.customer_details\n                                        "
+    }],
+    staticClass: "form-check-input",
+    attrs: {
+      type: "radio",
+      id: "customer_details",
+      name: "customer_details"
+    },
+    domProps: {
+      value: true,
+      checked: _vm._q(_vm.data.customer.customer_details, true)
+    },
+    on: {
+      change: function change($event) {
+        return _vm.$set(_vm.data.customer, "customer_details", true);
+      }
+    }
+  }), _vm._v(" "), _c("label", {
+    staticClass: "form-check-label",
+    attrs: {
+      "for": "customer_details"
+    }
+  }, [_vm._v("Dostavlja se poručiocu")])])])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-3"
   }, [_c("label", {
     staticClass: "form-label",
@@ -7198,8 +7285,8 @@ var render = function render() {
       directives: [{
         name: "model",
         rawName: "v-model",
-        value: form.color,
-        expression: "form.color"
+        value: form.tshirt_color,
+        expression: "form.tshirt_color"
       }],
       staticClass: "form-select",
       attrs: {
@@ -7214,7 +7301,7 @@ var render = function render() {
             var val = "_value" in o ? o._value : o.value;
             return val;
           });
-          _vm.$set(form, "color", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+          _vm.$set(form, "tshirt_color", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
         }
       }
     }, [_c("option", {
@@ -7276,8 +7363,8 @@ var render = function render() {
       directives: [{
         name: "model",
         rawName: "v-model",
-        value: form.size,
-        expression: "form.size"
+        value: form.tshirt_size,
+        expression: "form.tshirt_size"
       }],
       staticClass: "form-select",
       attrs: {
@@ -7292,7 +7379,7 @@ var render = function render() {
             var val = "_value" in o ? o._value : o.value;
             return val;
           });
-          _vm.$set(form, "size", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+          _vm.$set(form, "tshirt_size", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
         }
       }
     }, [_c("option", {
@@ -7519,13 +7606,12 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-
+var token = document.head.querySelector('meta[name="csrf-token"]');
+if (token) {
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+}
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('bedzevi.jwt');
 // import Echo from 'laravel-echo';
 
 // window.Pusher = require('pusher-js');

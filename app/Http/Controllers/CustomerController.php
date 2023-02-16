@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Customer;
 
 class CustomerController extends Controller
 {
-    //
+
+    public function index()
+    {
+        $customers = Customer::withCount('orders')->orderByDesc('created_at')->get();
+
+        return view('customers.index', compact('customers'))->with(['title' => 'Mušterije']);
+    }
 }

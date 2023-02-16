@@ -13,7 +13,7 @@
                     <select
                         name="color"
                         id="color"
-                        v-model="form.color"
+                        v-model="form.tshirt_color"
                         class="form-select"
                     >
                         <option value="null">Izaberi boju majice</option>
@@ -41,7 +41,7 @@
                     <select
                         name="size"
                         id="size"
-                        v-model="form.size"
+                        v-model="form.tshirt_size"
                         class="form-select"
                     >
                         <option value="null">Izaberi veličinu majice</option>
@@ -105,10 +105,11 @@ export default {
         return {
             forms: [
                 {
-                    color: null,
+                    tshirt_color: null,
                     tshirt_type: null,
-                    size: null,
+                    tshirt_size: null,
                     quantity: null,
+                    type: "majica",
                 },
             ],
         };
@@ -123,10 +124,11 @@ export default {
     methods: {
         addForm() {
             this.forms.push({
-                color: null,
+                tshirt_color: null,
                 tshirt_type: null,
-                size: null,
+                tshirt_size: null,
                 quantity: null,
+                type: "majica",
             });
         },
 

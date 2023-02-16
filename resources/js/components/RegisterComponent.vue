@@ -61,7 +61,7 @@
                                             <input
                                                 type="text"
                                                 name="name"
-                                                v-model="name"
+                                                v-model="data.name"
                                                 class="form-control"
                                                 id="name"
                                                 :class="{
@@ -92,7 +92,7 @@
                                                 class="form-control"
                                                 id="email"
                                                 name="email"
-                                                v-model="email"
+                                                v-model="data.email"
                                                 placeholder="example@user.com"
                                                 :class="{
                                                     'is-invalid': errors.email,
@@ -117,7 +117,7 @@
                                             >
                                             <div class="input-group">
                                                 <input
-                                                    v-model="password"
+                                                    v-model="data.password"
                                                     name="password"
                                                     type="password"
                                                     class="form-control border-end-0"
@@ -143,6 +143,51 @@
                                                     "
                                                 >
                                                     {{ errors.password[0] }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label
+                                                for="inputChoosePassword"
+                                                class="form-label"
+                                                >Unesi šifru</label
+                                            >
+                                            <div class="input-group">
+                                                <input
+                                                    v-model="
+                                                        data.password_confirmation
+                                                    "
+                                                    name="password"
+                                                    type="password"
+                                                    class="form-control border-end-0"
+                                                    value="12345678"
+                                                    placeholder="Unesi šifru"
+                                                    :class="{
+                                                        'is-invalid':
+                                                            errors.password_confirmation,
+                                                    }"
+                                                />
+                                                <a
+                                                    href="javascript:;"
+                                                    class="input-group-text bg-transparent"
+                                                    ><i class="bx bx-hide"></i
+                                                ></a>
+
+                                                <div
+                                                    v-if="
+                                                        errors.password_confirmation
+                                                    "
+                                                    class="invalid-feedback"
+                                                    style="
+                                                        display: block !important;
+                                                        font-size: 17px !important;
+                                                    "
+                                                >
+                                                    {{
+                                                        errors
+                                                            .password_confirmation[0]
+                                                    }}
                                                 </div>
                                             </div>
                                         </div>
@@ -181,9 +226,12 @@
 export default {
     data() {
         return {
-            name: null,
-            email: null,
-            password: null,
+            data: {
+                name: null,
+                email: null,
+                password: null,
+                password_confirmation: null,
+            },
             errors: {},
         };
     },
@@ -192,18 +240,23 @@ export default {
 
     methods: {
         doRegister() {
-            if (!this.email && !this.password && !this.name) return;
-
-            let data = {
-                name: this.name,
-                email: this.email,
-                password: this.password,
-            };
+            if (
+                !this.data.email &&
+                !this.data.password &&
+                !this.data.name &&
+                !this.password_confirmation
+            ) {
+                return;
+            }
 
             axios
-                .post("/register", data)
+                .post("/register", this.data)
                 .then((resp) => {
-                    window.href.location = "";
+                    let jwt = resp.data.token;
+                    let user = JSON.stringify(resp.data.user);
+                    localStorage.setItem("bedzevi.jwt", token);
+                    localStorage.setItem("bedzevi.user", user);
+                    window.location.href = "/";
                 })
                 .catch((error) => {
                     this.$awn.alert(error.response.data.message);

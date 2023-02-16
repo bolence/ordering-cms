@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that aren't mass assignable.
@@ -21,7 +23,10 @@ class Order extends Model
      *
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'enter_date'];
+
+    protected $with = ['order_items', 'user', 'customer'];
+
 
     /**
      * Undocumented function
@@ -33,6 +38,11 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function order_items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
     /**
      * Undocumented function
      *
@@ -41,5 +51,15 @@ class Order extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function setOrderDateAttribute($value)
+    {
+        $this->attributes['order_date'] = Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function getOrderDateAttribute()
+    {
+        return $this->enter_date->format('d.m.Y');
     }
 }

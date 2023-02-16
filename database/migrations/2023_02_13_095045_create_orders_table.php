@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->enum('order_from', ['facebook', 'instagram', 'viber']);
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('customer_id')->index();
+            $table->unsignedBigInteger('customer_id')->index()->nullable();
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->timestamps();
             $table->softDeletes();

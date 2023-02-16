@@ -57,23 +57,24 @@
                             >
                             <div class="input-group">
                                 <datepicker
-                                    v-model="data.enter_date"
-                                    name="enter_date"
+                                    v-model="data.order_date"
+                                    name="order_date"
                                     format="dd MMM yyyy"
+                                    type="date"
                                     style="width: 100%"
                                     :input-class="{
                                         'form-control': true,
                                         'form-control-danger':
-                                            errors.enter_date,
+                                            errors?.order_date,
                                     }"
                                     calendar-button-icon="fa fa-calendar"
                                 ></datepicker>
                             </div>
                             <div
-                                v-if="errors.enter_date"
+                                v-if="errors?.order_date"
                                 class="invalid-feedback error-message"
                             >
-                                {{ errors.enter_date[0] }}
+                                {{ errors.order_date[0] }}
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -269,9 +270,9 @@
                                         value="personal"
                                         id="lično"
                                         name="delivery"
-                                        v-model="data.delivery"
+                                        v-model="data.delivery_type"
                                         :class="{
-                                            'is-invalid': errors.delivery,
+                                            'is-invalid': errors.delivery_type,
                                         }"
                                     />
                                     <label class="form-check-label" for="lično"
@@ -286,9 +287,9 @@
                                         value="dostava"
                                         id="dostava"
                                         name="delivery"
-                                        v-model="data.delivery"
+                                        v-model="data.delivery_type"
                                         :class="{
-                                            'is-invalid': errors.delivery,
+                                            'is-invalid': errors.delivery_type,
                                         }"
                                     />
                                     <label
@@ -299,10 +300,10 @@
                                 </div>
                             </div>
                             <div
-                                v-if="errors.delivery"
+                                v-if="errors.delivery_type"
                                 class="invalid-feedback error-message"
                             >
-                                {{ errors.delivery[0] }}
+                                {{ errors.delivery_type[0] }}
                             </div>
                         </div>
                         <div class="col-12">
@@ -326,10 +327,38 @@
                         <TshirtForm :type="data.order_type" />
                         <BadgeForm :type="data.order_type" />
 
-                        <div class="row pt-3" v-if="data.delivery == 'dostava'">
-                            <h5 class="mb-0 text-uppercase pb-3">
-                                Podaci za dostavu
-                            </h5>
+                        <div
+                            class="row pt-3"
+                            v-if="data.delivery_type == 'dostava'"
+                        >
+                            <div
+                                class="d-flex justify-content-between align-items-center"
+                            >
+                                <h5 class="mb-0 text-uppercase pb-3">
+                                    Podaci za dostavu
+                                </h5>
+                                <span class="float-end">
+                                    <div
+                                        class="form-check form-check-inline mt-2"
+                                    >
+                                        <input
+                                            class="form-check-input"
+                                            type="radio"
+                                            :value="true"
+                                            id="customer_details"
+                                            name="customer_details"
+                                            v-model="
+                                                data.customer.customer_details
+                                            "
+                                        />
+                                        <label
+                                            class="form-check-label"
+                                            for="customer_details"
+                                            >Dostavlja se poručiocu</label
+                                        >
+                                    </div>
+                                </span>
+                            </div>
 
                             <div class="col-md-3">
                                 <label for="delivery_name" class="form-label"
@@ -546,6 +575,7 @@ export default {
                     company: null,
                     phone: null,
                     email: null,
+                    customer_details: false,
                 },
                 delivery: {
                     street: null,
@@ -555,8 +585,8 @@ export default {
                     delivery_name: null,
                 },
                 order_from: null,
-                delivery: null,
-                enter_date: null,
+                delivery_type: null,
+                order_date: null,
                 order_type: null,
                 payment: null,
                 napomena: null,
@@ -576,9 +606,11 @@ export default {
             saveOrder: "order/saveOrder",
         }),
         makeOrder() {
+            Object.assign(this.data, this.newOrder);
+
             this.saveOrder(this.data)
                 .then((resp) => {
-                    console.log(this.newOrder);
+                    this.$awn.success(resp.message);
                 })
                 .catch((error) => {
                     this.$awn.alert(error.message);

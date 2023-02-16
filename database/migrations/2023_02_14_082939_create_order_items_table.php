@@ -17,11 +17,12 @@ class CreateOrderItemsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
+            $table->string('type');
             $table->string('tshirt_color')->nullable();
             $table->string('tshirt_type')->nullable(); //muska,zenska
             $table->string('tshirt_size')->nullable();
             $table->smallInteger('badge_size')->nullable();
-            $table->enum('tip_kacenja', ['zihernadla', 'samolepljiv', 'magnet'])->nullable();
+            $table->json('tip_kacenja')->nullable();
             $table->enum('plastifikacija', ['sjaj', 'mat']);
             $table->smallInteger('quantity');
             $table->timestamps();

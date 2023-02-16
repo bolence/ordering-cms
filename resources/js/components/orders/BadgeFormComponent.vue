@@ -117,7 +117,7 @@ export default {
                     tip_kacenja: [],
                     plastifikacija: [],
                     quantity: 0,
-                    type: "Bedž",
+                    type: "bedž",
                 },
             ],
 
@@ -147,6 +147,7 @@ export default {
                 tip_kacenja: [],
                 plastifikacija: [],
                 quantity: 0,
+                type: "bedž",
             });
         },
 
