@@ -2,12 +2,11 @@
     <div class="row">
         <div class="col-xl-12 mx-auto">
             <div
-                class="card border-top border-bottom border-0 border-3 border-primary"
-                style="border-radius: 15px"
+                class="card border-top border-bottom border-0 border-3 border-primary bordered-15"
             >
                 <div class="card-body p-4">
                     <div
-                        class="card-title d-flex align-items-center justify-content-between"
+                        class="card-title d-flex align-items-center justify-content-between pb-3"
                     >
                         <div>
                             <h5 class="mb-0">
@@ -16,6 +15,35 @@
                                 ></i>
                                 Nova porudžbina
                             </h5>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="name" class="form-label"
+                                >Broj porudžbine</label
+                            >
+                            <div class="input-group">
+                                <span class="input-group-text bg-transparent"
+                                    ><i class="bx bxs-alarm"></i
+                                ></span>
+                                <input
+                                    type="text"
+                                    class="form-control border-start-0"
+                                    id="name"
+                                    name="name"
+                                    :class="{
+                                        'is-invalid': errors['order_number'],
+                                    }"
+                                    v-model="data.order_number"
+                                    placeholder="Unesi broj porudžbine"
+                                />
+                            </div>
+
+                            <div
+                                v-if="errors.order_number"
+                                class="invalid-feedback error-message"
+                            >
+                                {{ errors["order_number"][0] }}
+                            </div>
                         </div>
 
                         <span class="float-end">
@@ -49,8 +77,8 @@
                         </span>
                     </div>
 
-                    <hr />
-                    <form class="row g-3">
+                    <hr class="fancy" />
+                    <form class="row g-3 pb-3">
                         <div class="col-md-3">
                             <label for="name" class="form-label"
                                 >Datum prijema porudžbine</label
@@ -322,7 +350,7 @@
                             </div>
                         </div>
 
-                        <hr />
+                        <hr class="fancy" />
 
                         <TshirtForm :type="data.order_type" />
                         <BadgeForm :type="data.order_type" />
@@ -347,6 +375,7 @@
                                             :value="true"
                                             id="customer_details"
                                             name="customer_details"
+                                            @change="setSamePhone()"
                                             v-model="
                                                 data.customer.customer_details
                                             "
@@ -361,14 +390,14 @@
                             </div>
 
                             <div class="col-md-3">
-                                <label for="delivery_name" class="form-label"
+                                <label for="name" class="form-label"
                                     >Ime/Firma</label
                                 >
                                 <input
                                     class="form-control"
                                     id="delivery_name"
                                     name="delivery_name"
-                                    v-model="data.delivery.delivery_name"
+                                    v-model="data.delivery.name"
                                     placeholder="Ime ili firma"
                                 />
                             </div>
@@ -406,13 +435,37 @@
                                     class="form-control"
                                     id="phone2"
                                     name="phone2"
-                                    v-model="data.delivery.phone2"
+                                    v-model="data.delivery.phone"
                                     placeholder="Telefon"
                                 />
                             </div>
                         </div>
 
-                        <div class="col-12 pt-5">
+                        <div
+                            class="col-12 pt-5 d-flex justify-content-between align-items-center"
+                        >
+                            <div class="col-md-3">
+                                <label for="price" class="form-label"
+                                    >Cena</label
+                                >
+                                <input
+                                    class="form-control"
+                                    id="price"
+                                    name="price"
+                                    v-model="data.price"
+                                    :class="{
+                                        'is-invalid': errors.price,
+                                    }"
+                                    placeholder="Unesi ukupnu sumu porudžbine"
+                                />
+                                <div
+                                    v-if="errors.price"
+                                    class="invalid-feedback error-message"
+                                >
+                                    {{ errors.price[0] }}
+                                </div>
+                            </div>
+
                             <a
                                 @click.prevent="makeOrder()"
                                 class="btn btn-primary px-3 float-end"
@@ -420,7 +473,6 @@
                                 <i class="bx bxs-save"></i>Napravi porudžbinu
                             </a>
                         </div>
-                        {{ data }}
                     </form>
                 </div>
             </div>
@@ -457,10 +509,10 @@
                                     :key="index"
                                 >
                                     <td>
-                                        {{ item.color }}
+                                        {{ item.tshirt_color }}
                                     </td>
                                     <td>
-                                        {{ item.size }}
+                                        {{ item.tshirt_size }}
                                     </td>
                                     <td>
                                         {{ item.tshirt_type }}
@@ -581,8 +633,8 @@ export default {
                     street: null,
                     city: null,
                     street: null,
-                    phone2: null,
-                    delivery_name: null,
+                    phone: null,
+                    name: null,
                 },
                 order_from: null,
                 delivery_type: null,
@@ -590,6 +642,7 @@ export default {
                 order_type: null,
                 payment: null,
                 napomena: null,
+                price: null,
             },
         };
     },
@@ -617,6 +670,10 @@ export default {
                 });
         },
 
+        clearForm() {
+            this.data = {};
+        },
+
         removeTshirt(index) {
             this.newOrder.tshirt.splice(index, 1);
         },
@@ -624,6 +681,24 @@ export default {
         removeBadge(index) {
             this.newOrder.badges.splice(index, 1);
         },
+
+        setSamePhone() {
+            this.data.delivery.phone2 = this.data.customer.phone;
+        },
     },
 };
 </script>
+
+<style>
+hr.fancy {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0)
+    );
+}
+</style>

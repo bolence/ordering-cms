@@ -27,7 +27,7 @@
                                     <th>Grad</th>
                                     <th>Telefon</th>
                                     <th>Telefon 2</th>
-                                    <th>Broj poruđbina</th>
+                                    <th>Broj poruđžbina</th>
                                     <th>Detalji</th>
                                     <th>Akcije</th>
                                 </tr>

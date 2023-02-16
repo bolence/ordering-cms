@@ -53,6 +53,11 @@ class Order extends Model
         return $this->belongsTo(Customer::class);
     }
 
+    public function delivery()
+    {
+        return $this->hasOne(Delivery::class);
+    }
+
     public function setOrderDateAttribute($value)
     {
         $this->attributes['order_date'] = Carbon::parse($value)->format('Y-m-d');

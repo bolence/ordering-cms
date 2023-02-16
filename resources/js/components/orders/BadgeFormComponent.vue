@@ -156,6 +156,7 @@ export default {
         },
 
         addToNewOrderItems() {
+            this.$awn.success("Dodat bedž u porudžbinu.");
             this.newOrder.badges = this.forms;
         },
     },

@@ -4,8 +4,10 @@ namespace App\Services;
 
 use App\Models\Order;
 use App\Models\Customer;
+use App\Models\Delivery;
 use Illuminate\Support\Str;
 use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderService  extends GlobalService
 {
@@ -30,8 +32,8 @@ class OrderService  extends GlobalService
      */
     public function save($request)
     {
-        $request['order_number'] = Str::random(8);
-        $request['user_id'] = 1;
+        // $request['order_number'] = Str::random(8);
+        $request['user_id'] = Auth::id();
 
         $order = Order::create($request->only(['order_date', 'order_number', 'delivery_type', 'order_from', 'user_id', 'napomena']));
 
@@ -76,7 +78,7 @@ class OrderService  extends GlobalService
         if ($request->customer['customer_details']) {
             $customer_details['street'] = $request->delivery['street'];
             $customer_details['city'] = $request->delivery['city'];
-            $customer_details['phone2'] = $request->delivery['phone2'];
+            $customer_details['phone2'] = $request->customer['phone'];
         }
 
         // merge all to existing request with customer details
@@ -84,6 +86,10 @@ class OrderService  extends GlobalService
 
         // create new customer
         $customer = Customer::create($customer);
+
+        // save delivery address
+
+        Delivery::create($request->delivery);
 
         // update order with customer id
         $order->customer_id = $customer->id;

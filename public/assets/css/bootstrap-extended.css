@@ -451,3 +451,31 @@ input[type="checkbox"] {
     display: block !important;
     font-size: 17px !important;
 }
+
+.bordered-10 {
+    border-radius: 10px;
+}
+
+.bordered-15 {
+    border-radius: 15px;
+}
+
+.bordered-20 {
+    border-radius: 20px;
+}
+
+.bordered-25 {
+    border-radius: 25px;
+}
+
+hr.fancy {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0)
+    );
+}

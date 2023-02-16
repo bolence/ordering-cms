@@ -138,6 +138,7 @@ export default {
         },
 
         addToNewOrderItems() {
+            this.$awn.success("Dodata majica u porudžbinu.");
             this.newOrder.tshirt = this.forms;
         },
     },

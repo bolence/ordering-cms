@@ -14,7 +14,7 @@ class OrderPostRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        return true;
     }
 
     /**
@@ -32,6 +32,7 @@ class OrderPostRequest extends FormRequest
             'order_date' => 'required',
             'payment' => 'required',
             'delivery_type' => 'required',
+            'price' => 'required',
         ];
     }
 
@@ -45,6 +46,7 @@ class OrderPostRequest extends FormRequest
             'order_date.required' => 'Datum poručivanja je obavezno polje',
             'payment.required' => 'Način placanja je obavezno polje',
             'delivery_type.required' => 'Način dostave je obavezno polje',
+            'price.required' => 'Suma je obavezno polje',
         ];
     }
 }
