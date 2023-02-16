@@ -5424,13 +5424,13 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       }],
       kacenja: [{
         id: 1,
-        type: "zihernadla"
+        type: "Zihernadla"
       }, {
         id: 2,
-        type: "magnet"
+        type: "Magnet"
       }, {
         id: 3,
-        type: "samolepljiv"
+        type: "Samolepljiv"
       }],
       plastification: [{
         id: 1,
@@ -5606,10 +5606,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     },
     removeForm: function removeForm(index) {
       this.forms.splice(index, 1);
-      this.$awn.success("Uspešno izbrisana forma");
+      this.$awn.success("Uspešno izbrisana forma", {
+        durations: 200
+      });
     },
     addToNewOrderItems: function addToNewOrderItems() {
-      this.$awn.success("Dodata majica u porudžbinu.");
+      this.$awn.info("Dodata majica u porudžbinu.", {
+        durations: 200,
+        position: "bottom-right"
+      });
       this.newOrder.tshirt = this.forms;
     }
   }
@@ -6204,7 +6209,7 @@ var render = function render() {
     staticStyle: {
       "font-size": "30px"
     }
-  })])]), _vm._v(" "), _vm._l(_vm.forms, function (form, key, index) {
+  })])]), _vm._v(" "), _vm._l(_vm.forms, function (form, index) {
     return _c("div", {
       key: index
     }, [_c("div", {
@@ -6416,6 +6421,28 @@ var render = function render() {
     }, [_vm._v("10")])])]), _vm._v(" "), _c("div", {
       staticClass: "col-md mx-auto text-center mt-3"
     }, [_c("a", {
+      directives: [{
+        name: "show",
+        rawName: "v-show",
+        value: index > 0,
+        expression: "index > 0"
+      }],
+      staticClass: "text-danger",
+      attrs: {
+        href: ""
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.removeForm(index);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "bx bx-minus",
+      staticStyle: {
+        "font-size": "30px"
+      }
+    })]), _vm._v(" "), index == 0 ? _c("a", {
       staticClass: "text-success",
       attrs: {
         href: ""
@@ -6431,7 +6458,7 @@ var render = function render() {
       staticStyle: {
         "font-size": "30px"
       }
-    })])])])]);
+    })]) : _vm._e()])])]);
   })], 2);
 };
 var staticRenderFns = [];
@@ -6467,22 +6494,20 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "card-title d-flex align-items-center justify-content-between pb-3"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3"
+    staticClass: "col-md-3 px-5"
   }, [_c("label", {
-    staticClass: "form-label",
+    staticClass: "form-label fw-bold",
     attrs: {
       "for": "name"
     }
-  }, [_vm._v("Broj porudžbine")]), _vm._v(" "), _c("div", {
-    staticClass: "input-group"
-  }, [_vm._m(1), _vm._v(" "), _c("input", {
+  }, [_vm._v("Broj porudžbine")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.data.order_number,
       expression: "data.order_number"
     }],
-    staticClass: "form-control border-start-0",
+    staticClass: "form-control",
     "class": {
       "is-invalid": _vm.errors["order_number"]
     },
@@ -6501,12 +6526,12 @@ var render = function render() {
         _vm.$set(_vm.data, "order_number", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _vm.errors.order_number ? _c("div", {
+  }), _vm._v(" "), _vm.errors.order_number ? _c("div", {
     staticClass: "invalid-feedback error-message"
-  }, [_vm._v("\n                            " + _vm._s(_vm.errors["order_number"][0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("span", {
-    staticClass: "float-end"
+  }, [_vm._v("\n                            " + _vm._s(_vm.errors["order_number"][0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "col-mx-auto float-end"
   }, [_c("div", {
-    staticClass: "form-check form-check-inline mt-2"
+    staticClass: "form-check form-check-inline mt-2 pl-2"
   }, [_c("input", {
     directives: [{
       name: "model",
@@ -6530,7 +6555,7 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("label", {
-    staticClass: "form-check-label",
+    staticClass: "form-check-label fw-bold",
     attrs: {
       "for": "tshirt"
     }
@@ -6559,7 +6584,7 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("label", {
-    staticClass: "form-check-label",
+    staticClass: "form-check-label fw-bold",
     attrs: {
       "for": "badges"
     }
@@ -6570,17 +6595,18 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "col-md-3"
   }, [_c("label", {
-    staticClass: "form-label",
+    staticClass: "form-label fw-bold",
     attrs: {
       "for": "name"
     }
-  }, [_vm._v("Datum prijema porudžbine")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Datum porudžbine")]), _vm._v(" "), _c("div", {
     staticClass: "input-group"
   }, [_c("datepicker", {
     staticStyle: {
       width: "100%"
     },
     attrs: {
+      placeholder: "Datum porudžbine",
       name: "order_date",
       format: "dd MMM yyyy",
       type: "date",
@@ -6602,13 +6628,13 @@ var render = function render() {
   }, [_vm._v("\n                            " + _vm._s(_vm.errors.order_date[0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-3"
   }, [_c("label", {
-    staticClass: "form-label",
+    staticClass: "form-label fw-bold",
     attrs: {
       "for": "name"
     }
   }, [_vm._v("Ime i prezime")]), _vm._v(" "), _c("div", {
     staticClass: "input-group"
-  }, [_vm._m(2), _vm._v(" "), _c("input", {
+  }, [_vm._m(1), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -6639,13 +6665,13 @@ var render = function render() {
   }, [_vm._v("\n                            " + _vm._s(_vm.errors["customer.name"][0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-3"
   }, [_c("label", {
-    staticClass: "form-label",
+    staticClass: "form-label fw-bold",
     attrs: {
       "for": "company"
     }
   }, [_vm._v("Firma")]), _vm._v(" "), _c("div", {
     staticClass: "input-group"
-  }, [_vm._m(3), _vm._v(" "), _c("input", {
+  }, [_vm._m(2), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -6671,13 +6697,13 @@ var render = function render() {
   })])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-3"
   }, [_c("label", {
-    staticClass: "form-label",
+    staticClass: "form-label fw-bold",
     attrs: {
       "for": "phone"
     }
   }, [_vm._v("Telefon")]), _vm._v(" "), _c("div", {
     staticClass: "input-group"
-  }, [_vm._m(4), _vm._v(" "), _c("input", {
+  }, [_vm._m(3), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -6708,13 +6734,13 @@ var render = function render() {
   }, [_vm._v("\n                            " + _vm._s(_vm.errors["customer.phone"][0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-3"
   }, [_c("label", {
-    staticClass: "form-label",
+    staticClass: "form-label fw-bold",
     attrs: {
       "for": "email"
     }
   }, [_vm._v("Email adresa")]), _vm._v(" "), _c("div", {
     staticClass: "input-group"
-  }, [_vm._m(5), _vm._v(" "), _c("input", {
+  }, [_vm._m(4), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -6744,13 +6770,13 @@ var render = function render() {
   }, [_vm._v("\n                            " + _vm._s(_vm.errors["customer.email"][0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-3"
   }, [_c("label", {
-    staticClass: "form-label",
+    staticClass: "form-label fw-bold",
     attrs: {
       "for": "from"
     }
   }, [_vm._v("Poručeno sa:")]), _vm._v(" "), _c("div", {
     staticClass: "input-group"
-  }, [_vm._m(6), _vm._v(" "), _c("select", {
+  }, [_vm._m(5), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -6797,12 +6823,12 @@ var render = function render() {
   }, [_vm._v("\n                            " + _vm._s(_vm.errors.order_from[0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-3"
   }, [_c("label", {
-    staticClass: "form-label",
+    staticClass: "form-label fw-bold",
     attrs: {
       "for": "payment"
     }
   }, [_vm._v("Plaćanje:")]), _vm._v(" "), _c("div", {
-    staticClass: "form-check"
+    staticClass: "form-check px-1"
   }, [_c("div", {
     staticClass: "form-check form-check-inline mt-2"
   }, [_c("input", {
@@ -6872,12 +6898,12 @@ var render = function render() {
   }, [_vm._v("\n                            " + _vm._s(_vm.errors.payment[0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-3"
   }, [_c("label", {
-    staticClass: "form-label",
+    staticClass: "form-label fw-bold",
     attrs: {
       "for": "payment"
     }
   }, [_vm._v("Dostava:")]), _vm._v(" "), _c("div", {
-    staticClass: "form-check"
+    staticClass: "form-check px-1"
   }, [_c("div", {
     staticClass: "form-check form-check-inline mt-2"
   }, [_c("input", {
@@ -6947,7 +6973,7 @@ var render = function render() {
   }, [_vm._v("\n                            " + _vm._s(_vm.errors.delivery_type[0]) + "\n                        ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-12"
   }, [_c("label", {
-    staticClass: "form-label",
+    staticClass: "form-label fw-bold",
     attrs: {
       "for": "inputChoosePassword"
     }
@@ -7143,12 +7169,7 @@ var render = function render() {
     staticClass: "col-12 pt-5 d-flex justify-content-between align-items-center"
   }, [_c("div", {
     staticClass: "col-md-3"
-  }, [_c("label", {
-    staticClass: "form-label",
-    attrs: {
-      "for": "price"
-    }
-  }, [_vm._v("Cena")]), _vm._v(" "), _c("input", {
+  }, [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -7162,7 +7183,7 @@ var render = function render() {
     attrs: {
       id: "price",
       name: "price",
-      placeholder: "Unesi ukupnu sumu porudžbine"
+      placeholder: "Suma porudžbine"
     },
     domProps: {
       value: _vm.data.price
@@ -7197,7 +7218,7 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table table-bordered mb-0"
-  }, [_vm._m(7), _vm._v(" "), _c("tbody", _vm._l(_vm.newOrder.tshirt, function (item, index) {
+  }, [_vm._m(6), _vm._v(" "), _c("tbody", _vm._l(_vm.newOrder.tshirt, function (item, index) {
     return _c("tr", {
       key: index
     }, [_c("td", [_vm._v("\n                                    " + _vm._s(item.tshirt_color) + "\n                                ")]), _vm._v(" "), _c("td", [_vm._v("\n                                    " + _vm._s(item.tshirt_size) + "\n                                ")]), _vm._v(" "), _c("td", [_vm._v("\n                                    " + _vm._s(item.tshirt_type) + "\n                                ")]), _vm._v(" "), _c("td", [_vm._v(_vm._s(item.quantity))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm.date))]), _vm._v(" "), _c("td", [_c("div", {
@@ -7228,7 +7249,7 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table table-bordered mb-0"
-  }, [_vm._m(8), _vm._v(" "), _c("tbody", _vm._l(_vm.newOrder.badges, function (item, index) {
+  }, [_vm._m(7), _vm._v(" "), _c("tbody", _vm._l(_vm.newOrder.badges, function (item, index) {
     return _c("tr", {
       key: index
     }, [_c("td", [_vm._v("\n                                    " + _vm._s(item.badge_size) + "\n                                ")]), _vm._v(" "), _c("td", [_vm._v(_vm._s(item.tip_kacenja))]), _vm._v(" "), _c("td", [_vm._v("\n                                    " + _vm._s(item.plastifikacija) + "\n                                ")]), _vm._v(" "), _c("td", [_vm._v(_vm._s(item.quantity))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(_vm.date))]), _vm._v(" "), _c("td", [_c("div", {
@@ -7263,14 +7284,6 @@ var staticRenderFns = [function () {
   return _c("span", {
     staticClass: "input-group-text bg-transparent"
   }, [_c("i", {
-    staticClass: "bx bxs-alarm"
-  })]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("span", {
-    staticClass: "input-group-text bg-transparent"
-  }, [_c("i", {
     staticClass: "bx bxs-user"
   })]);
 }, function () {
@@ -7279,7 +7292,7 @@ var staticRenderFns = [function () {
   return _c("span", {
     staticClass: "input-group-text bg-transparent"
   }, [_c("i", {
-    staticClass: "bx bxs-user"
+    staticClass: "bx bx-home-circle"
   })]);
 }, function () {
   var _vm = this,
@@ -7530,7 +7543,7 @@ var render = function render() {
       }
     }, [_c("option", {
       attrs: {
-        value: "0"
+        value: "null"
       }
     }, [_vm._v("Izaberi količinu majice")]), _vm._v(" "), _c("option", {
       attrs: {
@@ -7664,7 +7677,8 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 
 // Your custom options
 var options = {
-  position: 'top-right'
+  position: 'top-right',
+  durations: 200
 };
 Vue.use((vue_awesome_notifications__WEBPACK_IMPORTED_MODULE_0___default()), options);
 var files = __webpack_require__("./resources/js sync recursive \\.vue$/");

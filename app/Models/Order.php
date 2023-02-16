@@ -23,7 +23,7 @@ class Order extends Model
      *
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'enter_date'];
+    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'order_date'];
 
     protected $with = ['order_items', 'user', 'customer'];
 
@@ -63,8 +63,8 @@ class Order extends Model
         $this->attributes['order_date'] = Carbon::parse($value)->format('Y-m-d');
     }
 
-    public function getOrderDateAttribute()
-    {
-        return $this->enter_date->format('d.m.Y');
-    }
+    // public function getOrderDateAttribute()
+    // {
+    //     return $this->order_date->format('d.m.Y');
+    // }
 }

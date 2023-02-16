@@ -29,7 +29,7 @@
 
         </li>
         <li class="{{ request()->is('order/tshirt' ? 'mm-active' : '') }}">
-            <a href="/order">
+            <a href="/order/tshirt">
                 <div class="parent-icon"><i class="bx bxs-t-shirt"></i>
                 </div>
                 <div class="menu-title">Porudžbine majica</div>
@@ -37,7 +37,7 @@
         </li>
 
         <li class="{{ request()->is('order/badges' ? 'mm-active' : '') }}">
-            <a href="/order">
+            <a href="/order/badges">
                 <div class="parent-icon"><i class="bx bxs-badge"></i>
                 </div>
                 <div class="menu-title">Porudžbine bedževa</div>

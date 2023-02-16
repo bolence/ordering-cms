@@ -11,6 +11,8 @@ Auth::routes();
 
 Route::group(['prefix' => 'order', 'middleware' => ['auth']], function () {
     Route::get('create', [OrderController::class, 'create']);
+    Route::get('tshirt', [OrderController::class, 'tshirt']);
+    Route::get('badges', [OrderController::class, 'badges']);
 });
 
 Route::resource('customers', CustomerController::class)->middleware('auth');

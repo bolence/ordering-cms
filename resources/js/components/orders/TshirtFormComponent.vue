@@ -62,7 +62,7 @@
                         v-model="form.quantity"
                         class="form-select"
                     >
-                        <option value="0">Izaberi količinu majice</option>
+                        <option value="null">Izaberi količinu majice</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -134,11 +134,14 @@ export default {
 
         removeForm(index) {
             this.forms.splice(index, 1);
-            this.$awn.success("Uspešno izbrisana forma");
+            this.$awn.success("Uspešno izbrisana forma", { durations: 200 });
         },
 
         addToNewOrderItems() {
-            this.$awn.success("Dodata majica u porudžbinu.");
+            this.$awn.info("Dodata majica u porudžbinu.", {
+                durations: 200,
+                position: "bottom-right",
+            });
             this.newOrder.tshirt = this.forms;
         },
     },

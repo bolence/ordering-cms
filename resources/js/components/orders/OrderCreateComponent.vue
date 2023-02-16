@@ -17,26 +17,22 @@
                             </h5>
                         </div>
 
-                        <div class="col-md-3">
-                            <label for="name" class="form-label"
+                        <div class="col-md-3 px-5">
+                            <label for="name" class="form-label fw-bold"
                                 >Broj porudžbine</label
                             >
-                            <div class="input-group">
-                                <span class="input-group-text bg-transparent"
-                                    ><i class="bx bxs-alarm"></i
-                                ></span>
-                                <input
-                                    type="text"
-                                    class="form-control border-start-0"
-                                    id="name"
-                                    name="name"
-                                    :class="{
-                                        'is-invalid': errors['order_number'],
-                                    }"
-                                    v-model="data.order_number"
-                                    placeholder="Unesi broj porudžbine"
-                                />
-                            </div>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                name="name"
+                                :class="{
+                                    'is-invalid': errors['order_number'],
+                                }"
+                                v-model="data.order_number"
+                                placeholder="Unesi broj porudžbine"
+                            />
 
                             <div
                                 v-if="errors.order_number"
@@ -46,8 +42,8 @@
                             </div>
                         </div>
 
-                        <span class="float-end">
-                            <div class="form-check form-check-inline mt-2">
+                        <div class="col-mx-auto float-end">
+                            <div class="form-check form-check-inline mt-2 pl-2">
                                 <input
                                     class="form-check-input"
                                     type="radio"
@@ -56,7 +52,9 @@
                                     name="order_type"
                                     v-model="data.order_type"
                                 />
-                                <label class="form-check-label" for="tshirt"
+                                <label
+                                    class="form-check-label fw-bold"
+                                    for="tshirt"
                                     >Majice</label
                                 >
                             </div>
@@ -70,22 +68,25 @@
                                     name="order_type"
                                     v-model="data.order_type"
                                 />
-                                <label class="form-check-label" for="badges"
+                                <label
+                                    class="form-check-label fw-bold"
+                                    for="badges"
                                     >Bedževi</label
                                 >
                             </div>
-                        </span>
+                        </div>
                     </div>
 
                     <hr class="fancy" />
                     <form class="row g-3 pb-3">
                         <div class="col-md-3">
-                            <label for="name" class="form-label"
-                                >Datum prijema porudžbine</label
+                            <label for="name" class="form-label fw-bold"
+                                >Datum porudžbine</label
                             >
                             <div class="input-group">
                                 <datepicker
                                     v-model="data.order_date"
+                                    placeholder="Datum porudžbine"
                                     name="order_date"
                                     format="dd MMM yyyy"
                                     type="date"
@@ -106,7 +107,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="name" class="form-label"
+                            <label for="name" class="form-label fw-bold"
                                 >Ime i prezime</label
                             >
                             <div class="input-group">
@@ -135,12 +136,12 @@
                         </div>
 
                         <div class="col-md-3">
-                            <label for="company" class="form-label"
+                            <label for="company" class="form-label fw-bold"
                                 >Firma</label
                             >
                             <div class="input-group">
                                 <span class="input-group-text bg-transparent"
-                                    ><i class="bx bxs-user"></i
+                                    ><i class="bx bx-home-circle"></i
                                 ></span>
                                 <input
                                     type="text"
@@ -154,7 +155,7 @@
                         </div>
 
                         <div class="col-md-3">
-                            <label for="phone" class="form-label"
+                            <label for="phone" class="form-label fw-bold"
                                 >Telefon</label
                             >
                             <div class="input-group">
@@ -181,7 +182,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="email" class="form-label"
+                            <label for="email" class="form-label fw-bold"
                                 >Email adresa</label
                             >
                             <div class="input-group">
@@ -208,7 +209,7 @@
                         </div>
 
                         <div class="col-md-3">
-                            <label for="from" class="form-label"
+                            <label for="from" class="form-label fw-bold"
                                 >Poručeno sa:</label
                             >
                             <div class="input-group">
@@ -240,10 +241,10 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label for="payment" class="form-label"
+                            <label for="payment" class="form-label fw-bold"
                                 >Plaćanje:</label
                             >
-                            <div class="form-check">
+                            <div class="form-check px-1">
                                 <div class="form-check form-check-inline mt-2">
                                     <input
                                         class="form-check-input"
@@ -287,10 +288,10 @@
                         </div>
 
                         <div class="col-md-3">
-                            <label for="payment" class="form-label"
+                            <label for="payment" class="form-label fw-bold"
                                 >Dostava:</label
                             >
-                            <div class="form-check">
+                            <div class="form-check px-1">
                                 <div class="form-check form-check-inline mt-2">
                                     <input
                                         class="form-check-input"
@@ -335,7 +336,9 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <label for="inputChoosePassword" class="form-label"
+                            <label
+                                for="inputChoosePassword"
+                                class="form-label fw-bold"
                                 >Napomena</label
                             >
                             <div>
@@ -445,9 +448,6 @@
                             class="col-12 pt-5 d-flex justify-content-between align-items-center"
                         >
                             <div class="col-md-3">
-                                <label for="price" class="form-label"
-                                    >Cena</label
-                                >
                                 <input
                                     class="form-control"
                                     id="price"
@@ -456,7 +456,7 @@
                                     :class="{
                                         'is-invalid': errors.price,
                                     }"
-                                    placeholder="Unesi ukupnu sumu porudžbine"
+                                    placeholder="Suma porudžbine"
                                 />
                                 <div
                                     v-if="errors.price"

@@ -7,7 +7,7 @@
             ></a>
         </div>
 
-        <div v-for="(form, key, index) in forms" :key="index">
+        <div v-for="(form, index) in forms" :key="index">
             <div class="row pt-4">
                 <div class="col-md-3 mb-1">
                     <label for="color" class="form-label"
@@ -95,6 +95,14 @@
                 <div class="col-md mx-auto text-center mt-3">
                     <a
                         href=""
+                        v-show="index > 0"
+                        @click.prevent="removeForm(index)"
+                        class="text-danger"
+                        ><i class="bx bx-minus" style="font-size: 30px"></i
+                    ></a>
+                    <a
+                        href=""
+                        v-if="index == 0"
                         @click.prevent="addToNewOrderItems()"
                         class="text-success"
                         ><i class="bx bx-save" style="font-size: 30px"></i
@@ -122,9 +130,9 @@ export default {
             ],
 
             kacenja: [
-                { id: 1, type: "zihernadla" },
-                { id: 2, type: "magnet" },
-                { id: 3, type: "samolepljiv" },
+                { id: 1, type: "Zihernadla" },
+                { id: 2, type: "Magnet" },
+                { id: 3, type: "Samolepljiv" },
             ],
 
             plastification: [

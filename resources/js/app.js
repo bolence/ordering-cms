@@ -8,7 +8,7 @@ import { store } from './store/store'
 
 
 // Your custom options
-let options = {position: 'top-right'}
+let options = {position: 'top-right', durations: 200}
 
 Vue.use(VueAWN, options)
 

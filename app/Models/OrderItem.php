@@ -28,4 +28,15 @@ class OrderItem extends Model
      * @var array
      */
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

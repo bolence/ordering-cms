@@ -2,12 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\OrderItem;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function tshirt()
     {
+        $orders = OrderItem::whereType('majica')->with('order.customer')->get();
+
+        return view('orders.tshirt', compact('orders'))->with(['title' => 'Spisak poručenih majica']);
+    }
+
+
+    public function badges()
+    {
+        $orders = OrderItem::whereType('bedž')->with('order.customer')->get();
+
+        return view('orders.badges', compact('orders'))->with(['title' => 'Spisak poručenih bedževa']);
     }
 
     /**
