@@ -34,6 +34,7 @@ class OrderService  extends GlobalService
     {
         // $request['order_number'] = Str::random(8);
         $request['user_id'] = Auth::id();
+        $request['status_id'] = 1;
 
         $order = Order::create($request->only(['order_date', 'order_number', 'delivery_type', 'order_from', 'user_id', 'napomena']));
 

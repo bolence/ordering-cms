@@ -26,6 +26,8 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('customer_id')->index()->nullable();
             $table->foreign('customer_id')->references('id')->on('customers');
+            $table->unsignedBigInteger('status_id')->index();
+            $table->foreign('status_id')->references('id')->on('statuses');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -13,6 +13,7 @@ Route::group(['prefix' => 'order', 'middleware' => ['auth']], function () {
     Route::get('create', [OrderController::class, 'create']);
     Route::get('tshirt', [OrderController::class, 'tshirt']);
     Route::get('badges', [OrderController::class, 'badges']);
+    Route::get('/{id}', [OrderController::class, 'show']);
 });
 
 Route::resource('customers', CustomerController::class)->middleware('auth');

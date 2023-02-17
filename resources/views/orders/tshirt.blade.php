@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @push('css')
     <link href="/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css" rel="stylesheet" />
 @endpush
 
 
@@ -16,7 +18,7 @@
                         <div>
                             <h5 class="mb-4">
                                 <i class="bx bxs-user me-1 font-22 text-primary"></i>
-                                Spisak poručenih bedževa - {{ $orders->count() }}
+                                Spisak poručenih majica - {{ $orders->count() }} porudžbine
                             </h5>
                         </div>
                     </div>
@@ -51,9 +53,10 @@
                                         <td>{{ $order->order->order_date->format('d.m.Y') }}</td>
 
                                         <td>
-                                            <a href="/order/{{ $order->order->id }}"
-                                                class="btn btn-primary btn-sm bordered-25 px-3">
-                                                Pogledaj detalje</a>
+                                            <a href="/order/{{ $order->order->id }}" class=""><i
+                                                    class="bx bx-smile text-info"></i></a>
+                                            <a href="javascript:;" class="ms-3"><i
+                                                    class="bx bxs-trash text-danger"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -72,12 +75,23 @@
 
 
     @push('js')
-        <script src="/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-        <script src="/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
 
         <script>
             $(document).ready(function() {
                 $('#tshirt').DataTable({
+                    responsive: {
+                        details: {
+                            display: $.fn.dataTable.Responsive.display.modal({
+                                header: function(row) {
+                                    var data = row.data();
+                                    return 'Detalji porudžbine ' + data[0];
+                                }
+                            }),
+                            renderer: $.fn.dataTable.Responsive.renderer.tableAll()
+                        }
+                    },
                     language: {
                         url: '/datatable.language.json'
                     }

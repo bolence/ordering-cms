@@ -18,7 +18,7 @@
                         <div>
                             <h5 class="mb-4">
                                 <i class="bx bxs-user me-1 font-22 text-primary"></i>
-                                Spisak poručenih bedževa - {{ $orders->count() }}
+                                Spisak poručenih bedževa - {{ $orders->count() }} porudžbine
                             </h5>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                                         <td>
                                             <div class="d-flex
                             order-actions">
-                                                <a href="javascript:;" class=""><i
+                                                <a href="/order/{{ $order->order->id }}" class=""><i
                                                         class="bx bx-smile text-info"></i></a>
                                                 <a href="javascript:;" class="ms-3"><i
                                                         class="bx bxs-trash text-danger"></i></a>
@@ -72,7 +72,6 @@
 
     @push('js')
         <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
-        {{-- <script src="/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script> --}}
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
         <script>
             $(document).ready(function() {
@@ -82,7 +81,7 @@
                             display: $.fn.dataTable.Responsive.display.modal({
                                 header: function(row) {
                                     var data = row.data();
-                                    return 'Details for ' + data[0] + ' ' + data[1];
+                                    return 'Detalji porudžbine ' + data[0];
                                 }
                             }),
                             renderer: $.fn.dataTable.Responsive.renderer.tableAll()
