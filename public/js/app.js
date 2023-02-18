@@ -5377,7 +5377,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
       axios.post("/register", this.data).then(function (resp) {
-        var jwt = resp.data.token;
+        var token = resp.data.token;
         var user = JSON.stringify(resp.data.user);
         localStorage.setItem("bedzevi.jwt", token);
         localStorage.setItem("bedzevi.user", user);
@@ -5670,7 +5670,7 @@ var render = function render() {
     staticClass: "card-body"
   }, [_c("div", {
     staticClass: "border p-4 rounded"
-  }, [_vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _c("div", {
+  }, [_vm._m(1), _vm._v(" "), _c("div", {
     staticClass: "form-body"
   }, [_c("form", {
     staticClass: "row g-3"
@@ -5748,7 +5748,7 @@ var render = function render() {
         _vm.password = $event.target.value;
       }
     }
-  }), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm.errors.password ? _c("div", {
+  }), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm.errors.password ? _c("div", {
     staticClass: "invalid-feedback",
     staticStyle: {
       display: "block !important",
@@ -5756,7 +5756,7 @@ var render = function render() {
     }
   }, [_vm._v("\n                                                " + _vm._s(_vm.errors.password[0]) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
-  }), _vm._v(" "), _vm._m(5), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm._m(3), _vm._v(" "), _c("div", {
     staticClass: "col-12"
   }, [_c("div", {
     staticClass: "d-grid"
@@ -5801,39 +5801,6 @@ var staticRenderFns = [function () {
       href: "/register"
     }
   }, [_vm._v("Registruj se")])])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "d-grid"
-  }, [_c("a", {
-    staticClass: "btn my-4 shadow-sm btn-white",
-    attrs: {
-      href: ""
-    }
-  }, [_c("span", {
-    staticClass: "d-flex justify-content-center align-items-center"
-  }, [_c("img", {
-    staticClass: "me-2",
-    attrs: {
-      src: "assets/images/icons/search.svg",
-      width: "16",
-      alt: "Image Description"
-    }
-  }), _vm._v(" "), _c("span", [_vm._v("Sign in with Google")])])]), _vm._v(" "), _c("a", {
-    staticClass: "btn btn-facebook",
-    attrs: {
-      href: ""
-    }
-  }, [_c("i", {
-    staticClass: "bx bxl-facebook"
-  }), _vm._v("Sign in\n                                    with Facebook")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "login-separater text-center mb-4"
-  }, [_c("span", [_vm._v("ILI ULOGUJTE SE SA EMAILOM")]), _vm._v(" "), _c("hr")]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -5890,7 +5857,7 @@ var render = function render() {
     staticClass: "card-body"
   }, [_c("div", {
     staticClass: "border p-4 rounded"
-  }, [_vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _c("div", {
+  }, [_vm._m(1), _vm._v(" "), _c("div", {
     staticClass: "form-body"
   }, [_c("form", {
     staticClass: "row g-3"
@@ -6007,7 +5974,7 @@ var render = function render() {
         _vm.$set(_vm.data, "password", $event.target.value);
       }
     }
-  }), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm.errors.password ? _c("div", {
+  }), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm.errors.password ? _c("div", {
     staticClass: "invalid-feedback",
     staticStyle: {
       display: "block !important",
@@ -6048,13 +6015,13 @@ var render = function render() {
         _vm.$set(_vm.data, "password_confirmation", $event.target.value);
       }
     }
-  }), _vm._v(" "), _vm._m(5), _vm._v(" "), _vm.errors.password_confirmation ? _c("div", {
+  }), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm.errors.password_confirmation ? _c("div", {
     staticClass: "invalid-feedback",
     staticStyle: {
       display: "block !important",
       "font-size": "17px !important"
     }
-  }, [_vm._v("\n                                                " + _vm._s(_vm.errors.password_confirmation[0]) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _vm._m(6), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                                                " + _vm._s(_vm.errors.password_confirmation[0]) + "\n                                            ")]) : _vm._e()])]), _vm._v(" "), _vm._m(4), _vm._v(" "), _c("div", {
     staticClass: "col-12"
   }, [_c("div", {
     staticClass: "d-grid"
@@ -6068,7 +6035,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "bx bx-user"
-  }), _vm._v("Sign up\n                                            ")])])])])])])])])])])])]);
+  }), _vm._v("Registruj se\n                                            ")])])])])])])])])])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -6091,44 +6058,7 @@ var staticRenderFns = [function () {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "text-center"
-  }, [_c("h3", {}, [_vm._v("Sign Up")]), _vm._v(" "), _c("p", [_vm._v("\n                                    Already have an account?\n                                    "), _c("a", {
-    attrs: {
-      href: "authentication-signin.html"
-    }
-  }, [_vm._v("Sign in here")])])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "d-grid"
-  }, [_c("a", {
-    staticClass: "btn my-4 shadow-sm btn-white",
-    attrs: {
-      href: "javascript:;"
-    }
-  }, [_c("span", {
-    staticClass: "d-flex justify-content-center align-items-center"
-  }, [_c("img", {
-    staticClass: "me-2",
-    attrs: {
-      src: "assets/images/icons/search.svg",
-      width: "16",
-      alt: "Image Description"
-    }
-  }), _vm._v(" "), _c("span", [_vm._v("Sign Up with Google")])])]), _vm._v(" "), _c("a", {
-    staticClass: "btn btn-facebook",
-    attrs: {
-      href: "javascript:;"
-    }
-  }, [_c("i", {
-    staticClass: "bx bxl-facebook"
-  }), _vm._v("Sign Up\n                                    with Facebook")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "login-separater text-center mb-4"
-  }, [_c("span", [_vm._v("OR SIGN UP WITH EMAIL")]), _vm._v(" "), _c("hr")]);
+  }, [_c("h3", {}, [_vm._v("Registruj novi nalog")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;

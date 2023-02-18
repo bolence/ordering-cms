@@ -73,7 +73,6 @@ class RegisterController extends Controller
         ]);
     }
 
-
     /**
      * Show the application registration form.
      *
@@ -83,8 +82,6 @@ class RegisterController extends Controller
     {
         return view('auth.register')->with(['title' => 'Registruj se']);
     }
-
-
 
     /**
      * The user has been registered.

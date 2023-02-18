@@ -20,7 +20,7 @@
                                         <a href="/register">Registruj se</a>
                                     </p>
                                 </div>
-                                <div class="d-grid">
+                                <!-- <div class="d-grid">
                                     <a
                                         class="btn my-4 shadow-sm btn-white"
                                         href=""
@@ -41,11 +41,11 @@
                                         ><i class="bx bxl-facebook"></i>Sign in
                                         with Facebook</a
                                     >
-                                </div>
-                                <div class="login-separater text-center mb-4">
+                                </div> -->
+                                <!-- <div class="login-separater text-center mb-4">
                                     <span>ILI ULOGUJTE SE SA EMAILOM</span>
                                     <hr />
-                                </div>
+                                </div> -->
                                 <div class="form-body">
                                     <form class="row g-3">
                                         <div class="col-12">

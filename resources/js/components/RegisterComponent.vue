@@ -14,15 +14,15 @@
                         <div class="card-body">
                             <div class="border p-4 rounded">
                                 <div class="text-center">
-                                    <h3 class="">Sign Up</h3>
-                                    <p>
-                                        Already have an account?
+                                    <h3 class="">Registruj novi nalog</h3>
+                                    <!-- <p>
+                                        Već imate nalog?
                                         <a href="authentication-signin.html"
-                                            >Sign in here</a
+                                            >Uloguj se</a
                                         >
-                                    </p>
+                                    </p> -->
                                 </div>
-                                <div class="d-grid">
+                                <!-- <div class="d-grid">
                                     <a
                                         class="btn my-4 shadow-sm btn-white"
                                         href="javascript:;"
@@ -49,7 +49,7 @@
                                 <div class="login-separater text-center mb-4">
                                     <span>OR SIGN UP WITH EMAIL</span>
                                     <hr />
-                                </div>
+                                </div> -->
                                 <div class="form-body">
                                     <form class="row g-3">
                                         <div class="col-12">
@@ -206,7 +206,7 @@
                                                     class="btn btn-primary"
                                                 >
                                                     <i class="bx bx-user"></i
-                                                    >Sign up
+                                                    >Registruj se
                                                 </a>
                                             </div>
                                         </div>
@@ -252,7 +252,7 @@ export default {
             axios
                 .post("/register", this.data)
                 .then((resp) => {
-                    let jwt = resp.data.token;
+                    let token = resp.data.token;
                     let user = JSON.stringify(resp.data.user);
                     localStorage.setItem("bedzevi.jwt", token);
                     localStorage.setItem("bedzevi.user", user);
