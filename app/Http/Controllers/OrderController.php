@@ -9,19 +9,11 @@ use App\Models\OrderItem;
 class OrderController extends Controller
 {
 
-    public function tshirt()
+    public function index()
     {
-        $orders = OrderItem::whereType('majica')->with('order.customer')->get();
+        $orders = Order::with('order_items')->withCount('order_items')->with('customer')->withSum('order_items', 'quantity')->groupBy('order_number')->get();
 
-        return view('orders.tshirt', compact('orders'))->with(['title' => 'Spisak poručenih majica']);
-    }
-
-
-    public function badges()
-    {
-        $orders = OrderItem::whereType('bedž')->with('order.customer')->get();
-
-        return view('orders.badges', compact('orders'))->with(['title' => 'Spisak poručenih bedževa']);
+        return view('orders.index', compact('orders'))->with(['title' => 'Spisak poručenih majica']);
     }
 
     /**

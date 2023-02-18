@@ -152,46 +152,48 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card bordered-10">
-                            <div class="card-body">
-                                <div class="card-header mb-0">
-                                    <h5 class="d-flex align-items-center mb-1">Porudžbina sadrži
-                                        {{ $order->order_items->sum('quantity') }} proizvoda</h5>
-                                </div>
+                @if ($order->order_items->count())
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card bordered-10">
+                                <div class="card-body">
+                                    <div class="card-header mb-0">
+                                        <h5 class="d-flex align-items-center mb-1">Porudžbina sadrži
+                                            {{ $order->order_items->sum('quantity') }} proizvoda</h5>
+                                    </div>
 
-                                <table id="badges" class="table table-bordered my-3" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Tip</th>
-                                            <th>Veličina bedža/majice</th>
-                                            <th>Tip kačenja/ Boja majice</th>
-                                            <th>Plastifikacija/Tip majice</th>
-                                            <th>Količina</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        @foreach ($order->order_items as $order_item)
+                                    <table id="badges" class="table table-bordered my-3" style="width:100%">
+                                        <thead>
                                             <tr>
-                                                <td class="fw-bold">{{ ucfirst($order_item->type) }}</td>
-                                                <td>{{ $order_item->badge_size ? $order_item->badge_size . 'mm' : strtoupper($order_item->tshirt_size) }}
-                                                </td>
-                                                <td>{{ $order_item->tip_kacenja ? json_encode($order_item->tip_kacenja) : ucfirst($order_item->tshirt_color) }}
-                                                </td>
-                                                <td>{{ $order_item->plastifikacija && $order_item->type == 'bedž' ? ucfirst($order_item->plastifikacija) : ucfirst($order_item->tshirt_type) }}
-                                                </td>
-                                                <td>{{ $order_item->quantity }}</td>
+                                                <th>Tip</th>
+                                                <th>Veličina bedža/majice</th>
+                                                <th>Tip kačenja/ Boja majice</th>
+                                                <th>Plastifikacija/Tip majice</th>
+                                                <th>Količina</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
 
+                                            @foreach ($order->order_items as $order_item)
+                                                <tr>
+                                                    <td class="fw-bold">{{ ucfirst($order_item->type) }}</td>
+                                                    <td>{{ $order_item->badge_size ? $order_item->badge_size . 'mm' : strtoupper($order_item->tshirt_size) }}
+                                                    </td>
+                                                    <td>{{ $order_item->tip_kacenja ? json_encode($order_item->tip_kacenja) : ucfirst($order_item->tshirt_color) }}
+                                                    </td>
+                                                    <td>{{ $order_item->plastifikacija && $order_item->type == 'bedž' ? ucfirst($order_item->plastifikacija) : ucfirst($order_item->tshirt_type) }}
+                                                    </td>
+                                                    <td>{{ $order_item->quantity }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>

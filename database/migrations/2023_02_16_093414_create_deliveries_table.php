@@ -19,6 +19,8 @@ class CreateDeliveriesTable extends Migration
             $table->string('street')->nullable();
             $table->string('city')->nullable();
             $table->string('phone')->nullable();
+            $table->unsignedBigInteger('order_id')->index();
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->timestamps();
             $table->softDeletes();
         });

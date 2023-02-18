@@ -28,21 +28,23 @@
             </a>
 
         </li>
-        <li class="{{ request()->is('order/tshirt' ? 'mm-active' : '') }}">
-            <a href="/order/tshirt">
+        <li class="{{ request()->is('order/' ? 'mm-active' : '') }}">
+            <a href="/order">
                 <div class="parent-icon"><i class="bx bxs-t-shirt"></i>
                 </div>
-                <div class="menu-title">Porudžbine majica</div>
+                <div class="parent-icon"><i class="bx bxs-badge"></i>
+                </div>
+                <div class="menu-title">Sve porudžbine</div>
             </a>
         </li>
 
-        <li class="{{ request()->is('order/badges' ? 'mm-active' : '') }}">
+        {{-- <li class="{{ request()->is('order/badges' ? 'mm-active' : '') }}">
             <a href="/order/badges">
                 <div class="parent-icon"><i class="bx bxs-badge"></i>
                 </div>
                 <div class="menu-title">Porudžbine bedževa</div>
             </a>
-        </li>
+        </li> --}}
 
 
         <li class="{{ request()->is('customers' ? 'mm-active' : '') }}">
@@ -52,6 +54,17 @@
                 <div class="menu-title">Mušterije</div>
             </a>
         </li>
+
+        <li class="{{ request()->is('bosko' ? 'mm-active' : '') }}">
+            <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <div class="parent-icon"><i class="bx bx-log-out-circle"></i>
+                </div>
+                <div class="menu-title">Izloguj se</div>
+            </a>
+        </li>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{ csrf_field() }}
+        </form>
     </ul>
     <!--end navigation-->
 </div>

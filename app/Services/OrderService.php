@@ -32,11 +32,22 @@ class OrderService  extends GlobalService
      */
     public function save($request)
     {
-        // $request['order_number'] = Str::random(8);
+
         $request['user_id'] = Auth::id();
         $request['status_id'] = 1;
 
-        $order = Order::create($request->only(['order_date', 'order_number', 'delivery_type', 'order_from', 'user_id', 'napomena']));
+        $order = Order::create($request->only(
+            [
+                'order_date',
+                'order_number',
+                'delivery_type',
+                'order_from',
+                'user_id',
+                'napomena',
+                'status_id',
+                'price'
+            ]
+        ));
 
         $orderItems = array_merge($request->tshirt, $request->badges);
 
@@ -45,7 +56,8 @@ class OrderService  extends GlobalService
         $this->saveCustomerAndUpdateOrder($request, $order);
 
         return response()->json([
-            'message' => 'Uspešno snimljena porudžbenica'
+            'message' => "Uspešno snimljena porudžbenica " . $request['order_number'],
+            'order' => $order->with('order_items')->get(),
         ], 200);
     }
 
@@ -89,8 +101,9 @@ class OrderService  extends GlobalService
         $customer = Customer::create($customer);
 
         // save delivery address
-
-        Delivery::create($request->delivery);
+        if ($request['delivery_type'] == 'dostava') {
+            $order->delivery()->create($request->delivery);
+        }
 
         // update order with customer id
         $order->customer_id = $customer->id;

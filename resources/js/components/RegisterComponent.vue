@@ -7,7 +7,7 @@
                 <div class="col mx-auto">
                     <div class="my-4 text-center">
                         <a href="/"
-                            ><img src="images/logo.png" width="180" alt=""
+                            ><img src="images/logo.png" width="100" alt=""
                         /></a>
                     </div>
                     <div class="card">
@@ -22,34 +22,7 @@
                                         >
                                     </p> -->
                                 </div>
-                                <!-- <div class="d-grid">
-                                    <a
-                                        class="btn my-4 shadow-sm btn-white"
-                                        href="javascript:;"
-                                    >
-                                        <span
-                                            class="d-flex justify-content-center align-items-center"
-                                        >
-                                            <img
-                                                class="me-2"
-                                                src="assets/images/icons/search.svg"
-                                                width="16"
-                                                alt="Image Description"
-                                            />
-                                            <span>Sign Up with Google</span>
-                                        </span>
-                                    </a>
-                                    <a
-                                        href="javascript:;"
-                                        class="btn btn-facebook"
-                                        ><i class="bx bxl-facebook"></i>Sign Up
-                                        with Facebook</a
-                                    >
-                                </div>
-                                <div class="login-separater text-center mb-4">
-                                    <span>OR SIGN UP WITH EMAIL</span>
-                                    <hr />
-                                </div> -->
+
                                 <div class="form-body">
                                     <form class="row g-3">
                                         <div class="col-12">
@@ -67,7 +40,7 @@
                                                 :class="{
                                                     'is-invalid': errors.name,
                                                 }"
-                                                placeholder="Jhon"
+                                                placeholder="Marko Markovic"
                                             />
                                             <div
                                                 v-if="errors.name"
@@ -85,7 +58,7 @@
                                             <label
                                                 for="inputEmailAddress"
                                                 class="form-label"
-                                                >Email Address</label
+                                                >Email adresa</label
                                             >
                                             <input
                                                 type="email"
@@ -93,7 +66,7 @@
                                                 id="email"
                                                 name="email"
                                                 v-model="data.email"
-                                                placeholder="example@user.com"
+                                                placeholder="marko.markovic@gmail.com"
                                                 :class="{
                                                     'is-invalid': errors.email,
                                                 }"
@@ -122,7 +95,7 @@
                                                     type="password"
                                                     class="form-control border-end-0"
                                                     value="12345678"
-                                                    placeholder="Unesi šifru"
+                                                    placeholder="******"
                                                     :class="{
                                                         'is-invalid':
                                                             errors.password,
@@ -151,7 +124,7 @@
                                             <label
                                                 for="inputChoosePassword"
                                                 class="form-label"
-                                                >Unesi šifru</label
+                                                >Ponovi šifru</label
                                             >
                                             <div class="input-group">
                                                 <input
@@ -162,7 +135,7 @@
                                                     type="password"
                                                     class="form-control border-end-0"
                                                     value="12345678"
-                                                    placeholder="Unesi šifru"
+                                                    placeholder="******"
                                                     :class="{
                                                         'is-invalid':
                                                             errors.password_confirmation,
@@ -266,3 +239,10 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+body {
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+</style>

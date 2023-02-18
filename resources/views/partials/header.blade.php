@@ -19,7 +19,7 @@
                         <a class="nav-link" href="#"> <i class='bx bx-search'></i>
                         </a>
                     </li>
-                    <li class="nav-item dropdown dropdown-large">
+                    {{-- <li class="nav-item dropdown dropdown-large">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false"> <i class='bx bx-category'></i>
                         </a>
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </li> --}}
                     <li class="nav-item dropdown dropdown-large">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -127,8 +127,8 @@
                                         <div class="notify bg-light-info text-info"><i class="bx bx-home-circle"></i>
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="msg-name">New Product Approved <span
-                                                    class="msg-time float-end">2 hrs ago</span></h6>
+                                            <h6 class="msg-name">New Product Approved <span class="msg-time float-end">2
+                                                    hrs ago</span></h6>
                                             <p class="msg-info">Your new product has approved</p>
                                         </div>
                                     </div>
@@ -151,8 +151,8 @@
                                                 class='bx bx-check-square'></i>
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="msg-name">Your item is shipped <span
-                                                    class="msg-time float-end">5 hrs
+                                            <h6 class="msg-name">Your item is shipped <span class="msg-time float-end">5
+                                                    hrs
                                                     ago</span></h6>
                                             <p class="msg-info">Successfully shipped your item</p>
                                         </div>
@@ -215,7 +215,7 @@
                     <li><a class="dropdown-item" href="javascript:;"><i
                                 class="bx bx-user"></i><span>Profile</span></a>
                     </li>
-                    <li><a class="dropdown-item" href="javascript:;"><i
+                    {{-- <li><a class="dropdown-item" href="javascript:;"><i
                                 class="bx bx-cog"></i><span>Settings</span></a>
                     </li>
                     <li><a class="dropdown-item" href="javascript:;"><i
@@ -226,7 +226,7 @@
                     </li>
                     <li><a class="dropdown-item" href="javascript:;"><i
                                 class='bx bx-download'></i><span>Downloads</span></a>
-                    </li>
+                    </li> --}}
                     <li>
                         <div class="dropdown-divider mb-0"></div>
                     </li>

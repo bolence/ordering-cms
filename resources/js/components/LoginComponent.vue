@@ -7,7 +7,7 @@
                 <div class="col mx-auto">
                     <div class="mb-4 text-center">
                         <a href="/"
-                            ><img src="images/logo.png" width="180" alt=""
+                            ><img src="images/logo.png" width="100" alt=""
                         /></a>
                     </div>
                     <div class="card">
@@ -20,32 +20,7 @@
                                         <a href="/register">Registruj se</a>
                                     </p>
                                 </div>
-                                <!-- <div class="d-grid">
-                                    <a
-                                        class="btn my-4 shadow-sm btn-white"
-                                        href=""
-                                    >
-                                        <span
-                                            class="d-flex justify-content-center align-items-center"
-                                        >
-                                            <img
-                                                class="me-2"
-                                                src="assets/images/icons/search.svg"
-                                                width="16"
-                                                alt="Image Description"
-                                            />
-                                            <span>Sign in with Google</span>
-                                        </span>
-                                    </a>
-                                    <a href="" class="btn btn-facebook"
-                                        ><i class="bx bxl-facebook"></i>Sign in
-                                        with Facebook</a
-                                    >
-                                </div> -->
-                                <!-- <div class="login-separater text-center mb-4">
-                                    <span>ILI ULOGUJTE SE SA EMAILOM</span>
-                                    <hr />
-                                </div> -->
+
                                 <div class="form-body">
                                     <form class="row g-3">
                                         <div class="col-12">
@@ -181,3 +156,10 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+body {
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+</style>

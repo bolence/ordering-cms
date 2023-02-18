@@ -18,54 +18,53 @@
                         <div>
                             <h5 class="mb-4">
                                 <i class="bx bxs-user me-1 font-22 text-primary"></i>
-                                Spisak poručenih bedževa - {{ $orders->count() }} porudžbine
+                                Spisak svih porudžbina - {{ $orders->count() }} porudžbine
                             </h5>
                         </div>
                     </div>
 
-                    <div>
-                        <table id="badges" class="display nowrap" style="width:100%">
-                            <thead>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover" id="tshirt">
+                            <thead class="table-light">
                                 <tr>
                                     <th>Broj porudžbine</th>
-                                    <th>Veličina bedža</th>
-                                    <th>Tip kačenja</th>
-                                    <th>Plastifikacija</th>
                                     <th>Poručio</th>
-                                    <th>Količina</th>
+                                    <th>Tip dostave</th>
+                                    <th>Broj porudžbina</th>
                                     <th>Suma</th>
                                     <th>Poručeno</th>
                                     <th>Detalji</th>
                                 </tr>
                             </thead>
+
                             <tbody>
 
                                 @foreach ($orders as $order)
                                     <tr>
-                                        <td>{{ $order->order->order_number }}</td>
-                                        <td>{{ $order->badge_size }}</td>
-                                        <td>{{ implode($order->tip_kacenja) }}</td>
-                                        <td>{{ ucfirst($order->plastifikacija) }}</td>
-                                        <td>{{ $order->order->customer->name }}</td>
-                                        <td>{{ $order->quantity }}</td>
-                                        <td>{{ number_format($order->order->price, 2) }}</td>
-                                        <td>{{ $order->order->order_date->format('d.m.Y') }}</td>
+                                        <td>{{ $order->order_number }}</td>
+                                        <td>{{ $order->customer->name }}</td>
+                                        <td>{{ $order->delivery_type }}</td>
+                                        <td>{{ $order->order_items_count ?? 0 }}</td>
+                                        <td>{{ number_format($order->price, 2) }}</td>
+                                        <td>{{ $order->order_date->format('d.m.Y') }}</td>
                                         <td>
-                                            <div class="d-flex
-                            order-actions">
-                                                <a href="/order/{{ $order->order->id }}" class=""><i
-                                                        class="bx bx-smile text-info"></i></a>
-                                                <a href="javascript:;" class="ms-3"><i
-                                                        class="bx bxs-trash text-danger"></i></a>
-                                            </div>
+                                            <a href="/order/{{ $order->id }}" class=""><i
+                                                    class="bx bx-smile text-info"></i></a>
+                                            <a href="javascript:;" class="ms-3"><i
+                                                    class="bx bxs-trash text-danger"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+
                 </div>
+
+
             </div>
+
+
         </div>
     @endsection
 
@@ -73,9 +72,10 @@
     @push('js')
         <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+
         <script>
             $(document).ready(function() {
-                $('#badges').DataTable({
+                $('#tshirt').DataTable({
                     responsive: {
                         details: {
                             display: $.fn.dataTable.Responsive.display.modal({

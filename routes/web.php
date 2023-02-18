@@ -9,12 +9,13 @@ use App\Http\Controllers\CustomerController;
 
 Auth::routes();
 
-Route::group(['prefix' => 'order', 'middleware' => ['auth']], function () {
-    Route::get('create', [OrderController::class, 'create']);
-    Route::get('tshirt', [OrderController::class, 'tshirt']);
-    Route::get('badges', [OrderController::class, 'badges']);
-    Route::get('/{id}', [OrderController::class, 'show']);
-});
+// Route::group(['prefix' => 'order', 'middleware' => ['auth']], function () {
+//     Route::get('/', [OrderController::class, 'tshirt']);
+//     Route::get('create', [OrderController::class, 'create']);
+//     Route::get('/{id}', [OrderController::class, 'show']);
+// });
+
+Route::resource('order', OrderController::class)->middleware('auth');
 
 Route::resource('customers', CustomerController::class)->middleware('auth');
 

@@ -93,8 +93,7 @@
                                     style="width: 100%"
                                     :input-class="{
                                         'form-control': true,
-                                        'form-control-danger':
-                                            errors?.order_date,
+                                        'is-invalid': errors.order_date,
                                     }"
                                     calendar-button-icon="fa fa-calendar"
                                 ></datepicker>
@@ -296,7 +295,7 @@
                                     <input
                                         class="form-check-input"
                                         type="radio"
-                                        value="personal"
+                                        value="lično"
                                         id="lično"
                                         name="delivery"
                                         v-model="data.delivery_type"
@@ -638,7 +637,7 @@ export default {
                 },
                 order_from: null,
                 delivery_type: null,
-                order_date: null,
+                order_date: moment().format("DD MMM yyyy"),
                 order_type: null,
                 payment: null,
                 napomena: null,
@@ -664,6 +663,9 @@ export default {
             this.saveOrder(this.data)
                 .then((resp) => {
                     this.$awn.success(resp.message);
+                    this.data = {};
+                    this.newOrder.tshirt = {};
+                    this.newOrder.badges = {};
                 })
                 .catch((error) => {
                     this.$awn.alert(error.message);
@@ -683,7 +685,8 @@ export default {
         },
 
         setSamePhone() {
-            this.data.delivery.phone2 = this.data.customer.phone;
+            this.data.delivery.phone = this.data.customer.phone;
+            this.data.delivery.name = this.data.customer.name;
         },
     },
 };
