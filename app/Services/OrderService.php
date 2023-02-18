@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Order;
 use App\Models\Customer;
 use App\Models\Delivery;
+use App\Models\Status;
 use Illuminate\Support\Str;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Auth;
@@ -69,10 +70,11 @@ class OrderService  extends GlobalService
      */
     public function getOne(int $id)
     {
-        $order = Order::findOrFail($id);
+        $order = Order::with('order_items', 'delivery', 'customer', 'status')->findOrFail($id);
 
         return response()->json([
-            'order' => $order
+            'order' => $order,
+            'statuses' => Status::orderByDesc('id')->get(),
         ], 200);
     }
 

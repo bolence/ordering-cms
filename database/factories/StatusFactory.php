@@ -14,7 +14,7 @@ class StatusFactory extends Factory
     public function definition()
     {
         return [
-            'status' => $this->faker->randomElement(['Primljena', 'U izradi', 'U slanju', 'Poslato', 'Završena']),
+            'status' => $this->faker->randomElement(['Završena', 'Poslato', 'U slanju', 'U izradi', 'Primljena']),
             'enabled' => 1,
             'created_at' => now(),
         ];

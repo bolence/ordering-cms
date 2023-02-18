@@ -5,7 +5,8 @@ const state =  {
  newOrder: {
     badges: {},
     tshirt: {},
- }
+ },
+ statuses: [],
 
 }
 
@@ -14,6 +15,7 @@ const getters = {
     order: state => state.order,
     orders: state => state.orders,
     newOrder: state => state.newOrder,
+    statuses: state => state.statuses,
 }
 
 const mutations = {
@@ -25,7 +27,10 @@ const mutations = {
     },
     setOrders(state, orders) {
         state.orders = orders;
-    }
+    },
+    setStatuses(state, statuses) {
+        state.statuses = statuses;
+    },
 }
 
 
@@ -39,6 +44,31 @@ const actions = {
             }).catch( error => {
                 commit('setErrors', error.response.data.errors);
                 reject(error.response.data);
+            })
+        })
+    },
+
+    getOrder({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.get(`/api/orders/${payload.id}`).then(resp => {
+                resolve(resp.data);
+                commit('setOrder', resp.data.order);
+                commit('setStatuses', resp.data.statuses);
+            }).catch( error => {
+                reject(error.response.data.errors);
+                commit('errors', error.response.data.errors);
+            })
+        })
+    },
+
+    deleteOrderItem({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.get(`/api/orders_items/${payload.id}`).then(resp => {
+                resolve(resp.data);
+                // commit('setOrder', resp.data.order);
+            }).catch( error => {
+                reject(error.response.data.errors);
+                commit('errors', error.response.data.errors);
             })
         })
     }

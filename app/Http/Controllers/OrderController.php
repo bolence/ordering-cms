@@ -24,9 +24,9 @@ class OrderController extends Controller
      */
     public function show(int $id)
     {
-        $order = Order::with('order_items', 'delivery', 'customer', 'status')->findOrFail($id);
-        $statuses = Status::orderByDesc('id')->get();
-        return view('orders.order', compact('order', 'statuses'))->with(['title' => 'Detalji porudžbine ' . $order->order_number]);
+        $order = Order::findOrFail($id);
+        // $statuses = Status::orderByDesc('id')->get();
+        return view('orders.order', compact('order'))->with(['title' => 'Detalji porudžbine ' . $order->order_number]);
     }
 
     /**

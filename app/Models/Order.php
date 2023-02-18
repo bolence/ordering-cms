@@ -18,6 +18,10 @@ class Order extends Model
      */
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'created_at' => 'date:d.m.Y'
+    ];
+
     /**
      * The attributes that should be mutated to dates.
      *
@@ -66,5 +70,20 @@ class Order extends Model
     public function setOrderDateAttribute($value)
     {
         $this->attributes['order_date'] = Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function getDeliveryTypeAttribute()
+    {
+        return ucfirst($this->attributes['delivery_type']);
+    }
+
+    public function getOrderDateAttribute()
+    {
+        return Carbon::parse($this->attributes['order_date'])->format('d.m.Y');
+    }
+
+    public function getOrderFromAttribute()
+    {
+        return ucfirst($this->attributes['order_from']);
     }
 }
