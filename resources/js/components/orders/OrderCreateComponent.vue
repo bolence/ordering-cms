@@ -31,7 +31,7 @@
                                     'is-invalid': errors['order_number'],
                                 }"
                                 v-model="data.order_number"
-                                placeholder="Unesi broj porudžbine"
+                                placeholder="Broj porudžbine"
                             />
 
                             <div
@@ -469,7 +469,7 @@
                                 @click.prevent="makeOrder()"
                                 class="btn btn-primary px-3 float-end"
                             >
-                                <i class="bx bxs-save"></i>Napravi porudžbinu
+                                <i class="bx bxs-save"></i>SNIMI
                             </a>
                         </div>
                     </form>

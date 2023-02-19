@@ -14,7 +14,7 @@
                         <div class="card-body">
                             <div class="border p-4 rounded">
                                 <div class="text-center">
-                                    <h3 class="">Registruj se</h3>
+                                    <h3 class="">Ulogujte se</h3>
                                     <p>
                                         Još nemate nalog?
                                         <a href="/register">Registruj se</a>
