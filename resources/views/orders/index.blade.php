@@ -41,13 +41,16 @@
                             @foreach ($orders as $order)
                                 <tr>
                                     <td>{{ $order->order_number }}</td>
-                                    <td>{{ $order->customer->name }}</td>
+                                    <td>{{ $order->customer?->name }}</td>
                                     <td>{{ $order->delivery_type }}</td>
                                     <td>{{ $order->order_items_count ?? 0 }}</td>
                                     <td>{{ number_format($order->price, 2) }}</td>
                                     <td>{{ $order->order_date }}</td>
                                     <td>
-                                        <b-icon icon="eye" variant="success" font-scale="1"></b-icon>
+                                        <a href="/order/{{ $order->id }}">
+                                            <b-icon icon="eye" variant="success" font-scale="1"></b-icon>
+                                        </a>
+
                                         <b-icon icon="trash" variant="danger" font-scale="1"></b-icon>
 
                                     </td>

@@ -11,7 +11,11 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = Order::with('order_items')->withCount('order_items')->with('customer')->withSum('order_items', 'quantity')->groupBy('order_number')->get();
+        $orders = Order::with('order_items', 'customer')
+        ->withCount('order_items')
+        ->withSum('order_items', 'quantity')
+        ->groupBy('order_number')
+        ->get();
 
         return view('orders.index', compact('orders'))->with(['title' => 'Spisak poručenih majica']);
     }
