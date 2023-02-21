@@ -298,11 +298,9 @@
                                             <td>
                                                 {{
                                                     order_item.tip_kacenja
-                                                        ? json_encode(
-                                                              order_item.tip_kacenja
-                                                          )
+                                                        ? order_item.tip_kacenja
                                                         : order_item.tshirt_color
-                                                          | capitalize
+
                                                 }}
                                             </td>
                                             <td>
