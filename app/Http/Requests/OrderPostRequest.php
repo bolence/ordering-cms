@@ -33,6 +33,7 @@ class OrderPostRequest extends FormRequest
             'payment' => 'required',
             'delivery_type' => 'required',
             'price' => 'required',
+            'order_number' => 'required',
         ];
     }
 
@@ -47,6 +48,7 @@ class OrderPostRequest extends FormRequest
             'payment.required' => 'Način placanja je obavezno polje',
             'delivery_type.required' => 'Način dostave je obavezno polje',
             'price.required' => 'Suma je obavezno polje',
+            'order_number.required' => 'Broj porudžbine je obavezan',
         ];
     }
 }
