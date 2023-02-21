@@ -151,6 +151,7 @@ export default {
                 .catch((error) => {
                     if(error.response.data.token_missing) {
                         this.$awn.alert('Uradite refresh stranice');
+                        return;
                     }
                     this.$awn.alert(error.response.data.message);
                     this.errors = error.response.data.errors;
