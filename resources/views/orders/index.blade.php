@@ -50,9 +50,9 @@
                                         <a href="/order/{{ $order->id }}">
                                             <b-icon icon="eye" variant="success" font-scale="1"></b-icon>
                                         </a>
-
+                                        <a href="" data-id="{{ $order->id}}" class="delete_row">
                                         <b-icon icon="trash" variant="danger" font-scale="1"></b-icon>
-
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -88,6 +88,20 @@
                     url: '/datatable.language.json'
                 }
             });
+
+            $('.delete_row').click(function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                if(confirm('Da li ste sigurni za brisanje?')) {
+                    $.ajax({
+                        url: `/api/orders/${id}`,
+                        type: 'DELETE',
+                        success: function(result) {
+                            window.location.href = "/orders"
+                        }
+                    });
+                }
+            })
         });
     </script>
 @endpush

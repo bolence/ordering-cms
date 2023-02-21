@@ -111,4 +111,23 @@ class OrderService  extends GlobalService
         $order->customer_id = $customer->id;
         $order->save();
     }
+
+    public function deleteOrder(int $id)
+    {
+        $order = Order::findOrFail($id);
+
+        try {
+            $order->delete();
+            $order->order_items->delete();
+        } catch (\Throwable $th) {
+            info($th->getMessage() . ' ' . $th->getLine() . ' ' . $th->getCode());
+            return response()->json([
+                'message' => 'Došlo je do greške priliko brisanja'
+            ], 400);
+        }
+
+        return response()->json([
+            'message' => 'Uspešno izbrisana porudžbenica'
+        ], 200);
+    }
 }

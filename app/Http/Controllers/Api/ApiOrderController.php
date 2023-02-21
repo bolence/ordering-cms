@@ -69,6 +69,6 @@ class ApiOrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->orderService->deleteOrder($id);
     }
 }
