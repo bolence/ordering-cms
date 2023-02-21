@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Status;
-use App\Models\OrderItem;
 
 class OrderController extends Controller
 {
@@ -15,6 +13,7 @@ class OrderController extends Controller
         ->withCount('order_items')
         ->withSum('order_items', 'quantity')
         ->groupBy('order_number')
+        ->orderByDesc('id')
         ->get();
 
         return view('orders.index', compact('orders'))->with(['title' => 'Spisak poručenih majica']);
