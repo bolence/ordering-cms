@@ -34,8 +34,16 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (\Symfony\Component\HttpKernel\Exception\HttpException $e, $request) {
+            if ($e->getStatusCode() == 419) {
+                return response()->json(
+                    ['token_missing_message' => 'Morate da uradite refresh stranice',
+                    'token_missing' => true
+                ], 400);
+            }
         });
+        // $this->reportable(function (Throwable $e) {
+        //     //
+        // });
     }
 }
