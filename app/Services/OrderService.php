@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 class OrderService  extends GlobalService
 {
 
+    protected $orderNumber = 23000;
+
     /**
      * Undocumented function
      *
@@ -34,8 +36,11 @@ class OrderService  extends GlobalService
     public function save($request)
     {
 
+        $latest_order_number = Order::latest('id')->first();
+        $new_order_number = $latest_order_number ? $latest_order_number->order_number + 1 : $this->orderNumber;
         $request['user_id'] = Auth::id();
         $request['status_id'] = 1;
+        $request['order_number'] = $new_order_number;
 
         $order = Order::create($request->only(
             [
@@ -57,8 +62,7 @@ class OrderService  extends GlobalService
         $this->saveCustomerAndUpdateOrder($request, $order);
 
         return response()->json([
-            'message' => "Uspešno snimljena porudžbenica " . $request['order_number'],
-            'order' => $order->with('order_items')->get(),
+            'message' => "Uspešno snimljena porudžbenica " . $new_order_number,
         ], 200);
     }
 
@@ -74,7 +78,7 @@ class OrderService  extends GlobalService
 
         return response()->json([
             'order' => $order,
-            'statuses' => Status::orderByDesc('id')->get(),
+            'statuses' => Status::all(),
         ], 200);
     }
 
@@ -118,7 +122,7 @@ class OrderService  extends GlobalService
 
         try {
             $order->delete();
-            $order->order_items->delete();
+            $order->order_items()->delete();
         } catch (\Throwable $th) {
             info($th->getMessage() . ' ' . $th->getLine() . ' ' . $th->getCode());
             return response()->json([

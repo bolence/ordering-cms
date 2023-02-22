@@ -3,6 +3,20 @@
     <link href="/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css" rel="stylesheet" />
+    <style>
+        .dataTables_length,
+        .dataTables_filter {
+            padding-bottom: 20px;
+        }
+
+        thead>tr {
+            font-size: 15px !important;
+        }
+
+        tbody>tr>td {
+            font-size: 17px !important;
+        }
+    </style>
 @endpush
 
 
@@ -29,6 +43,7 @@
                                 <th>Broj porudžbine</th>
                                 <th>Poručio</th>
                                 <th>Tip dostave</th>
+                                <th>Status</th>
                                 <th>Broj porudžbina</th>
                                 <th>Suma</th>
                                 <th>Poručeno</th>
@@ -43,6 +58,11 @@
                                     <td>{{ $order->order_number }}</td>
                                     <td>{{ $order->customer?->name }}</td>
                                     <td>{{ $order->delivery_type }}</td>
+                                    <td><span
+                                            class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
+                                            <i class="bx bxs-circle me-1"></i>{{ $order->status->status }}
+                                        </span>
+                                    </td>
                                     <td>{{ $order->order_items_count ?? 0 }}</td>
                                     <td>{{ number_format($order->price, 2) }}</td>
                                     <td>{{ $order->order_date }}</td>
@@ -50,8 +70,8 @@
                                         <a href="/order/{{ $order->id }}">
                                             <b-icon icon="eye" variant="success" font-scale="1"></b-icon>
                                         </a>
-                                        <a href="" data-id="{{ $order->id}}" class="delete_row">
-                                        <b-icon icon="trash" variant="danger" font-scale="1"></b-icon>
+                                        <a href="" data-id="{{ $order->id }}" class="delete_row">
+                                            <b-icon icon="trash" variant="danger" font-scale="1"></b-icon>
                                         </a>
                                     </td>
                                 </tr>
@@ -71,8 +91,11 @@
 
     <script>
         $(document).ready(function() {
+
             $('#tshirt').DataTable({
-                order: [[0, 'desc']],
+                order: [
+                    [0, 'desc']
+                ],
                 responsive: {
                     details: {
                         display: $.fn.dataTable.Responsive.display.modal({
@@ -92,12 +115,13 @@
             $('.delete_row').click(function(e) {
                 e.preventDefault();
                 var id = $(this).data('id');
-                if(confirm('Da li ste sigurni za brisanje?')) {
+                if (confirm('Da li ste sigurni za brisanje?')) {
                     $.ajax({
                         url: `/api/orders/${id}`,
                         type: 'DELETE',
                         success: function(result) {
-                            window.location.href = "/orders"
+                            alert('Porudžbina izbrisana');
+                            window.location.href = "/order"
                         }
                     });
                 }

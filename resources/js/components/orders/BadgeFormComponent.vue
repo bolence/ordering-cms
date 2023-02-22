@@ -72,24 +72,13 @@
 
                 <div class="col-md-2 mb-1">
                     <label class="form-label">Količina:</label>
-                    <select
-                        name="size"
-                        id="size"
+                    <input
+                        name="quanity"
+                        id="quantity"
                         v-model="form.quantity"
-                        class="form-select"
-                    >
-                        <option value="0">Izaberi količinu bedzeva</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
+                        class="form-control"
+                        placeholder="Unesi količinu"
+                    />
                 </div>
 
                 <div class="col-md mx-auto text-center mt-3">
@@ -124,7 +113,7 @@ export default {
                     badge_size: null,
                     tip_kacenja: [],
                     plastifikacija: [],
-                    quantity: 0,
+                    quantity: null,
                     type: "bedž",
                 },
             ],

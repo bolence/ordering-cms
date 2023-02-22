@@ -3,6 +3,7 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 import VueAWN from "vue-awesome-notifications"
+import VueSweetalert2 from 'vue-sweetalert2';
 import 'vue-awesome-notifications/dist/styles/style.css';
 import { store } from './store/store'
 import moment from 'moment';
@@ -10,14 +11,17 @@ import numeral from 'numeral'
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
-// Import Bootstrap and BootstrapVue CSS files (order is important)
 // import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+
+Vue.use(VueSweetalert2);
 
 // Your custom options
 let options = {position: 'top-right', durations: 200}

@@ -6,9 +6,9 @@
             >
                 <div class="card-body p-4">
                     <div
-                        class="card-title d-flex align-items-center justify-content-between pb-3"
+                        class="card-title d-flex align-items-center justify-content-between"
                     >
-                        <div>
+                        <div class="col-md-6">
                             <h5 class="mb-0">
                                 <i
                                     class="bx bxs-book me-1 font-22 text-primary"
@@ -17,33 +17,8 @@
                             </h5>
                         </div>
 
-                        <div class="col-md-3 px-5">
-                            <label for="name" class="form-label fw-bold"
-                                >Broj porudžbine</label
-                            >
-
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="name"
-                                name="name"
-                                :class="{
-                                    'is-invalid': errors['order_number'],
-                                }"
-                                v-model="data.order_number"
-                                placeholder="Broj porudžbine"
-                            />
-
-                            <div
-                                v-if="errors.order_number"
-                                class="invalid-feedback error-message"
-                            >
-                                {{ errors["order_number"][0] }}
-                            </div>
-                        </div>
-
                         <div class="col-mx-auto float-end">
-                            <div class="form-check form-check-inline mt-2 pl-2">
+                            <div class="form-check form-check-inline pl-2">
                                 <input
                                     class="form-check-input"
                                     type="radio"
@@ -59,7 +34,7 @@
                                 >
                             </div>
 
-                            <div class="form-check form-check-inline mt-2">
+                            <div class="form-check form-check-inline">
                                 <input
                                     class="form-check-input"
                                     type="radio"
@@ -703,5 +678,13 @@ hr.fancy {
         rgba(0, 0, 0, 0.75),
         rgba(0, 0, 0, 0)
     );
+}
+
+input[type="radio"] {
+    transform: scale(1.5);
+}
+
+input[type="checkbox"] {
+    transform: scale(1.5);
 }
 </style>

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class StatusFactory extends Factory
 {
+
+
     /**
      * Define the model's default state.
      *
@@ -13,6 +15,7 @@ class StatusFactory extends Factory
      */
     public function definition()
     {
+
         return [
             'status' => $this->faker->randomElement(['Završena', 'Poslato', 'U slanju', 'U izradi', 'Primljena']),
             'enabled' => 1,

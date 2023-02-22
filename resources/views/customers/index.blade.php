@@ -34,7 +34,7 @@
                                     <th>Telefon 2</th>
                                     <th>Broj poruđžbina</th>
                                     <th>Detalji</th>
-                                    <th>Akcije</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,14 +53,9 @@
                                         <td>{{ $customer->phone }}</td>
                                         <td>{{ $customer->phone2 }}</td>
                                         <td>{{ $customer->orders_count }}</td>
-                                        <td><a href="" class="btn btn-primary btn-sm radius-30 px-4">Detalji
+                                        <td><a href="/customers/{{ $customer->id }}"
+                                                class="btn btn-primary btn-sm radius-30 px-4">Detalji
                                             </a></td>
-                                        <td>
-                                            <div class="d-flex order-actions">
-                                                <a href="" class="ms-3"><i
-                                                        class="bx bxs-trash text-danger"></i></a>
-                                            </div>
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

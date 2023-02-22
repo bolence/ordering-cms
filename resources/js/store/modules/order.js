@@ -74,7 +74,7 @@ const actions = {
 
     deleteOrderItem({commit}, payload) {
         return new Promise((resolve, reject) => {
-            axios.get(`/api/orders_items/${payload.id}`).then(resp => {
+            axios.delete(`/api/order_items/${payload.id}`).then(resp => {
                 resolve(resp.data);
                 // commit('setOrder', resp.data.order);
             }).catch( error => {

@@ -75,6 +75,7 @@
                         </h4>
                     </div>
                     <div class="card-body mt-3">
+                        {{ order.delivery_type }}
                         <div class="row mb-3">
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Tip dostave</h6>
@@ -120,11 +121,33 @@
                                 <h6 class="mb-0">Poručeno sa</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input
-                                    type="text"
-                                    class="form-control"
+                                <select
                                     v-model="order.order_from"
-                                />
+                                    class="form-select"
+                                >
+                                    <option
+                                        value="Facebook"
+                                        :selected="
+                                            order.order_from == 'Facebook'
+                                        "
+                                    >
+                                        Facebook
+                                    </option>
+                                    <option
+                                        value="Viber"
+                                        :selected="order.order_from == 'Viber'"
+                                    >
+                                        Viber
+                                    </option>
+                                    <option
+                                        value="Instagram"
+                                        :selected="
+                                            order.order_from == 'Instagram'
+                                        "
+                                    >
+                                        Instagram
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -147,6 +170,7 @@
                                 <input
                                     type="text"
                                     class="form-control"
+                                    disabled
                                     v-model="order.created_at"
                                 />
                             </div>
@@ -177,7 +201,12 @@
                             </div>
                         </div>
 
-                        <div v-if="order.delivery_type == 'Dostava'">
+                        <div
+                            v-if="
+                                order.delivery &&
+                                order.delivery_type == 'Dostava'
+                            "
+                        >
                             <h5 class="text-primary">Detalji slanja</h5>
                             <hr />
                             <div class="row mb-3">
@@ -190,7 +219,7 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        :value="order.delivery.name"
+                                        v-model="order.delivery.name"
                                     />
                                 </div>
                             </div>
@@ -203,7 +232,7 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        :value="order.delivery.street"
+                                        v-model="order.delivery.street"
                                     />
                                 </div>
                             </div>
@@ -216,7 +245,7 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        :value="order.delivery.city"
+                                        v-model="order.delivery.city"
                                     />
                                 </div>
                             </div>
@@ -229,7 +258,65 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        :value="order.delivery.phone"
+                                        v-model="order.delivery.phone"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-else-if="order.delivery_type == 'Dostava'">
+                            <h5 class="text-primary">Detalji slanja</h5>
+                            <hr />
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">
+                                        Ime i prezime kome se šalje
+                                    </h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="delivery_name"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Ulica gde se šalje</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="delivery_street"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Grad gde se šalje</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="delivery_city"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Telefon za kontakt</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        v-model="delivery_phone"
                                     />
                                 </div>
                             </div>
@@ -252,10 +339,9 @@
                         <div class="card bordered-10">
                             <div class="card-body">
                                 <div class="card-header mb-0">
-                                    <h5 class="d-flex align-items-center mb-1">
+                                    <h5 class="mb-1">
                                         Porudžbina sadrži
-                                        <!-- {{ $order->order_items->sum('quantity') }} -->
-                                        proizvoda
+                                        {{ order.order_items.length }} proizvoda
                                     </h5>
                                 </div>
 
@@ -300,7 +386,6 @@
                                                     order_item.tip_kacenja
                                                         ? order_item.tip_kacenja
                                                         : order_item.tshirt_color
-
                                                 }}
                                             </td>
                                             <td>
@@ -317,7 +402,10 @@
                                                 <a
                                                     href=""
                                                     @click.prevent="
-                                                        orderItemDelete(index)
+                                                        orderItemDelete(
+                                                            index,
+                                                            order_item.id
+                                                        )
                                                     "
                                                     ><i
                                                         class="bx bxs-trash text-danger"
@@ -341,7 +429,12 @@ import { mapGetters, mapActions } from "vuex";
 export default {
     props: ["order_id"],
     data() {
-        return {};
+        return {
+            delivery_city: null,
+            delivery_name: null,
+            delivery_phone: null,
+            delivery_street: null,
+        };
     },
 
     computed: {
@@ -361,8 +454,31 @@ export default {
             deleteOrderItem: "order/deleteOrderItem",
         }),
 
-        orderItemDelete(index) {
-            this.order.order_items.splice(index, 1);
+        orderItemDelete(index, orderItemId) {
+            this.$swal
+                .fire({
+                    title: "Da li ste sigurni?",
+                    text: "Radnja je nepovratna!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Da, izbriši!",
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        this.deleteOrderItem({ id: orderItemId }).then(
+                            (resp) => {
+                                this.order.order_items.splice(index, 1);
+                                this.$swal.fire(
+                                    "Izbrisano!",
+                                    resp.message,
+                                    "success"
+                                );
+                            }
+                        );
+                    }
+                });
         },
 
         updateOrder() {

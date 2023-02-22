@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_number');
-            $table->string('delivery_type');
+            $table->string('delivery_type'); // ['lično', 'dostava']
             $table->date('order_date');
             $table->date('delivery_date')->nullable();
             $table->text('napomena')->nullable();

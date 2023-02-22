@@ -31,6 +31,13 @@ $(function() {
 					scrollTop: 0
 				}, 600), !1
 			})
+
+			var token = localStorage.getItem('bedzevi.jwt');
+			$.ajaxSetup({
+				headers: {
+					'Authorization': 'Bearer ' + token
+				}
+			});
 		}),
 		$(function() {
 			for (var e = window.location, o = $(".metismenu li a").filter(function() {
