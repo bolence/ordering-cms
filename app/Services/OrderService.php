@@ -40,6 +40,7 @@ class OrderService  extends GlobalService
         $request['user_id'] = Auth::id();
         $request['status_id'] = 1;
         $request['order_number'] = $new_order_number;
+        $request['email'] = strtolower($request['email']);
 
         $order = Order::create($request->only(
             [

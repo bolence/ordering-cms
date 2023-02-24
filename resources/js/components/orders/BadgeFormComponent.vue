@@ -30,23 +30,16 @@
 
                 <div class="col-md-3 mb-1">
                     <label class="form-label">Tip kačenja:</label>
-                    <div class="form-check">
-                        <div
-                            class="form-check form-check-inline mt-2"
-                            v-for="(kacenje, index) in kacenja"
-                            :key="kacenje.id"
+                    <select class="form-select" v-model="form.tip_kacenja">
+                        <option value="null">Izaberi tip kačenja</option>
+                        <option
+                            :value="tip_kacenja.type"
+                            v-for="(tip_kacenja, index) in kacenja"
+                            :key="index"
                         >
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                :value="kacenje.type"
-                                v-model="form.tip_kacenja"
-                            />
-                            <label class="form-check-label">{{
-                                kacenje.type
-                            }}</label>
-                        </div>
-                    </div>
+                            {{ tip_kacenja.type }}
+                        </option>
+                    </select>
                 </div>
 
                 <div class="col-md-3 mb-1">
@@ -111,16 +104,17 @@ export default {
             forms: [
                 {
                     badge_size: null,
-                    tip_kacenja: [],
-                    plastifikacija: [],
-                    quantity: null,
+                    tip_kacenja: null,
+                    plastifikacija: null,
+                    quantity: 0,
                     type: "bedž",
                 },
             ],
 
             kacenja: [
                 { id: 1, type: "Zihernadla" },
-                { id: 2, type: "Magnet" },
+                { id: 2, type: "Feo. magnet" },
+                { id: 2, type: "Neo. magnet" },
                 { id: 3, type: "Samolepljiv" },
             ],
 
@@ -141,8 +135,8 @@ export default {
         addForm() {
             this.forms.push({
                 badge_size: null,
-                tip_kacenja: [],
-                plastifikacija: [],
+                tip_kacenja: null,
+                plastifikacija: null,
                 quantity: 0,
                 type: "bedž",
             });

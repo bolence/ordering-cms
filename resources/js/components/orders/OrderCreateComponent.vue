@@ -80,6 +80,34 @@
                                 {{ errors.order_date[0] }}
                             </div>
                         </div>
+
+                        <div class="col-md-3">
+                            <label for="name" class="form-label fw-bold"
+                                >Datum isporuke</label
+                            >
+                            <div class="input-group">
+                                <datepicker
+                                    v-model="data.delivery_date"
+                                    placeholder="Datum isporuke"
+                                    name="order_date"
+                                    format="dd MMM yyyy"
+                                    type="date"
+                                    style="width: 100%"
+                                    :input-class="{
+                                        'form-control': true,
+                                        'is-invalid': errors.delivery_date,
+                                    }"
+                                    calendar-button-icon="fa fa-calendar"
+                                ></datepicker>
+                            </div>
+                            <div
+                                v-if="errors?.delivery_date"
+                                class="invalid-feedback error-message"
+                            >
+                                {{ errors.delivery_date[0] }}
+                            </div>
+                        </div>
+
                         <div class="col-md-3">
                             <label for="name" class="form-label fw-bold"
                                 >Ime i prezime</label
@@ -202,6 +230,7 @@
                                     <option value="null">
                                         Izaberi odakle je poručeno
                                     </option>
+                                    <option value="email">Email</option>
                                     <option value="facebook">Facebook</option>
                                     <option value="instagram">Instagram</option>
                                     <option value="viber">Viber</option>
@@ -214,7 +243,7 @@
                                 {{ errors.order_from[0] }}
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-auto">
                             <label for="payment" class="form-label fw-bold"
                                 >Plaćanje:</label
                             >
@@ -261,7 +290,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-auto">
                             <label for="payment" class="form-label fw-bold"
                                 >Dostava:</label
                             >
@@ -419,7 +448,7 @@
                         </div>
 
                         <div
-                            class="col-12 pt-5 d-flex justify-content-between align-items-center"
+                            class="col-12 pt-2 d-flex justify-content-between align-items-center"
                         >
                             <div class="col-md-3">
                                 <input
@@ -439,13 +468,14 @@
                                     {{ errors.price[0] }}
                                 </div>
                             </div>
-
-                            <a
-                                @click.prevent="makeOrder()"
-                                class="btn btn-primary px-3 float-end"
-                            >
-                                <i class="bx bxs-save"></i>SNIMI
-                            </a>
+                            <div class="col-md-6">
+                                <a
+                                    @click.prevent="makeOrder()"
+                                    class="btn btn-primary px-2 float-end"
+                                >
+                                    <i class="bx bxs-save"></i>SNIMI
+                                </a>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -617,6 +647,7 @@ export default {
                 payment: null,
                 napomena: null,
                 price: null,
+                delivery_date: null,
             },
         };
     },

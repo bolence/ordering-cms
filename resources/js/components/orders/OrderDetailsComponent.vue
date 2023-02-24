@@ -301,77 +301,85 @@
                                         {{ order.order_items.length }} proizvoda
                                     </h5>
                                 </div>
-
-                                <table
-                                    id="badges"
-                                    class="table table-bordered my-3"
-                                    style="width: 100%"
-                                >
-                                    <thead>
-                                        <tr>
-                                            <th>Tip</th>
-                                            <th>Veličina bedža/majice</th>
-                                            <th>Tip kačenja/ Boja majice</th>
-                                            <th>Plastifikacija/Tip majice</th>
-                                            <th>Količina</th>
-                                            <th>Akcije</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr
-                                            v-for="(
-                                                order_item, index
-                                            ) in order.order_items"
-                                            :key="index"
-                                        >
-                                            <td class="fw-bold">
-                                                {{
-                                                    order_item.type | capitalize
-                                                }}
-                                            </td>
-                                            <td>
-                                                {{
-                                                    order_item.badge_size
-                                                        ? order_item.badge_size +
-                                                          "mm"
-                                                        : order_item.tshirt_size
-                                                          | capitalize
-                                                }}
-                                            </td>
-                                            <td>
-                                                {{
-                                                    order_item.tip_kacenja
-                                                        ? order_item.tip_kacenja
-                                                        : order_item.tshirt_color
-                                                }}
-                                            </td>
-                                            <td>
-                                                {{
-                                                    order_item.plastifikacija &&
-                                                    order_item.type == "bedž"
-                                                        ? order_item.plastifikacija
-                                                        : order_item.tshirt_type
-                                                          | capitalize
-                                                }}
-                                            </td>
-                                            <td>{{ order_item.quantity }}</td>
-                                            <td>
-                                                <a
-                                                    href=""
-                                                    @click.prevent="
-                                                        orderItemDelete(
-                                                            index,
-                                                            order_item.id
-                                                        )
-                                                    "
-                                                    ><i
-                                                        class="bx bxs-trash text-danger"
-                                                    ></i
-                                                ></a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="tab-content table-responsive">
+                                    <table
+                                        id="badges"
+                                        class="table table-bordered my-3"
+                                    >
+                                        <thead>
+                                            <tr>
+                                                <th>Tip</th>
+                                                <th>Veličina bedža/majice</th>
+                                                <th>
+                                                    Tip kačenja/ Boja majice
+                                                </th>
+                                                <th>
+                                                    Plastifikacija/Tip majice
+                                                </th>
+                                                <th>Količina</th>
+                                                <th>Akcije</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                v-for="(
+                                                    order_item, index
+                                                ) in order.order_items"
+                                                :key="index"
+                                            >
+                                                <td class="fw-bold">
+                                                    {{
+                                                        order_item.type
+                                                            | capitalize
+                                                    }}
+                                                </td>
+                                                <td>
+                                                    {{
+                                                        order_item.badge_size
+                                                            ? order_item.badge_size +
+                                                              "mm"
+                                                            : order_item.tshirt_size
+                                                              | capitalize
+                                                    }}
+                                                </td>
+                                                <td>
+                                                    {{
+                                                        order_item.tip_kacenja
+                                                            ? order_item.tip_kacenja
+                                                            : order_item.tshirt_color
+                                                    }}
+                                                </td>
+                                                <td>
+                                                    {{
+                                                        order_item.plastifikacija &&
+                                                        order_item.type ==
+                                                            "bedž"
+                                                            ? order_item.plastifikacija
+                                                            : order_item.tshirt_type
+                                                              | capitalize
+                                                    }}
+                                                </td>
+                                                <td>
+                                                    {{ order_item.quantity }}
+                                                </td>
+                                                <td>
+                                                    <a
+                                                        href=""
+                                                        @click.prevent="
+                                                            orderItemDelete(
+                                                                index,
+                                                                order_item.id
+                                                            )
+                                                        "
+                                                        ><i
+                                                            class="bx bxs-trash text-danger"
+                                                        ></i
+                                                    ></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

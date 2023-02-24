@@ -16,6 +16,10 @@
         tbody>tr>td {
             font-size: 17px !important;
         }
+
+        .dtr-details {
+            font-size: 17px !important;
+        }
     </style>
 @endpush
 
@@ -40,8 +44,8 @@
                     <table class="table table-bordered table-striped table-hover" id="tshirt">
                         <thead class="table-light">
                             <tr>
-                                <th>Broj porudžbine</th>
                                 <th>Poručio</th>
+                                <th>Broj porudžbine</th>
                                 <th>Tip dostave</th>
                                 <th>Status</th>
                                 <th>Broj porudžbina</th>
@@ -55,8 +59,9 @@
 
                             @foreach ($orders as $order)
                                 <tr>
-                                    <td>{{ $order->order_number }}</td>
                                     <td>{{ $order->customer?->name }}</td>
+                                    <td>{{ $order->order_number }}</td>
+
                                     <td>{{ $order->delivery_type }}</td>
                                     <td><span
                                             class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
