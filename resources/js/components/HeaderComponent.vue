@@ -105,7 +105,7 @@
                             <i class="bx bx-bell"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a href="javascript:;">
+                            <a href="">
                                 <div class="msg-header">
                                     <p class="msg-header-title">Notifikacije</p>
                                     <a class="msg-header-clear ms-auto" href="">
