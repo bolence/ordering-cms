@@ -2,7 +2,10 @@
 
 namespace App\Observers;
 
+use App\Models\User;
 use App\Models\Order;
+use App\Notifications\NewOrder;
+use Illuminate\Support\Facades\Notification;
 
 class OrderObserver
 {
@@ -14,6 +17,7 @@ class OrderObserver
      */
     public function created(Order $order)
     {
+        Notification::send(User::all(), new NewOrder($order));
     }
 
     /**

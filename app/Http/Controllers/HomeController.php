@@ -30,4 +30,14 @@ class HomeController extends Controller
         $statuses_json = json_encode($order_statuses, JSON_NUMERIC_CHECK);
         return view('welcome', compact('orders', 'customers', 'order_items', 'count_badges', 'count_tshirt', 'order_statuses', 'statuses_json', 'tshirt_count_per_month', 'badge_count_per_month'));
     }
+
+
+    public function notifications()
+    {
+        return
+            [
+                'notifications' => auth()->user()->notifications->sortByDesc('id')->take(5),
+                'count_notifications' => auth()->user()->notifications->count(),
+            ];
+    }
 }

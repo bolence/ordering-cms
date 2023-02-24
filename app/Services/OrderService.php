@@ -4,17 +4,15 @@ namespace App\Services;
 
 use App\Models\Order;
 use App\Models\Customer;
-use App\Models\Delivery;
 use App\Models\Status;
+use App\Notifications\NewOrder;
 use Exception;
-use Illuminate\Support\Str;
-use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderService  extends GlobalService
 {
 
-    protected $orderNumber = 23000;
+    protected $orderNumber = 230000;
 
     /**
      * Undocumented function

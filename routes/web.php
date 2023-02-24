@@ -20,3 +20,4 @@ Route::resource('order', OrderController::class)->middleware('auth');
 Route::resource('customers', CustomerController::class)->middleware('auth');
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth');
+Route::get('/notifications', [HomeController::class, 'notifications'])->middleware('auth');

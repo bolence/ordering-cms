@@ -50,6 +50,13 @@ Vue.filter("formatNumber", function(value) {
     }
 });
 
+
+Vue.filter("fromTime", function(value) {
+    if (value) {
+        return moment(String(value)).fromNow();
+    }
+});
+
 const app = new Vue({
     el: '#app',
     store,
