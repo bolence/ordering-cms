@@ -58,8 +58,6 @@
     </div>
     <!--end wrapper-->
 
-    <!-- Bootstrap JS -->
-    {{-- <script src="/assets/js/bootstrap.bundle.min.js"></script> --}}
     <!--plugins-->
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/plugins/simplebar/js/simplebar.min.js"></script>
@@ -70,8 +68,7 @@
     <!--app JS-->
     <script src="/assets/js/app.js"></script>
     <!-- vue js -->
-    <script src="/js/app.js"></script>
-
+    <script src="{{ mix('js/app.js') }}"></script>
     @stack('js')
 </body>
 
