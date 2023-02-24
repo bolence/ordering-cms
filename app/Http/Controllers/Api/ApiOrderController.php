@@ -58,7 +58,7 @@ class ApiOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->orderService->updateOrder($request, $id);
     }
 
     /**

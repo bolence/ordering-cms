@@ -75,7 +75,6 @@
                         </h4>
                     </div>
                     <div class="card-body mt-3">
-                        {{ order.delivery_type }}
                         <div class="row mb-3">
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Tip dostave</h6>
@@ -201,6 +200,22 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Napomena</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <textarea
+                                    rows="6"
+                                    v-model="order.napomena"
+                                    class="form-control"
+                                    name="napomena"
+                                    id="napomena"
+                                    >{{ order.napomena }}</textarea
+                                >
+                            </div>
+                        </div>
+
                         <div
                             v-if="
                                 order.delivery &&
@@ -264,66 +279,8 @@
                             </div>
                         </div>
 
-                        <div v-else-if="order.delivery_type == 'Dostava'">
-                            <h5 class="text-primary">Detalji slanja</h5>
-                            <hr />
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">
-                                        Ime i prezime kome se šalje
-                                    </h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        v-model="delivery_name"
-                                    />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Ulica gde se šalje</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        v-model="delivery_street"
-                                    />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Grad gde se šalje</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        v-model="delivery_city"
-                                    />
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Telefon za kontakt</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        v-model="delivery_phone"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="row">
-                            <div class="col-sm-12text-secondary">
+                            <div class="col-sm-12 text-secondary">
                                 <a
                                     @click.prevent="updateOrder()"
                                     class="btn btn-primary px-4 float-end"
@@ -425,15 +382,15 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
     props: ["order_id"],
     data() {
         return {
-            delivery_city: null,
-            delivery_name: null,
-            delivery_phone: null,
-            delivery_street: null,
+            // delivery_city: null,
+            // delivery_name: null,
+            // delivery_phone: null,
+            // delivery_street: null,
         };
     },
 
@@ -452,6 +409,10 @@ export default {
         ...mapActions({
             getOrder: "order/getOrder",
             deleteOrderItem: "order/deleteOrderItem",
+        }),
+
+        ...mapMutations({
+            setOrder: "order/setOrder",
         }),
 
         orderItemDelete(index, orderItemId) {
@@ -482,7 +443,15 @@ export default {
         },
 
         updateOrder() {
-            console.log(this.order);
+            axios
+                .put(`/api/orders/${this.order_id}`, this.order)
+                .then((resp) => {
+                    this.$awn.success(resp.data.message);
+                    this.setOrder(resp.data.order);
+                })
+                .catch((error) => {
+                    this.$awn.alert(error.response.data.message);
+                });
         },
     },
 };

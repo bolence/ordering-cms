@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Customer;
 use App\Models\Delivery;
 use App\Models\Status;
+use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Auth;
@@ -114,6 +115,48 @@ class OrderService  extends GlobalService
         // update order with customer id
         $order->customer_id = $customer->id;
         $order->save();
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $request
+     * @param [type] $id
+     * @return void
+     */
+    public function updateOrder($request, $id)
+    {
+        $order = Order::findOrFail($id);
+
+        try {
+            $order->update(
+                $request->only(
+                    [
+                        'order_date',
+                        'delivery_type',
+                        'order_from',
+                        'napomena',
+                        'status_id',
+                        'price'
+                    ]
+                )
+            );
+
+            if ($request->delivery) {
+                $order->delivery()->update($request->delivery);
+            }
+        } catch (Exception $e) {
+            info($e->getMessage() . ' ' . $e->getFile() . ' ' . $e->getCode());
+            return response()->json([
+                'message' => 'Došlo je do greške prilikom izmene porudžbine'
+            ], 400);
+        }
+
+
+        return response()->json([
+            'message' => 'Uspešno izmenjena porudžbina',
+            'order' => $order->with('delivery')->find($id),
+        ], 200);
     }
 
     public function deleteOrder(int $id)
