@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->date('order_date');
             $table->date('delivery_date')->nullable();
             $table->text('napomena')->nullable();
-            $table->enum('order_from', ['facebook', 'instagram', 'viber']);
+            $table->enum('order_from', ['facebook', 'instagram', 'viber', 'email']);
             $table->decimal('price', 10, 2)->nullable();
             $table->boolean('notify')->default(0);
             $table->unsignedBigInteger('user_id')->index();

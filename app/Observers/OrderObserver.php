@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\User;
 use App\Models\Order;
 use App\Notifications\NewOrder;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Notification;
 
 class OrderObserver
@@ -28,7 +29,7 @@ class OrderObserver
      */
     public function updated(Order $order)
     {
-        //
+        Cache::forget('finished_orders');
     }
 
     /**

@@ -15,6 +15,7 @@ Auth::routes();
 //     Route::get('/{id}', [OrderController::class, 'show']);
 // });
 
+Route::get('order/finished', [OrderController::class, 'finished_orders'])->middleware('auth');
 Route::resource('order', OrderController::class)->middleware('auth');
 
 Route::resource('customers', CustomerController::class)->middleware('auth');

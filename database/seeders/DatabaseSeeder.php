@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Order;
-use App\Models\OrderItem;
 use App\Models\Status;
+use App\Models\OrderItem;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
@@ -21,9 +22,11 @@ class DatabaseSeeder extends Seeder
         Status::truncate();
         Order::truncate();
         OrderItem::truncate();
+        // User::truncate();
+        // User::factory()->create();
         Status::factory(5)->create();
-        Order::factory(10)->create();
-        OrderItem::factory(50)->create();
+        // Order::factory(10)->create();
+        // OrderItem::factory(50)->create();
         Schema::enableForeignKeyConstraints();
     }
 }

@@ -51,7 +51,8 @@ class OrderService  extends GlobalService
                 'user_id',
                 'napomena',
                 'status_id',
-                'price'
+                'price',
+                'delivery_date',
             ]
         ));
 

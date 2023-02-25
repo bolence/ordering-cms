@@ -29,7 +29,7 @@ class Order extends Model
      *
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'order_date'];
+    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'order_date', 'delivery_date'];
 
     protected $with = ['order_items', 'user', 'customer'];
 
@@ -73,6 +73,11 @@ class Order extends Model
         $this->attributes['order_date'] = Carbon::parse($value)->format('Y-m-d');
     }
 
+    public function setDeliveryDateAttribute($value)
+    {
+        $this->attributes['delivery_date'] = Carbon::parse($value)->format('Y-m-d');
+    }
+
     public function getDeliveryTypeAttribute()
     {
         return ucfirst($this->attributes['delivery_type']);
@@ -81,6 +86,11 @@ class Order extends Model
     public function getOrderDateAttribute()
     {
         return Carbon::parse($this->attributes['order_date'])->format('d.m.Y');
+    }
+
+    public function getDeliveryDateAttribute()
+    {
+        return Carbon::parse($this->attributes['delivery_date'])->format('d.m.Y');
     }
 
     public function getOrderFromAttribute()

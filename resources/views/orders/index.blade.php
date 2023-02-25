@@ -48,7 +48,7 @@
                                 <th>Broj porudžbine</th>
                                 <th>Tip dostave</th>
                                 <th>Status</th>
-                                <th>Broj porudžbina</th>
+                                <th>Broj proizvoda</th>
                                 <th>Suma</th>
                                 <th>Poručeno</th>
                                 <th>Detalji</th>

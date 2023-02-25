@@ -27,4 +27,4 @@ mix.webpackConfig({
           '@': path.resolve(__dirname, 'resources/js/components/')
       }
   }
-}).version(['/public/js/app.js']);
+}).version(['public/js/app.js']);

@@ -115,6 +115,19 @@
                                 />
                             </div>
                         </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Datum isporuke</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    v-model="order.delivery_date"
+                                />
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Poručeno sa</h6>
@@ -124,6 +137,12 @@
                                     v-model="order.order_from"
                                     class="form-select"
                                 >
+                                    <option
+                                        value="Email"
+                                        :selected="order.order_from == 'Email'"
+                                    >
+                                        Email
+                                    </option>
                                     <option
                                         value="Facebook"
                                         :selected="
@@ -279,12 +298,29 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-sm-12 text-secondary">
+                        <div
+                            class="col-12 d-flex align-items-center justify-content-between"
+                        >
+                            <div class="col-md-6">
+                                <input
+                                    type="checkbox"
+                                    class="form-check-input"
+                                    name="send_email"
+                                    id="send_email"
+                                    v-model="order.notify"
+                                />
+                                <label
+                                    class="form-check-label px-1"
+                                    for="send_email"
+                                    >Pošalji notifikaciju</label
+                                >
+                            </div>
+                            <div class="col-md-6 text-secondary">
                                 <a
                                     @click.prevent="updateOrder()"
+                                    v-if="order.status_id !== 5"
                                     class="btn btn-primary px-4 float-end"
-                                    >Snimi izmene</a
+                                    >Snimi</a
                                 >
                             </div>
                         </div>

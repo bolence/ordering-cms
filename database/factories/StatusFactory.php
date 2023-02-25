@@ -17,7 +17,7 @@ class StatusFactory extends Factory
     {
 
         return [
-            'status' => $this->faker->randomElement(['Preuzeta', 'Spremna za isporuku', 'Platifikacija', 'Odštampana', 'Primljena']),
+            'status' => $this->faker->randomElement(['Preuzeta', 'Spremna za isporuku', 'Plastifikacija', 'Odštampana', 'Primljena']),
             'enabled' => 1,
             'created_at' => now(),
         ];

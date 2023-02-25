@@ -23,7 +23,7 @@ class OrderFactory extends Factory
             'delivery_type' => $this->faker->randomElement(['lično', 'dostava']),
             'order_date' => now()->format('Y-m-d'),
             'napomena' => $this->faker->sentence(),
-            'order_from' => $this->faker->randomElement(['facebook', 'instagram', 'viber']),
+            'order_from' => $this->faker->randomElement(['facebook', 'instagram', 'viber', 'email']),
             'price' => $this->faker->randomFloat(),
             'user_id' => User::all()->random()->id,
             'customer_id' => Customer::all()->random()->id,

@@ -89,7 +89,7 @@
                                 <datepicker
                                     v-model="data.delivery_date"
                                     placeholder="Datum isporuke"
-                                    name="order_date"
+                                    name="delivery_date"
                                     format="dd MMM yyyy"
                                     type="date"
                                     style="width: 100%"
@@ -356,7 +356,7 @@
                             </div>
                         </div>
 
-                        <hr class="fancy" />
+                        <hr class="fancy" v-if="data.order_type" />
 
                         <TshirtForm :type="data.order_type" />
                         <BadgeForm :type="data.order_type" />
@@ -448,7 +448,7 @@
                         </div>
 
                         <div
-                            class="col-12 pt-2 d-flex justify-content-between align-items-center"
+                            class="col-12 pt-5 d-flex justify-content-between align-items-center"
                         >
                             <div class="col-md-3">
                                 <input

@@ -38,13 +38,13 @@
             </a>
         </li>
 
-        {{-- <li class="{{ request()->is('order/badges' ? 'mm-active' : '') }}">
-            <a href="/order/badges">
+        <li class="{{ request()->is('order/badges/finished' ? 'mm-active' : '') }}">
+            <a href="/order/finished">
                 <div class="parent-icon"><i class="bx bxs-badge"></i>
                 </div>
-                <div class="menu-title">Porudžbine bedževa</div>
+                <div class="menu-title">Završene porudžbine</div>
             </a>
-        </li> --}}
+        </li>
 
 
         <li class="{{ request()->is('customers' ? 'mm-active' : '') }}">
