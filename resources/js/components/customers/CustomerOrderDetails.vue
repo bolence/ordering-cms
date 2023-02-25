@@ -14,24 +14,24 @@
                                 width="110"
                             />
                             <div class="mt-3">
-                                <h4>Poručio/la: {{ order.customer?.name }}</h4>
+                                <h4>Poručio/la: {{ customer?.name }}</h4>
 
                                 <a
-                                    v-if="order.customer?.email"
+                                    v-if="customer?.email"
                                     class="text-muted font-size-sm py-2"
-                                    >{{ order.customer?.email }}</a
+                                    >{{ customer?.email }}</a
                                 >
 
                                 <p
                                     class="text-muted font-size-sm py-2"
-                                    v-if="order.customer?.phone"
+                                    v-if="customer?.phone"
                                 >
-                                    {{ order.customer?.phone }}
+                                    {{ customer?.phone }}
                                 </p>
 
                                 <a
                                     class="btn btn-primary"
-                                    :href="`mailto:${order.customer?.email}`"
+                                    :href="`mailto:${customer?.email}`"
                                     >Pošalji poruku</a
                                 >
                             </div>
@@ -40,16 +40,14 @@
                         <hr class="my-4" />
                         <ul
                             class="list-group list-group-flush"
-                            v-if="
-                                order.customer?.street || order.customer?.city
-                            "
+                            v-if="customer?.street || customer?.city"
                         >
                             <li
                                 class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
                             >
                                 <h6 class="mb-0">Ulica</h6>
                                 <span class="text-secondary">{{
-                                    order.customer?.street
+                                    customer?.street
                                 }}</span>
                             </li>
                             <li
@@ -57,7 +55,7 @@
                             >
                                 <h6 class="mb-0">Grad</h6>
                                 <span class="text-secondary">{{
-                                    order.customer?.city
+                                    customer?.city
                                 }}</span>
                             </li>
                         </ul>
@@ -65,7 +63,7 @@
                 </div>
             </div>
             <div class="col-lg-8">
-                <div class="card bordered-10">
+                <!-- <div class="card bordered-10">
                     <div class="card-header">
                         <h4>
                             Detalji porudžbine
@@ -332,85 +330,74 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="row" v-if="order.order_items?.length > 0">
+                <div class="row" v-if="customer.orders.length > 0">
                     <div class="col-sm-12">
                         <div class="card bordered-10">
                             <div class="card-body">
                                 <div class="card-header mb-0">
                                     <h5 class="mb-1">
-                                        Porudžbina sadrži
-                                        {{ order.order_items.length }} proizvoda
+                                        Broj porudžbina
+                                        {{ customer.orders.length }}
                                     </h5>
                                 </div>
 
                                 <table
                                     id="badges"
-                                    class="table table-bordered my-3"
+                                    class="table table-bordered table-striped my-3"
                                     style="width: 100%"
                                 >
                                     <thead>
                                         <tr>
-                                            <th>Tip</th>
-                                            <th>Veličina bedža/majice</th>
-                                            <th>Tip kačenja/ Boja majice</th>
-                                            <th>Plastifikacija/Tip majice</th>
-                                            <th>Količina</th>
-                                            <th>Akcije</th>
+                                            <th>Broj porudžbine</th>
+                                            <th>Datum porudžbine</th>
+                                            <th>Tip dostave</th>
+                                            <th>Poručeno sa</th>
+                                            <th>Broj proizvoda</th>
+                                            <th>Status</th>
+                                            <th>Detalji</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr
                                             v-for="(
-                                                order_item, index
-                                            ) in order.order_items"
+                                                order, index
+                                            ) in customer.orders"
                                             :key="index"
                                         >
                                             <td class="fw-bold">
-                                                {{
-                                                    order_item.type | capitalize
-                                                }}
+                                                {{ order.order_number }}
                                             </td>
-                                            <td>
-                                                {{
-                                                    order_item.badge_size
-                                                        ? order_item.badge_size +
-                                                          "mm"
-                                                        : order_item.tshirt_size
-                                                          | capitalize
-                                                }}
+
+                                            <td class="fw-bold">
+                                                {{ order.order_date }}
                                             </td>
-                                            <td>
-                                                {{
-                                                    order_item.tip_kacenja
-                                                        ? order_item.tip_kacenja
-                                                        : order_item.tshirt_color
-                                                }}
+                                            <td class="fw-bold">
+                                                {{ order.delivery_type }}
                                             </td>
-                                            <td>
-                                                {{
-                                                    order_item.plastifikacija &&
-                                                    order_item.type == "bedž"
-                                                        ? order_item.plastifikacija
-                                                        : order_item.tshirt_type
-                                                          | capitalize
-                                                }}
+                                            <td class="fw-bold">
+                                                {{ order.order_from }}
                                             </td>
-                                            <td>{{ order_item.quantity }}</td>
+                                            <td class="fw-bold">
+                                                {{ order.order_items.length }}
+                                            </td>
+                                            <td class="fw-bold">
+                                                <span
+                                                    class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"
+                                                >
+                                                    <i
+                                                        class="bx bxs-circle me-1"
+                                                    ></i
+                                                    >{{ order.status.status }}
+                                                </span>
+                                            </td>
                                             <td>
                                                 <a
-                                                    href=""
-                                                    @click.prevent="
-                                                        orderItemDelete(
-                                                            index,
-                                                            order_item.id
-                                                        )
-                                                    "
-                                                    ><i
-                                                        class="bx bxs-trash text-danger"
-                                                    ></i
-                                                ></a>
+                                                    :href="`/order/${order.id}`"
+                                                    class="btn btn-primary btn-sm radius-30 px-4"
+                                                    >Detalji
+                                                </a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -427,25 +414,24 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
-    props: ["order_id"],
+    props: ["customer_id"],
     data() {
         return {
-            delivery_city: null,
-            delivery_name: null,
-            delivery_phone: null,
-            delivery_street: null,
+            customer: {},
         };
     },
 
     computed: {
-        ...mapGetters({
-            order: "order/order",
-            statuses: "order/statuses",
-        }),
+        // ...mapGetters({
+        //     order: "order/order",
+        //     statuses: "order/statuses",
+        // }),
     },
 
     mounted() {
-        this.getOrder({ id: this.order_id });
+        axios.get(`/api/customers/${this.customer_id}`).then((resp) => {
+            this.customer = resp.data.customer_orders;
+        });
     },
 
     methods: {
@@ -453,37 +439,6 @@ export default {
             getOrder: "order/getOrder",
             deleteOrderItem: "order/deleteOrderItem",
         }),
-
-        orderItemDelete(index, orderItemId) {
-            this.$swal
-                .fire({
-                    title: "Da li ste sigurni?",
-                    text: "Radnja je nepovratna!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Da, izbriši!",
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        this.deleteOrderItem({ id: orderItemId }).then(
-                            (resp) => {
-                                this.order.order_items.splice(index, 1);
-                                this.$swal.fire(
-                                    "Izbrisano!",
-                                    resp.message,
-                                    "success"
-                                );
-                            }
-                        );
-                    }
-                });
-        },
-
-        updateOrder() {
-            console.log(this.order);
-        },
     },
 };
 </script>
