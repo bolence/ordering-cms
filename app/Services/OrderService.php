@@ -120,9 +120,9 @@ class OrderService  extends GlobalService
     /**
      * Undocumented function
      *
-     * @param [type] $request
-     * @param [type] $id
-     * @return void
+     * @param object $request
+     * @param integer $id
+     * @return Illuminate\Http\Response json
      */
     public function updateOrder($request, $id)
     {
@@ -137,7 +137,8 @@ class OrderService  extends GlobalService
                         'order_from',
                         'napomena',
                         'status_id',
-                        'price'
+                        'price',
+                        'notified',
                     ]
                 )
             );
@@ -151,7 +152,6 @@ class OrderService  extends GlobalService
                 'message' => 'Došlo je do greške prilikom izmene porudžbine'
             ], 400);
         }
-
 
         return response()->json([
             'message' => 'Uspešno izmenjena porudžbina',

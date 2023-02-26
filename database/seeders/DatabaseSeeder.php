@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Customer;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Status;
@@ -19,14 +20,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Schema::disableForeignKeyConstraints();
-        Status::truncate();
-        Order::truncate();
-        OrderItem::truncate();
+        // Status::truncate();
+        // Order::truncate();
+        // OrderItem::truncate();
         // User::truncate();
         // User::factory()->create();
-        Status::factory(5)->create();
+        // Status::factory(5)->create();
         // Order::factory(10)->create();
         // OrderItem::factory(50)->create();
+        Customer::factory(10)->create();
         Schema::enableForeignKeyConstraints();
     }
 }

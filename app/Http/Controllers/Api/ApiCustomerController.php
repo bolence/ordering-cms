@@ -15,7 +15,9 @@ class ApiCustomerController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'customers' => Customer::all(),
+        ], 200);
     }
 
     /**

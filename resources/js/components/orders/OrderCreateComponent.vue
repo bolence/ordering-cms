@@ -112,10 +112,12 @@
                             <label for="name" class="form-label fw-bold"
                                 >Ime i prezime</label
                             >
+
                             <div class="input-group">
                                 <span class="input-group-text bg-transparent"
                                     ><i class="bx bxs-user"></i
                                 ></span>
+
                                 <input
                                     type="text"
                                     class="form-control border-start-0"
@@ -480,7 +482,6 @@
                     </form>
                 </div>
             </div>
-
             <div
                 class="card border-top border-bottom border-0 border-3 border-danger"
                 v-if="newOrder.tshirt.length > 0"
@@ -649,7 +650,14 @@ export default {
                 price: null,
                 delivery_date: null,
             },
+            customers: [],
         };
+    },
+
+    mounted() {
+        axios.get("/api/customers").then((resp) => {
+            this.customers = resp.data.customers;
+        });
     },
 
     computed: {

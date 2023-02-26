@@ -204,6 +204,7 @@
                                     id="status"
                                     name="status"
                                     v-model="order.status_id"
+                                    @change="infoAboutSendingEmail()"
                                 >
                                     <option
                                         v-for="(status, index) in statuses"
@@ -300,6 +301,7 @@
 
                         <div
                             class="col-12 d-flex align-items-center justify-content-between"
+                            v-if="!order.notified"
                         >
                             <div class="col-md-6">
                                 <input
@@ -307,7 +309,7 @@
                                     class="form-check-input"
                                     name="send_email"
                                     id="send_email"
-                                    v-model="order.notify"
+                                    v-model="notified"
                                 />
                                 <label
                                     class="form-check-label px-1"
@@ -318,7 +320,6 @@
                             <div class="col-md-6 text-secondary">
                                 <a
                                     @click.prevent="updateOrder()"
-                                    v-if="order.status_id !== 5"
                                     class="btn btn-primary px-4 float-end"
                                     >Snimi</a
                                 >
@@ -431,6 +432,7 @@ export default {
     props: ["order_id"],
     data() {
         return {
+            notified: 0,
             // delivery_city: null,
             // delivery_name: null,
             // delivery_phone: null,
@@ -458,6 +460,36 @@ export default {
         ...mapMutations({
             setOrder: "order/setOrder",
         }),
+
+        infoAboutSendingEmail() {
+            this.$swal
+                .fire({
+                    title: "Pošaljite email?",
+                    text: "Da li želite da pošaljete email kako bi obavestili kupca o završenoj porudžbini?",
+                    icon: "success",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Da, želim!",
+                    cancelButtonText: "Otkaži",
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        this.notified = true;
+                        this.$swal.fire(
+                            "Slanje mejla zakazano!",
+                            "Mejl će biti poslat kad kliknete na snimi. Ako ipak ne želite, odčekirajte pošalji notifikaciju!",
+                            "warning"
+                        );
+                    } else {
+                        this.$swal.fire(
+                            "Mejl neće biti poslat!",
+                            "Mejl neće biti poslat kad budete izmenili status ove porudžbenice!",
+                            "info"
+                        );
+                    }
+                });
+        },
 
         orderItemDelete(index, orderItemId) {
             this.$swal
@@ -487,6 +519,16 @@ export default {
         },
 
         updateOrder() {
+            // let updatedOrder;
+            // if (!this.order.notified) {
+            //     updatedOrder = {
+            //         ...this.order,
+            //         ...{ notified: this.notified },
+            //     };
+            // } else {
+            //     updatedOrder = this.order;
+            // }
+
             axios
                 .put(`/api/orders/${this.order_id}`, this.order)
                 .then((resp) => {
