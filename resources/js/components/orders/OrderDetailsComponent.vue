@@ -301,7 +301,7 @@
 
                         <div
                             class="col-12 d-flex align-items-center justify-content-between"
-                            v-if="order.status_id !== 5"
+                            v-if="!order.notified"
                         >
                             <div class="col-md-6">
                                 <span v-if="order.order_from == 'Email'">
