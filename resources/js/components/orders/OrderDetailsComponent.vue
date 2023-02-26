@@ -341,7 +341,7 @@
                                         </h6>
                                         <div class="text-dark">
                                             Porudžbenica je završena i ne može
-                                            se izmeniti više.
+                                            se više izmeniti.
                                         </div>
                                     </div>
                                 </div>
