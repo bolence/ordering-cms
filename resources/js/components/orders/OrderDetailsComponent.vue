@@ -462,33 +462,42 @@ export default {
         }),
 
         infoAboutSendingEmail() {
-            this.$swal
-                .fire({
-                    title: "Pošaljite email?",
-                    text: "Da li želite da pošaljete email kako bi obavestili kupca o završenoj porudžbini?",
-                    icon: "success",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Da, želim!",
-                    cancelButtonText: "Otkaži",
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        this.notified = true;
-                        this.$swal.fire(
-                            "Slanje mejla zakazano!",
-                            "Mejl će biti poslat kad kliknete na snimi. Ako ipak ne želite, odčekirajte pošalji notifikaciju!",
-                            "warning"
-                        );
-                    } else {
-                        this.$swal.fire(
-                            "Mejl neće biti poslat!",
-                            "Mejl neće biti poslat kad budete izmenili status ove porudžbenice!",
-                            "info"
-                        );
-                    }
-                });
+            if (this.order.status_id == 5) {
+                this.$swal
+                    .fire({
+                        title: "Pošaljite email?",
+                        text: "Da li želite da pošaljete email kako bi obavestili kupca o završenoj porudžbini?",
+                        icon: "success",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Da, želim!",
+                        cancelButtonText: "Otkaži",
+                    })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            this.notified = true;
+                            this.$swal.fire(
+                                "Slanje mejla zakazano!",
+                                "Mejl će biti poslat kad kliknete na snimi. Ako ipak ne želite, odčekirajte pošalji notifikaciju!",
+                                "warning"
+                            );
+                        } else {
+                            this.$swal.fire(
+                                "Mejl neće biti poslat!",
+                                "Mejl neće biti poslat kad budete izmenili status ove porudžbenice!",
+                                "info"
+                            );
+                        }
+                    });
+            } else if (this.notified == true) {
+                this.notified = false;
+                this.$swal.fire(
+                    "Slanje mejla otkazano!",
+                    "Da bi bili sigurni, otkazali smo slanje mejla jer ste promenili status porudžbenice!",
+                    "warning"
+                );
+            }
         },
 
         orderItemDelete(index, orderItemId) {
