@@ -325,6 +325,32 @@
                                 >
                             </div>
                         </div>
+                        <div class="col-12" else>
+                            <div
+                                class="alert alert-warning border-0 bg-warning alert-dismissible fade show py-1"
+                            >
+                                <div class="d-flex align-items-center">
+                                    <div class="font-35 text-dark">
+                                        <i class="bx bx-info-square"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0 text-dark">
+                                            Obaveštenje
+                                        </h6>
+                                        <div class="text-dark">
+                                            Porudžbenica je završena i ne može
+                                            se izmeniti više.
+                                        </div>
+                                    </div>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -432,7 +458,7 @@ export default {
     props: ["order_id"],
     data() {
         return {
-            notified: 0,
+            notified: false,
             // delivery_city: null,
             // delivery_name: null,
             // delivery_phone: null,
@@ -490,7 +516,7 @@ export default {
                             );
                         }
                     });
-            } else if (this.notified == true) {
+            } else if (this.notified == true && this.order.status_id == 5) {
                 this.notified = false;
                 this.$swal.fire(
                     "Slanje mejla otkazano!",
@@ -510,6 +536,7 @@ export default {
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
                     confirmButtonText: "Da, izbriši!",
+                    cancelButtonText: "Otkaži",
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
@@ -528,21 +555,14 @@ export default {
         },
 
         updateOrder() {
-            // let updatedOrder;
-            // if (!this.order.notified) {
-            //     updatedOrder = {
-            //         ...this.order,
-            //         ...{ notified: this.notified },
-            //     };
-            // } else {
-            //     updatedOrder = this.order;
-            // }
+            this.order.notified = this.notified;
 
             axios
                 .put(`/api/orders/${this.order_id}`, this.order)
                 .then((resp) => {
                     this.$awn.success(resp.data.message);
                     this.setOrder(resp.data.order);
+                    // this.notified = false;
                 })
                 .catch((error) => {
                     this.$awn.alert(error.response.data.message);

@@ -21,7 +21,7 @@ class Order extends Model
 
     protected $casts = [
         'created_at' => 'date:d.m.Y',
-        'notify' => 'boolean'
+        'notified' => 'boolean'
     ];
 
     /**
