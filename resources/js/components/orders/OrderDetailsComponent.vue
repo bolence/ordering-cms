@@ -304,7 +304,7 @@
                             v-if="!order.notified"
                         >
                             <div class="col-md-6">
-                                <span v-if="order.order_from == 'Email'">
+                                <span v-if="order.customer.email">
                                     <input
                                         type="checkbox"
                                         class="form-check-input"
@@ -490,7 +490,11 @@ export default {
         }),
 
         infoAboutSendingEmail() {
-            if (this.order.status_id == 5) {
+            if (
+                this.order.status_id == 5 &&
+                !this.order.notified &&
+                this.order.customer.email
+            ) {
                 this.$swal
                     .fire({
                         title: "Pošaljite email?",
@@ -518,13 +522,6 @@ export default {
                             );
                         }
                     });
-            } else if (this.notified == true && this.order.status_id == 5) {
-                this.notified = false;
-                this.$swal.fire(
-                    "Slanje mejla otkazano!",
-                    "Da bi bili sigurni, otkazali smo slanje mejla jer ste promenili status porudžbenice!",
-                    "warning"
-                );
             }
         },
 
