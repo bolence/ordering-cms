@@ -301,21 +301,23 @@
 
                         <div
                             class="col-12 d-flex align-items-center justify-content-between"
-                            v-if="!order.notified"
+                            v-if="order.status_id == 5"
                         >
                             <div class="col-md-6">
-                                <input
-                                    type="checkbox"
-                                    class="form-check-input"
-                                    name="send_email"
-                                    id="send_email"
-                                    v-model="notified"
-                                />
-                                <label
-                                    class="form-check-label px-1"
-                                    for="send_email"
-                                    >Pošalji notifikaciju</label
-                                >
+                                <span v-if="order.order_from == 'Email'">
+                                    <input
+                                        type="checkbox"
+                                        class="form-check-input"
+                                        name="send_email"
+                                        id="send_email"
+                                        v-model="notified"
+                                    />
+                                    <label
+                                        class="form-check-label px-1"
+                                        for="send_email"
+                                        >Pošalji notifikaciju</label
+                                    >
+                                </span>
                             </div>
                             <div class="col-md-6 text-secondary">
                                 <a
@@ -325,7 +327,7 @@
                                 >
                             </div>
                         </div>
-                        <div class="col-12" else>
+                        <div class="col-12" v-else>
                             <div
                                 class="alert alert-warning border-0 bg-warning alert-dismissible fade show py-1"
                             >
