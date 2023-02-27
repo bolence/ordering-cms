@@ -7,6 +7,7 @@ if (
     || gethostname() == 'centos007'
     || gethostname() == 'Boskos-MacBook-Air.local'
     || gethostname() == 'Boskos-iMac.local'
+    || gethostname() == 'beograd011'
 ) {
 
     return [
