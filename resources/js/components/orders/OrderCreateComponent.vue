@@ -650,7 +650,6 @@ export default {
                 price: null,
                 delivery_date: moment().add(7, "days").format("DD MMM yyyy"), // added 7 days to order_date default date
             },
-            customers: [],
         };
     },
 

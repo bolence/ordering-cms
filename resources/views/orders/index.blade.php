@@ -73,10 +73,13 @@
                                     <td>{{ $order->order_date }}</td>
                                     <td>
                                         <a href="/order/{{ $order->id }}">
-                                            <b-icon icon="eye" variant="success" font-scale="1"></b-icon>
+                                            <b-icon icon="eye-fill" variant="success" font-scale="1"></b-icon>
                                         </a>
                                         <a href="" data-id="{{ $order->id }}" class="delete_row">
-                                            <b-icon icon="trash" variant="danger" font-scale="1"></b-icon>
+                                            <b-icon icon="trash-fill" variant="danger" font-scale="1"></b-icon>
+                                        </a>
+                                        <a href="/pdf/order/{{ $order->id }}">
+                                            <b-icon icon="printer-fill" variant="info" font-scale="1"></b-icon>
                                         </a>
                                     </td>
                                 </tr>

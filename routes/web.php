@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     HomeController,
     OrderController,
-    CustomerController
+    CustomerController,
+    PdfController
 };
 
 
@@ -24,3 +25,8 @@ Route::resource('customers', CustomerController::class)->middleware('auth');
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 Route::get('/notifications', [HomeController::class, 'notifications'])->middleware('auth');
+
+
+Route::group(['prefix' => 'pdf', 'middleware' => 'auth'], function () {
+    Route::get('order/{id}', [PdfController::class, 'orderToPdf']);
+});

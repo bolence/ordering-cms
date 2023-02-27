@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="msg-name">
-                                                Broj porudžbenice
+                                                Nova porudžbenica
                                                 <span
                                                     class="msg-time float-end"
                                                     >{{

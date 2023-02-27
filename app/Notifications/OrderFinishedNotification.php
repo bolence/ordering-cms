@@ -14,14 +14,17 @@ class OrderFinishedNotification extends Notification implements ShouldQueue
 
     public $order;
 
+    public $sendToAll;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order, $sendToAll = false)
     {
         $this->order = $order;
+        $this->sendToAll = $sendToAll;
     }
 
     /**
@@ -43,6 +46,7 @@ class OrderFinishedNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+        if (!$this->sendToAll) return;
         return (new MailMessage)
             ->from('bedzstudio@gmail.com', 'BedžStudio')
             ->view('emails.order_finished', ['order' => $this->order])
