@@ -34,54 +34,54 @@
             <table class="table table-bordered table-striped" border="1">
                 <tbody>
                     <tr>
-                        <td class="fw-bold">Broj porudžbenice</td>
+                        <td class="fw-bold w-25">Broj porudžbenice</td>
                         <td>{{ $order->order_number }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Način dostave</td>
+                        <td class="fw-bold w-25">Način dostave</td>
                         <td>{{ $order->delivery_type }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Datum poručivanja</td>
+                        <td class="fw-bold w-25">Datum poručivanja</td>
                         <td>{{ $order->order_date }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Datum isporuke</td>
+                        <td class="fw-bold w-25">Datum isporuke</td>
                         <td>{{ $order->order_number }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Napomena</td>
+                        <td class="fw-bold w-25">Napomena</td>
                         <td>{{ $order->napomena }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Poručeno sa</td>
+                        <td class="fw-bold w-25">Poručeno sa</td>
                         <td>{{ $order->order_from }}</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">Status</td>
+                        <td class="fw-bold w-25">Status</td>
                         <td>{{ $order->status->status }}</td>
                     </tr>
 
                     <tr>
-                        <td class="fw-bold">Poručio</td>
+                        <td class="fw-bold w-25">Poručio</td>
                         <td>{{ $order->customer->name }}</td>
                     </tr>
 
                     <tr>
-                        <td class="fw-bold">Broj telefona</td>
+                        <td class="fw-bold w-25">Broj telefona</td>
                         <td>{{ $order->customer->phone }}</td>
                     </tr>
 
                     @if ($order->customer->street)
                         <tr>
-                            <td class="fw-bold">Adresa</td>
+                            <td class="fw-bold w-25">Adresa</td>
                             <td>{{ $order->customer->street }}</td>
                         </tr>
                     @endif
 
                     @if ($order->customer->city)
                         <tr>
-                            <td class="fw-bold">Grad</td>
+                            <td class="fw-bold w-25">Grad</td>
                             <td>{{ $order->customer->city }}</td>
                         </tr>
                     @endif
