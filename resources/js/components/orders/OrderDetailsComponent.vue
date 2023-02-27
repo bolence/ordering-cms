@@ -363,7 +363,10 @@
                                 <div class="card-header mb-0">
                                     <h5 class="mb-1">
                                         Porudžbina sadrži
-                                        {{ order.order_items.length }} proizvoda
+                                        {{
+                                            order.order_items.length
+                                        }}
+                                        proizvod/a
                                     </h5>
                                 </div>
                                 <div class="tab-content table-responsive">
