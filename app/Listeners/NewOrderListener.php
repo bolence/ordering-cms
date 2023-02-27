@@ -2,13 +2,14 @@
 
 namespace App\Listeners;
 
+use App\Models\User;
 use App\Events\NewOrderEvent;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Notification;
 use App\Notifications\NewOrderNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 
-class NewOrderListener implements ShouldQueue
+class NewOrderListener
 {
     /**
      * Create the event listener.
@@ -28,7 +29,6 @@ class NewOrderListener implements ShouldQueue
      */
     public function handle(NewOrderEvent $event)
     {
-        $event->order->customer->notify(new NewOrderNotification($event->order));
-        Cache::forget('finished_orders');
+        Notification::send(User::all(), new NewOrderNotification($event->order));
     }
 }

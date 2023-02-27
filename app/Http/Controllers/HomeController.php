@@ -31,13 +31,19 @@ class HomeController extends Controller
         return view('welcome', compact('orders', 'customers', 'order_items', 'count_badges', 'count_tshirt', 'order_statuses', 'statuses_json', 'tshirt_count_per_month', 'badge_count_per_month'));
     }
 
-
+    /**
+     * Get user notifications
+     *
+     * @return Illuminate\Http\Response
+     */
     public function notifications()
     {
-        return
-            [
-                'notifications' => auth()->user()->notifications->sortByDesc('id')->take(5),
-                'count_notifications' => auth()->user()->notifications->count(),
-            ];
+        $notifications = auth()->user()->notifications->sortByDesc('id')->take(5);
+        $count_notifications = auth()->user()->notifications->count();
+
+        return response()->json([
+            'notifications' => $notifications,
+            'count_notifications' => $count_notifications,
+        ], 200);
     }
 }

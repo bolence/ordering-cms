@@ -281,7 +281,7 @@
                                                                 style="padding-left:10px;padding-right:10px;width:100%;padding-top:5px;">
                                                                 <div class="alignment" align="center"
                                                                     style="line-height:10px"><a
-                                                                        href="https://www.example.com/"
+                                                                        href="https://bedzstudio.co.rs"
                                                                         target="_blank" style="outline:none"
                                                                         tabindex="-1"><img
                                                                             src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/BeeProAgency/951907_936403/1001.png"
@@ -298,8 +298,8 @@
                                                             <td class="pad"
                                                                 style="text-align:center;padding-bottom:5px;">
                                                                 <div class="alignment" align="center">
-                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.example.com/" style="height:32px;width:50px;v-text-anchor:middle;" arcsize="13%" stroke="false" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#111111; font-family:Tahoma, sans-serif; font-size:16px"><![endif]--><a
-                                                                        href="https://www.example.com/"
+                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://bedzstudio.co.rs" style="height:32px;width:50px;v-text-anchor:middle;" arcsize="13%" stroke="false" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#111111; font-family:Tahoma, sans-serif; font-size:16px"><![endif]--><a
+                                                                        href="https://bedzstudio.co.rs"
                                                                         target="_blank"
                                                                         style="text-decoration:none;display:inline-block;color:#111111;background-color:transparent;border-radius:4px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:0px;padding-bottom:0px;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span
                                                                             style="padding-left:0px;padding-right:0px;font-size:16px;display:inline-block;letter-spacing:normal;"><span
@@ -321,7 +321,7 @@
                                                                 style="padding-left:10px;padding-right:10px;width:100%;padding-top:5px;">
                                                                 <div class="alignment" align="center"
                                                                     style="line-height:10px"><a
-                                                                        href="https://www.example.com/"
+                                                                        href="https://bedzstudio.co.rs"
                                                                         target="_blank" style="outline:none"
                                                                         tabindex="-1"><img
                                                                             src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/BeeProAgency/951907_936403/1004.png"
@@ -338,8 +338,8 @@
                                                             <td class="pad"
                                                                 style="text-align:center;padding-bottom:5px;">
                                                                 <div class="alignment" align="center">
-                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.example.com/" style="height:32px;width:73px;v-text-anchor:middle;" arcsize="13%" stroke="false" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#111111; font-family:Tahoma, sans-serif; font-size:16px"><![endif]--><a
-                                                                        href="https://www.example.com/"
+                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://bedzstudio.co.rs" style="height:32px;width:73px;v-text-anchor:middle;" arcsize="13%" stroke="false" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#111111; font-family:Tahoma, sans-serif; font-size:16px"><![endif]--><a
+                                                                        href="https://bedzstudio.co.rs"
                                                                         target="_blank"
                                                                         style="text-decoration:none;display:inline-block;color:#111111;background-color:transparent;border-radius:4px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:0px;padding-bottom:0px;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span
                                                                             style="padding-left:0px;padding-right:0px;font-size:16px;display:inline-block;letter-spacing:normal;"><span
@@ -361,7 +361,7 @@
                                                                 style="padding-left:10px;padding-right:10px;width:100%;padding-top:5px;">
                                                                 <div class="alignment" align="center"
                                                                     style="line-height:10px"><a
-                                                                        href="https://www.example.com/"
+                                                                        href="https://bedzstudio.co.rs"
                                                                         target="_blank" style="outline:none"
                                                                         tabindex="-1"><img
                                                                             src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/BeeProAgency/951907_936403/1003.png"
@@ -378,8 +378,8 @@
                                                             <td class="pad"
                                                                 style="text-align:center;padding-bottom:5px;">
                                                                 <div class="alignment" align="center">
-                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.example.com/" style="height:32px;width:42px;v-text-anchor:middle;" arcsize="13%" stroke="false" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#111111; font-family:Tahoma, sans-serif; font-size:16px"><![endif]--><a
-                                                                        href="https://www.example.com/"
+                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://bedzstudio.co.rs" style="height:32px;width:42px;v-text-anchor:middle;" arcsize="13%" stroke="false" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#111111; font-family:Tahoma, sans-serif; font-size:16px"><![endif]--><a
+                                                                        href="https://bedzstudio.co.rs"
                                                                         target="_blank"
                                                                         style="text-decoration:none;display:inline-block;color:#111111;background-color:transparent;border-radius:4px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:0px;padding-bottom:0px;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span
                                                                             style="padding-left:0px;padding-right:0px;font-size:16px;display:inline-block;letter-spacing:normal;"><span
@@ -401,7 +401,7 @@
                                                                 style="padding-left:10px;padding-right:10px;width:100%;padding-top:5px;">
                                                                 <div class="alignment" align="center"
                                                                     style="line-height:10px"><a
-                                                                        href="https://www.example.com/"
+                                                                        href="https://bedzstudio.co.rs"
                                                                         target="_blank" style="outline:none"
                                                                         tabindex="-1"><img
                                                                             src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/BeeProAgency/951907_936403/1002.png"
@@ -418,8 +418,8 @@
                                                             <td class="pad"
                                                                 style="text-align:center;padding-bottom:5px;">
                                                                 <div class="alignment" align="center">
-                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.example.com/" style="height:32px;width:86px;v-text-anchor:middle;" arcsize="13%" stroke="false" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#111111; font-family:Tahoma, sans-serif; font-size:16px"><![endif]--><a
-                                                                        href="https://www.example.com/"
+                                                                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://bedzstudio.co.rs" style="height:32px;width:86px;v-text-anchor:middle;" arcsize="13%" stroke="false" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#111111; font-family:Tahoma, sans-serif; font-size:16px"><![endif]--><a
+                                                                        href="https://bedzstudio.co.rs"
                                                                         target="_blank"
                                                                         style="text-decoration:none;display:inline-block;color:#111111;background-color:transparent;border-radius:4px;width:auto;border-top:0px solid #8a3b8f;font-weight:400;border-right:0px solid #8a3b8f;border-bottom:0px solid #8a3b8f;border-left:0px solid #8a3b8f;padding-top:0px;padding-bottom:0px;font-family:Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span
                                                                             style="padding-left:0px;padding-right:0px;font-size:16px;display:inline-block;letter-spacing:normal;"><span
@@ -526,7 +526,7 @@
                                                                         <tr>
                                                                             <td
                                                                                 style="vertical-align: middle; text-align: center; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;">
-                                                                                <a href="https://www.example.com/"
+                                                                                <a href="https://bedzstudio.co.rs"
                                                                                     target="_self"
                                                                                     style="text-decoration: none;"><img
                                                                                         class="icon"
@@ -554,7 +554,7 @@
                                                                             style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block;">
                                                                             <tr>
                                                                                 <td style="padding:0 2px 0 2px;"><a
-                                                                                        href="https://www.facebook.com/"
+                                                                                        href="https://www.facebook.com/profile.php?id=100029264605885"
                                                                                         target="_blank"><img
                                                                                             src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-circle-white/facebook@2x.png"
                                                                                             width="32"
@@ -564,7 +564,7 @@
                                                                                             style="display: block; height: auto; border: 0;"></a>
                                                                                 </td>
                                                                                 <td style="padding:0 2px 0 2px;"><a
-                                                                                        href="https://www.instagram.com/"
+                                                                                        href="https://www.instagram.com/bedzevi_majice_bedzstudio/"
                                                                                         target="_blank"><img
                                                                                             src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-circle-white/instagram@2x.png"
                                                                                             width="32"

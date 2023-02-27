@@ -6,7 +6,6 @@ use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 // use Illuminate\Notifications\Messages\MailMessage;
 
 class NewOrderNotification extends Notification
@@ -33,7 +32,7 @@ class NewOrderNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'mail'];
+        return ['database'];
     }
 
     /**
@@ -44,10 +43,10 @@ class NewOrderNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-            ->from('bedzstudio@gmail.com', 'BedžStudio')
-            ->view('emails.order_finished', ['order' => $this->order])
-            ->subject('BedžStudio - porudžbina ' . $this->order->order_number . ' isporučena');
+        // return (new MailMessage)
+        //     ->line('The introduction to the notification.')
+        //     ->action('Notification Action', url('/'))
+        //     ->line('Thank you for using our application!');
     }
 
     /**

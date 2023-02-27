@@ -2,8 +2,10 @@
 
 namespace App\Observers;
 
-use App\Events\NewOrderEvent;
 use App\Models\Order;
+use App\Events\NewOrderEvent;
+use App\Events\OrderUpdateEvent;
+
 
 class OrderObserver
 {
@@ -15,6 +17,7 @@ class OrderObserver
      */
     public function created(Order $order)
     {
+        event(new NewOrderEvent($order));
     }
 
     /**
@@ -26,9 +29,8 @@ class OrderObserver
     public function updated(Order $order)
     {
         // if order is finished, send notification to customer
-
         if ($order->status_id == 5 && $order->notified) {
-            event(new NewOrderEvent($order));
+            event(new OrderUpdateEvent($order));
         }
     }
 

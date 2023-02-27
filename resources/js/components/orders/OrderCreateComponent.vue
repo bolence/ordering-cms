@@ -648,7 +648,7 @@ export default {
                 payment: null,
                 napomena: null,
                 price: null,
-                delivery_date: null,
+                delivery_date: moment().add(7, "days").format("DD MMM yyyy"), // added 7 days to order_date default date
             },
             customers: [],
         };
@@ -670,16 +670,19 @@ export default {
     methods: {
         ...mapActions({
             saveOrder: "order/saveOrder",
+            getNotifications: "notification/getNotifications",
         }),
+
         makeOrder() {
             Object.assign(this.data, this.newOrder);
 
             this.saveOrder(this.data)
                 .then((resp) => {
                     this.$awn.success(resp.message);
-                    this.data = {};
-                    this.newOrder.tshirt = {};
-                    this.newOrder.badges = {};
+                    this.clearForm();
+                    setTimeout(() => {
+                        this.getNotifications();
+                    }, 1000);
                 })
                 .catch((error) => {
                     this.$awn.alert(error.message);
@@ -688,6 +691,10 @@ export default {
 
         clearForm() {
             this.data = {};
+            this.data.customer = {};
+            this.data.delivery = {};
+            this.newOrder.tshirt = {};
+            this.newOrder.badges = {};
         },
 
         removeTshirt(index) {

@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="msg-name">
-                                                Nova porudžbenica
+                                                Broj porudžbenice
                                                 <span
                                                     class="msg-time float-end"
                                                     >{{
@@ -134,22 +134,28 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
     data() {
-        return {
-            notifications: [],
-            count_notification: 0,
-        };
+        return {};
+    },
+
+    computed: {
+        ...mapGetters({
+            notifications: "notification/notifications",
+            count_notification: "notification/count_notification",
+        }),
     },
 
     mounted() {
-        axios.get("/notifications").then((resp) => {
-            this.notifications = resp.data.notifications;
-            this.count_notification = resp.data.count_notifications;
-        });
+        this.getNotifications();
     },
 
     methods: {
+        ...mapActions({
+            getNotifications: "notification/getNotifications",
+        }),
+
         logout() {
             axios.post("/logout").then((resp) => {
                 window.location.href = "/login";
@@ -158,5 +164,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss" scoped></style>
