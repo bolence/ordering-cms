@@ -38,6 +38,9 @@
                             Spisak svih porudžbina - {{ $orders->count() }} porudžbine
                         </h5>
                     </div>
+                    <a style="font-size: 15px;" href="/pdf/order/today">
+                        <b-icon icon="printer-fill" variant="info" font-scale="1.5"></b-icon> Današnje porudžbine
+                    </a>
                 </div>
 
                 <div class="table-responsive">

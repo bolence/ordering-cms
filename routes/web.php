@@ -28,5 +28,6 @@ Route::get('/notifications', [HomeController::class, 'notifications'])->middlewa
 
 
 Route::group(['prefix' => 'pdf', 'middleware' => 'auth'], function () {
+    Route::get('order/today', [PdfController::class, 'todayOrders']);
     Route::get('order/{id}', [PdfController::class, 'orderToPdf']);
 });
