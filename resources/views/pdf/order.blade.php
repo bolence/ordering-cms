@@ -47,7 +47,7 @@
                     </tr>
                     <tr>
                         <td class="fw-bold w-25">Datum isporuke</td>
-                        <td>{{ $order->order_number }}</td>
+                        <td>{{ $order->delivery_date }}</td>
                     </tr>
                     <tr>
                         <td class="fw-bold w-25">Napomena</td>
