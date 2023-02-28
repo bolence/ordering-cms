@@ -204,7 +204,6 @@
                                     id="status"
                                     name="status"
                                     v-model="order.status_id"
-                                    @change="infoAboutSendingEmail()"
                                 >
                                     <option
                                         v-for="(status, index) in statuses"
@@ -301,11 +300,11 @@
 
                         <div
                             class="col-12 d-flex align-items-center justify-content-between"
-                            v-if="!order.notified"
+                            v-if="!order.finished_at"
                         >
                             <div class="col-md-6">
-                                <span v-if="order.customer.email">
-                                    <input
+                                <span v-if="order.customer?.email">
+                                    <!-- <input
                                         type="checkbox"
                                         class="form-check-input"
                                         name="send_email"
@@ -316,7 +315,7 @@
                                         class="form-check-label px-1"
                                         for="send_email"
                                         >Pošalji notifikaciju</label
-                                    >
+                                    > -->
                                 </span>
                             </div>
                             <div class="col-md-6 text-secondary">
@@ -363,9 +362,7 @@
                                 <div class="card-header mb-0">
                                     <h5 class="mb-1">
                                         Porudžbina sadrži
-                                        {{
-                                            order.order_items.length
-                                        }}
+                                        {{ order.order_items.length }}
                                         proizvod/a
                                     </h5>
                                 </div>

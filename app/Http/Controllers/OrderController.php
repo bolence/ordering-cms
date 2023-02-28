@@ -58,7 +58,7 @@ class OrderController extends Controller
                 ->withSum('order_items', 'quantity')
                 ->whereStatusId(5)
                 ->groupBy('order_number')
-                ->orderByDesc('id')
+                ->orderByDesc('finished_at')
                 ->get();
         });
 

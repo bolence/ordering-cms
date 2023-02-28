@@ -2,12 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Order;
-use App\Models\Customer;
-use App\Models\Status;
-use App\Notifications\NewOrder;
 use Exception;
+use App\Models\Order;
+use App\Models\Status;
+use App\Models\Customer;
+use App\Notifications\NewOrder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class OrderService  extends GlobalService
 {
@@ -127,6 +128,9 @@ class OrderService  extends GlobalService
     public function updateOrder($request, $id)
     {
         $order = Order::findOrFail($id);
+        if ($request['status_id'] == 5) {
+            $request['finished_at'] = now()->format('d.m.Y H:m:s');
+        }
 
         try {
             $order->update(
@@ -139,6 +143,8 @@ class OrderService  extends GlobalService
                         'status_id',
                         'price',
                         'notified',
+                        'finished_at'
+
                     ]
                 )
             );
@@ -152,6 +158,8 @@ class OrderService  extends GlobalService
                 'message' => 'Došlo je do greške prilikom izmene porudžbine'
             ], 400);
         }
+
+        Cache::forget('finished_orders');
 
         return response()->json([
             'message' => 'Uspešno izmenjena porudžbina',

@@ -202,8 +202,8 @@
     <script>
         $(document).ready(function() {
 
-            var count_badges = <?php echo $count_badges; ?>;
-            var count_tshirt = <?php echo $count_tshirt; ?>;
+            var count_badges = '<?php echo $count_badges; ?>';
+            var count_tshirt = '<?php echo $count_tshirt; ?>';
 
             var ctx = document.getElementById("chart2").getContext('2d');
 
@@ -259,8 +259,8 @@
             });
 
             var order_statuses = <?php echo $statuses_json; ?>;
-            var statuses = [];
-            var count_statuses = [];
+            var statuses = Array();
+            var count_statuses = Array();
 
             $.each(order_statuses, function(k, v) {
                 statuses.push(v.status);
@@ -340,8 +340,8 @@
             var counts_tshirt_per_month = <?php echo $tshirt_count_per_month; ?>;
             var counts_badge_per_month = <?php echo $badge_count_per_month; ?>;
 
-            var tshirt_per_month = [];
-            var badge_per_month = [];
+            var tshirt_per_month = Array();
+            var badge_per_month = Array();
 
             $.each(counts_tshirt_per_month, function(k, v) {
                 tshirt_per_month.push(v.count_item);
@@ -365,7 +365,7 @@
                         fill: true,
                         borderWidth: 0
                     }, {
-                        label: 'Bedževi',
+                        label: 'Bedzevi',
                         data: badge_per_month,
                         borderColor: gradientStroke2,
                         backgroundColor: gradientStroke2,

@@ -29,9 +29,9 @@ class OrderObserver
     public function updated(Order $order)
     {
         // if order is finished, send notification to customer
-        if ($order->status_id == 5 && $order->notified) {
-            event(new OrderUpdateEvent($order));
-        }
+        // if ($order->status_id == 5 && $order->notified) {
+        //     event(new OrderUpdateEvent($order));
+        // }
     }
 
     /**

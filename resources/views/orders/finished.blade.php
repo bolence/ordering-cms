@@ -51,6 +51,7 @@
                                 <th>Broj proizvoda</th>
                                 <th>Suma</th>
                                 <th>Poručeno</th>
+                                <th>Završena</th>
                                 <th>Detalji</th>
                             </tr>
                         </thead>
@@ -71,6 +72,7 @@
                                     <td>{{ $order->order_items_count ?? 0 }}</td>
                                     <td>{{ number_format($order->price, 2) }}</td>
                                     <td>{{ $order->order_date }}</td>
+                                    <td>{{ $order->finished_at }}</td>
                                     <td>
                                         <a href="/order/{{ $order->id }}">
                                             <b-icon icon="eye" variant="success" font-scale="1"></b-icon>
@@ -97,7 +99,7 @@
 
             $('#tshirt').DataTable({
                 order: [
-                    [0, 'desc']
+                    [7, 'desc']
                 ],
                 responsive: {
                     details: {

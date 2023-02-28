@@ -5,12 +5,6 @@
 
             <div class="top-menu ms-auto">
                 <ul class="navbar-nav align-items-center">
-                    <li class="nav-item mobile-search-icon">
-                        <a class="nav-link" href="#">
-                            <i class="bx bx-search"></i>
-                        </a>
-                    </li>
-
                     <li class="nav-item dropdown dropdown-large">
                         <a
                             class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative"
@@ -24,7 +18,10 @@
                             </span>
                             <i class="bx bx-bell"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
+                        <div
+                            class="dropdown-menu dropdown-menu-end"
+                            style="min-width: 400px"
+                        >
                             <a href="">
                                 <div class="msg-header">
                                     <p class="msg-header-title">Notifikacije</p>
@@ -44,13 +41,22 @@
                                 >
                                     <div class="d-flex align-items-center">
                                         <div
-                                            class="notify bg-light-danger text-danger"
+                                            class="notify bg-light-primary text-primary"
                                         >
-                                            <i class="bx bx-cart-alt"></i>
+                                            <i
+                                                :class="`bx ${icon(
+                                                    notification.type
+                                                )} `"
+                                            ></i>
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="msg-name">
-                                                Nova porudžbenica
+                                                <span>
+                                                    {{
+                                                        text(notification.type)
+                                                    }}
+                                                </span>
+
                                                 <span
                                                     class="msg-time float-end"
                                                     >{{
@@ -66,11 +72,11 @@
                                     </div>
                                 </a>
                             </div>
-                            <a href="">
+                            <!-- <a href="">
                                 <div class="text-center msg-footer">
                                     Pogledaj sve notifikacije
                                 </div>
-                            </a>
+                            </a> -->
                         </div>
                     </li>
                     <li
@@ -152,6 +158,26 @@ export default {
     },
 
     methods: {
+        icon(type) {
+            let icon = {
+                "App\\Notifications\\NewOrderNotification": "bx-cart-alt",
+                "App\\Notifications\\OrderFinishedDBNotification": "bx-send",
+            };
+
+            return icon[type];
+        },
+
+        text(type) {
+            let text = {
+                "App\\Notifications\\NewOrderNotification":
+                    "Kreirana porudžbenica",
+                "App\\Notifications\\OrderFinishedDBNotification":
+                    "Porudžbenica isporučena",
+            };
+
+            return text[type];
+        },
+
         ...mapActions({
             getNotifications: "notification/getNotifications",
         }),
