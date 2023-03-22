@@ -258,9 +258,9 @@
                                         id="cash"
                                         name="payment"
                                         :class="{
-                                            'is-invalid': errors.payment,
+                                            'is-invalid': errors.payment_type,
                                         }"
-                                        v-model="data.payment"
+                                        v-model="data.payment_type"
                                     />
                                     <label class="form-check-label" for="cash"
                                         >Gotovina</label
@@ -274,9 +274,9 @@
                                         value="virman"
                                         id="virman"
                                         name="payment"
-                                        v-model="data.payment"
+                                        v-model="data.payment_type"
                                         :class="{
-                                            'is-invalid': errors.payment,
+                                            'is-invalid': errors.payment_type,
                                         }"
                                     />
                                     <label class="form-check-label" for="virman"
@@ -285,10 +285,10 @@
                                 </div>
                             </div>
                             <div
-                                v-if="errors.payment"
+                                v-if="errors.payment_type"
                                 class="invalid-feedback error-message"
                             >
-                                {{ errors.payment[0] }}
+                                {{ errors.payment_type[0] }}
                             </div>
                         </div>
 
@@ -645,7 +645,7 @@ export default {
                 delivery_type: null,
                 order_date: moment().format("DD MMM yyyy"),
                 order_type: null,
-                payment: null,
+                payment_type: null,
                 napomena: null,
                 price: null,
                 delivery_date: moment().add(7, "days").format("DD MMM yyyy"), // added 7 days to order_date default date

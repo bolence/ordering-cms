@@ -63,6 +63,26 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="card" v-if="edit || add">
+                    <div class="card-header" v-if="edit">
+                        <h5>Izmeni proizvod</h5>
+                    </div>
+                    <div class="card-header" v-else>
+                        <h5>Dodaj proizvod</h5>
+                    </div>
+                    <div class="card-body m-3" v-if="add">
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-2">Tip proizvoda</h6>
+                            </div>
+                            <select class="form-select">
+                                <option>Bedz</option>
+                                <option>Majica</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-8">
                 <div class="card bordered-10">
@@ -108,11 +128,15 @@
                                 <h6 class="mb-0">Datum porudžbine</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    v-model="order.order_date"
-                                />
+                                <datepicker
+                                    v-model="order_date"
+                                    name="order_date"
+                                    type="date"
+                                    :bootstrap-styling="true"
+                                    :language="sr"
+                                    :monday-first="true"
+                                    calendar-button-icon="fa fa-calendar"
+                                ></datepicker>
                             </div>
                         </div>
 
@@ -164,6 +188,33 @@
                                         "
                                     >
                                         Instagram
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Tip plaćanja</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <select
+                                    v-model="order.payment_type"
+                                    class="form-select"
+                                >
+                                    <option
+                                        value="virman"
+                                        :selected="
+                                            order.payment_type == 'virman'
+                                        "
+                                    >
+                                        Virman
+                                    </option>
+                                    <option
+                                        value="cash"
+                                        :selected="order.payment_type == 'cash'"
+                                    >
+                                        Gotovina
                                     </option>
                                 </select>
                             </div>
@@ -235,12 +286,7 @@
                             </div>
                         </div>
 
-                        <div
-                            v-if="
-                                order.delivery &&
-                                order.delivery_type == 'Dostava'
-                            "
-                        >
+                        <div v-if="order.delivery_type == 'Dostava'">
                             <h5 class="text-primary">Detalji slanja</h5>
                             <hr />
                             <div class="row mb-3">
@@ -253,8 +299,18 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        v-model="order.delivery.name"
+                                        :class="{
+                                            'is-invalid':
+                                                errors['delivery.name'],
+                                        }"
+                                        v-model="delivery_name"
                                     />
+                                    <div
+                                        v-if="errors['delivery.name']"
+                                        class="invalid-feedback error-message"
+                                    >
+                                        {{ errors["delivery.name"][0] }}
+                                    </div>
                                 </div>
                             </div>
 
@@ -266,8 +322,18 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        v-model="order.delivery.street"
+                                        :class="{
+                                            'is-invalid':
+                                                errors['delivery.street'],
+                                        }"
+                                        v-model="delivery_street"
                                     />
+                                    <div
+                                        v-if="errors['delivery.street']"
+                                        class="invalid-feedback error-message"
+                                    >
+                                        {{ errors["delivery.street"][0] }}
+                                    </div>
                                 </div>
                             </div>
 
@@ -279,8 +345,18 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        v-model="order.delivery.city"
+                                        v-model="delivery_city"
+                                        :class="{
+                                            'is-invalid':
+                                                errors['delivery.city'],
+                                        }"
                                     />
+                                    <div
+                                        v-if="errors['delivery.city']"
+                                        class="invalid-feedback error-message"
+                                    >
+                                        {{ errors["delivery.city"][0] }}
+                                    </div>
                                 </div>
                             </div>
 
@@ -292,8 +368,18 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        v-model="order.delivery.phone"
+                                        v-model="delivery_phone"
+                                        :class="{
+                                            'is-invalid':
+                                                errors['delivery.phone'],
+                                        }"
                                     />
+                                    <div
+                                        v-if="errors['delivery.phone']"
+                                        class="invalid-feedback error-message"
+                                    >
+                                        {{ errors["delivery.phone"][0] }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -320,7 +406,7 @@
                             </div>
                             <div class="col-md-6 text-secondary">
                                 <a
-                                    @click.prevent="updateOrder()"
+                                    @click.prevent="orderUpdate()"
                                     class="btn btn-primary px-4 float-end"
                                     >Snimi</a
                                 >
@@ -360,11 +446,25 @@
                         <div class="card bordered-10">
                             <div class="card-body">
                                 <div class="card-header mb-0">
-                                    <h5 class="mb-1">
-                                        Porudžbina sadrži
-                                        {{ order.order_items.length }}
-                                        proizvod/a
-                                    </h5>
+                                    <div
+                                        class="d-flex justify-content-between align-items-center"
+                                    >
+                                        <h5 class="mb-1">
+                                            Porudžbina sadrži
+                                            {{ order.order_items.length }}
+                                            proizvod/a
+                                        </h5>
+                                        <span>
+                                            <a
+                                                href=""
+                                                style="font-size: 25px"
+                                                @click.prevent="addItem()"
+                                                ><i
+                                                    class="bx bx-plus text-info"
+                                                ></i
+                                            ></a>
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="tab-content table-responsive">
                                     <table
@@ -440,6 +540,19 @@
                                                             class="bx bxs-trash text-danger"
                                                         ></i
                                                     ></a>
+
+                                                    <a
+                                                        href=""
+                                                        @click.prevent="
+                                                            orderItemEdit(
+                                                                index,
+                                                                order_item.id
+                                                            )
+                                                        "
+                                                        ><i
+                                                            class="bx bxs-pencil text-success"
+                                                        ></i
+                                                    ></a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -456,15 +569,25 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
+import Datepicker from "vuejs-datepicker";
+import { sr } from "vuejs-datepicker/dist/locale";
+import moment from "moment";
 export default {
+    components: {
+        Datepicker,
+    },
     props: ["order_id"],
     data() {
         return {
             notified: false,
-            // delivery_city: null,
-            // delivery_name: null,
-            // delivery_phone: null,
-            // delivery_street: null,
+            name: null,
+            phone: null,
+            city: null,
+            street: null,
+            sr: sr,
+            ordered_date: null,
+            edit: false,
+            add: false,
         };
     },
 
@@ -472,7 +595,55 @@ export default {
         ...mapGetters({
             order: "order/order",
             statuses: "order/statuses",
+            errors: "order/errors",
         }),
+
+        order_date: {
+            get() {
+                return moment(this.order.order_date, "DD.MM.YYYY").format(
+                    "DD MMM yyyy"
+                );
+            },
+            set(value) {
+                this.ordered_date = value;
+            },
+        },
+
+        delivery_name: {
+            get() {
+                return this.order.delivery ? this.order.delivery.name : null;
+            },
+            set(value) {
+                this.name = value;
+            },
+        },
+
+        delivery_street: {
+            get() {
+                return this.order.delivery ? this.order.delivery.street : null;
+            },
+            set(value) {
+                this.street = value;
+            },
+        },
+
+        delivery_city: {
+            get() {
+                return this.order.delivery ? this.order.delivery.city : null;
+            },
+            set(value) {
+                this.city = value;
+            },
+        },
+
+        delivery_phone: {
+            get() {
+                return this.order.delivery ? this.order.delivery.phone : null;
+            },
+            set(value) {
+                this.phone = value;
+            },
+        },
     },
 
     mounted() {
@@ -483,11 +654,22 @@ export default {
         ...mapActions({
             getOrder: "order/getOrder",
             deleteOrderItem: "order/deleteOrderItem",
+            updateOrder: "order/updateOrder",
         }),
 
         ...mapMutations({
             setOrder: "order/setOrder",
         }),
+
+        orderItemEdit() {
+            this.edit = true;
+            this.add = false;
+        },
+
+        addItem() {
+            this.edit = false;
+            this.add = true;
+        },
 
         infoAboutSendingEmail() {
             if (
@@ -553,18 +735,28 @@ export default {
                 });
         },
 
-        updateOrder() {
+        orderUpdate() {
             this.order.notified = this.notified;
 
-            axios
-                .put(`/api/orders/${this.order_id}`, this.order)
+            if (this.name) {
+                this.order.delivery = {
+                    name: this.name,
+                    street: this.street,
+                    city: this.city,
+                    phone: this.phone,
+                };
+            }
+
+            this.order.order_date = this.ordered_date;
+
+            this.updateOrder(this.order)
                 .then((resp) => {
-                    this.$awn.success(resp.data.message);
-                    this.setOrder(resp.data.order);
+                    this.$awn.success(resp.message);
+                    this.setOrder(resp.order);
                     // this.notified = false;
                 })
                 .catch((error) => {
-                    this.$awn.alert(error.response.data.message);
+                    this.$awn.alert(error.message);
                 });
         },
     },

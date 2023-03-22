@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Customer;
-use Illuminate\Http\Request;
+
+use App\Services\OrderService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderPostRequest;
-use App\Services\OrderService;
+use App\Http\Requests\UpdateOrderRequest;
 
 class ApiOrderController extends Controller
 {
@@ -56,7 +56,7 @@ class ApiOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateOrderRequest $request, $id)
     {
         return $this->orderService->updateOrder($request, $id);
     }

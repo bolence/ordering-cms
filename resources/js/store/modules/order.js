@@ -56,9 +56,21 @@ const actions = {
                 commit('setStatuses', resp.data.statuses);
             }).catch( error => {
                 reject(error.response.data.errors);
-                commit('errors', error.response.data.errors);
+                commit('setErrors', error.response.data.errors);
             })
         })
+    },
+
+    updateOrder({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            axios.put(`/api/orders/${payload.id}`, payload).then(resp => {
+                resolve(resp.data);
+                commit('setOrder', resp.data.order);
+            }).catch(error => {
+                reject(error.response.data.errors);
+                commit('setErrors', error.response.data.errors);
+            })
+        });
     },
 
     deleteOrder({commit}, payload) {
@@ -67,7 +79,7 @@ const actions = {
                 resolve(resp.data);
             }).catch( error => {
                 reject(error.response.data.errors);
-                commit('errors', error.response.data.errors);
+                commit('setErrors', error.response.data.errors);
             })
         })
     },
@@ -79,7 +91,7 @@ const actions = {
                 // commit('setOrder', resp.data.order);
             }).catch( error => {
                 reject(error.response.data.errors);
-                commit('errors', error.response.data.errors);
+                commit('setErrors', error.response.data.errors);
             })
         })
     }

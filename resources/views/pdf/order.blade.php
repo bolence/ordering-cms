@@ -27,40 +27,58 @@
         <div class="col-md-10">
             <h2
                 style="text-align: center; margin: 0 auto; padding: 30px; font-weight: bolder; font-style: 'Helvetica'; ">
-                Detalji porudžbenice {{ $order->order_number }} @if ($order->price)
+                Detalji porudžbenice <span class="fw-bolder">"{{ $order->order_number }}"</span>
+                @if ($order->price)
                     - suma: {{ number_format($order->price, 2) }}
                 @endif
             </h2>
             <table class="table table-bordered table-striped" border="1">
                 <tbody>
                     <tr>
-                        <td class="fw-bold w-25">Broj porudžbenice</td>
-                        <td>{{ $order?->order_number }}</td>
+                        <td class="fw-bold w-25">Poručio</td>
+                        <td>{{ $order?->customer?->name }}
+
+                        </td>
                     </tr>
-                    <tr>
-                        <td class="fw-bold w-25">Način dostave</td>
-                        <td>{{ $order?->delivery_type }}</td>
-                    </tr>
+                    @if ($order?->customer->firma)
+                        <tr>
+                            <td class="fw-bold w-25">Firma</td>
+                            <td>{{ $order->customer->firma }}</td>
+                        </tr>
+                    @endif
+
                     <tr>
                         <td class="fw-bold w-25">Datum poručivanja</td>
                         <td>{{ $order?->order_date }}</td>
                     </tr>
+
                     <tr>
                         <td class="fw-bold w-25">Datum isporuke</td>
                         <td>{{ $order?->delivery_date }}</td>
                     </tr>
+
                     <tr>
                         <td class="fw-bold w-25">Napomena</td>
                         <td>{{ $order?->napomena }}</td>
                     </tr>
+
+                    @if ($order->payment_type)
+                        <tr>
+                            <td class="fw-bold w-25">Način plaćanja</td>
+                            <td>{{ $order->payment_type }}</td>
+                        </tr>
+                    @endif
+
+                    <tr>
+                        <td class="fw-bold w-25">Način dostave</td>
+                        <td>{{ $order?->delivery_type }}</td>
+                    </tr>
+
                     <tr>
                         <td class="fw-bold w-25">Poručeno sa</td>
                         <td>{{ $order?->order_from }}</td>
                     </tr>
-                    <tr>
-                        <td class="fw-bold w-25">Status</td>
-                        <td>{{ $order?->status->status }}</td>
-                    </tr>
+
 
                     @if ($order->price)
                         <tr>
@@ -69,15 +87,12 @@
                         </tr>
                     @endif
 
-                    <tr>
-                        <td class="fw-bold w-25">Poručio</td>
-                        <td>{{ $order?->customer?->name }}</td>
-                    </tr>
-
-                    <tr>
-                        <td class="fw-bold w-25">Broj telefona</td>
-                        <td>{{ $order?->customer?->phone }}</td>
-                    </tr>
+                    @if ($order->customer->phone)
+                        <tr>
+                            <td class="fw-bold w-25">Broj telefona</td>
+                            <td>{{ $order->customer->phone }}</td>
+                        </tr>
+                    @endif
 
                     @if ($order->customer->street)
                         <tr>
@@ -92,6 +107,11 @@
                             <td>{{ $order->customer->city }}</td>
                         </tr>
                     @endif
+
+                    <tr>
+                        <td class="fw-bold w-25">Status</td>
+                        <td>{{ $order?->status->status }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

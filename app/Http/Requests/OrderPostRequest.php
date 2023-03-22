@@ -14,7 +14,7 @@ class OrderPostRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -26,25 +26,31 @@ class OrderPostRequest extends FormRequest
     {
         return [
             'customer.name' => 'required',
-            'customer.phone' => 'required',
+            // 'customer.phone' => 'required',
             // 'customer.email' => 'required|email',
             'order_from' => 'required',
             'order_date' => 'required',
             'payment' => 'required',
             'delivery_type' => 'required',
             'delivery_date' => 'required',
+
         ];
     }
 
-    public function messages()
+    /**
+     * Translate validation messages
+     *
+     * @return array
+     */
+    public function messages(): array
     {
         return [
             'customer.name.required' => 'Ime i prezime je obavezno polje',
-            'customer.phone.required' => 'Telefon je obavezno polje',
+            // 'customer.phone.required' => 'Telefon je obavezno polje',
             // 'customer.email.required' => 'Telefon je obavezno polje',
             'order_from.required' => 'Poručeno sa je obavezno polje',
             'order_date.required' => 'Datum poručivanja je obavezno polje',
-            'payment.required' => 'Način placanja je obavezno polje',
+            'payment_type.required' => 'Način plaćanja je obavezno polje',
             'delivery_type.required' => 'Način dostave je obavezno polje',
             'delivery_date.required' => 'Datum isporuke je obavezno polje'
         ];

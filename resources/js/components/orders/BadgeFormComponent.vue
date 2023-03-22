@@ -114,7 +114,7 @@ export default {
 
             kacenja: [
                 { id: 1, type: "Zihernadla" },
-                { id: 2, type: "Feo. magnet" },
+                { id: 2, type: "Fer. magnet" },
                 { id: 2, type: "Neo. magnet" },
                 { id: 3, type: "Samolepljiv" },
             ],

@@ -54,6 +54,7 @@ class OrderService  extends GlobalService
                 'status_id',
                 'price',
                 'delivery_date',
+                'payment_type',
             ]
         ));
 
@@ -143,8 +144,8 @@ class OrderService  extends GlobalService
                         'status_id',
                         'price',
                         'notified',
-                        'finished_at'
-
+                        'finished_at',
+                        'payment_type'
                     ]
                 )
             );
