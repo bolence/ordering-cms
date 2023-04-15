@@ -76,11 +76,12 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-2">Tip proizvoda</h6>
                             </div>
-                            <select class="form-select">
-                                <option>Bedz</option>
-                                <option>Majica</option>
+                            <select class="form-select" v-model="product_type">
+                                <option value="badge">Bedž</option>
+                                <option value="tshirt">Majica</option>
                             </select>
                         </div>
+                        <BadgeFormComponent v-show="product_type == 'badge'" />
                     </div>
                 </div>
             </div>
@@ -588,6 +589,7 @@ export default {
             ordered_date: null,
             edit: false,
             add: false,
+            product_type: null,
         };
     },
 
