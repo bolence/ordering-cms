@@ -89,7 +89,7 @@ class OrderService  extends GlobalService
      * Undocumented function
      *
      * @param Object $customer
-     * @param object $order
+     * @param Object $order
      * @return void
      */
     private function saveCustomerAndUpdateOrder(object $request, object $order)
@@ -120,13 +120,13 @@ class OrderService  extends GlobalService
     }
 
     /**
-     * Undocumented function
+     * Update an order
      *
      * @param object $request
      * @param integer $id
-     * @return Illuminate\Http\Response json
+     * @return Illuminate\Http\JsonResponse json
      */
-    public function updateOrder($request, $id)
+    public function updateOrder($request, $id): \Illuminate\Http\JsonResponse
     {
         $order = Order::findOrFail($id);
         if ($request['status_id'] == 5) {
@@ -150,9 +150,7 @@ class OrderService  extends GlobalService
                 )
             );
 
-            if ($request->delivery) {
-                $order->delivery()->update($request->delivery);
-            }
+            DeliveryService::createOrUpdateDelivery($order, $request);
         } catch (Exception $e) {
             info($e->getMessage() . ' ' . $e->getFile() . ' ' . $e->getCode());
             return response()->json([
@@ -168,8 +166,15 @@ class OrderService  extends GlobalService
         ], 200);
     }
 
-    public function deleteOrder(int $id)
+    /**
+     * Delete an order
+     *
+     * @param integer $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteOrder(int $id): \Illuminate\Http\JsonResponse
     {
+
         $order = Order::findOrFail($id);
 
         try {

@@ -78,7 +78,20 @@ class ApiCustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+
+        try {
+            $customer->update($request->all());
+        } catch (\Throwable $th) {
+            info($th);
+            return response()->json([
+                'message' => 'Doslo je do greške prilikom izmene mušterije'
+            ], 400);
+        }
+
+        return response()->json([
+            'message' => 'Uspešno izmenjena mušterija'
+        ], 200);
     }
 
     /**

@@ -105,7 +105,7 @@
 
             $('#tshirt').DataTable({
                 order: [
-                    [1, 'desc']
+                    [6, 'asc']
                 ],
                 responsive: {
                     details: {

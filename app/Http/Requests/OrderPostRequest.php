@@ -26,11 +26,9 @@ class OrderPostRequest extends FormRequest
     {
         return [
             'customer.name' => 'required',
-            // 'customer.phone' => 'required',
-            // 'customer.email' => 'required|email',
             'order_from' => 'required',
             'order_date' => 'required',
-            'payment' => 'required',
+            'payment_type' => 'required',
             'delivery_type' => 'required',
             'delivery_date' => 'required',
 
@@ -46,8 +44,6 @@ class OrderPostRequest extends FormRequest
     {
         return [
             'customer.name.required' => 'Ime i prezime je obavezno polje',
-            // 'customer.phone.required' => 'Telefon je obavezno polje',
-            // 'customer.email.required' => 'Telefon je obavezno polje',
             'order_from.required' => 'Poručeno sa je obavezno polje',
             'order_date.required' => 'Datum poručivanja je obavezno polje',
             'payment_type.required' => 'Način plaćanja je obavezno polje',

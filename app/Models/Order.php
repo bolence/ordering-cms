@@ -33,7 +33,7 @@ class Order extends Model
      *
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'order_date', 'delivery_date', 'finished_at'];
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
      * Undocumented variable
