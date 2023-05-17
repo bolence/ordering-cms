@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Delivery;
 
 class DeliveryService
 {
@@ -20,7 +19,7 @@ class DeliveryService
             $order->delivery()->updateOrCreate(['order_id' => $order->id], $request->delivery);
         }
 
-        if ($request->delivery_type !== 'Dostava') {
+        if ($request->delivery && $request->delivery_type !== 'Dostava') {
             $order->delivery->delete();
         }
     }

@@ -176,7 +176,7 @@
                                     <td>{{ ucfirst($item->type) }}</td>
                                     <td>{{ $item->order->order_number }}</td>
                                     <td>{{ ucfirst($item->tshirt_size ?? $item->badge_size) }}</td>
-                                    <td>{{ $item->tshirt_color ? ucfirst($item->tshirt_color) : json_encode($item->tip_kacenja) }}
+                                    <td>{{ $item->tshirt_color ? ucfirst($item->tshirt_color) : $item->tip_kacenja }}
                                     </td>
                                     <td>{{ ucfirst($item->tshirt_type ?? $item->plastifikacija) }}
                                     </td>

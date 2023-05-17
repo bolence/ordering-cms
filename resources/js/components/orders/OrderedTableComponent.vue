@@ -23,7 +23,7 @@
                                     {{ order.order_items.length }}
                                     proizvod/a
                                 </h5>
-                                <span>
+                                <span v-if="!order.finished_at">
                                     <a
                                         href=""
                                         style="font-size: 25px"
@@ -104,33 +104,35 @@
                                             {{ order_item.quantity }}
                                         </td>
                                         <td>
-                                            <a
-                                                href=""
-                                                style="font-size: 20px"
-                                                @click.prevent="
-                                                    orderItemDelete(
-                                                        index,
-                                                        order_item.id
-                                                    )
-                                                "
-                                                ><i
-                                                    class="bx bxs-trash text-danger"
-                                                ></i
-                                            ></a>
+                                            <span v-if="!order.finished_at">
+                                                <a
+                                                    href=""
+                                                    style="font-size: 20px"
+                                                    @click.prevent="
+                                                        orderItemDelete(
+                                                            index,
+                                                            order_item.id
+                                                        )
+                                                    "
+                                                    ><i
+                                                        class="bx bxs-trash text-danger"
+                                                    ></i
+                                                ></a>
 
-                                            <a
-                                                href=""
-                                                style="font-size: 20px"
-                                                @click.prevent="
-                                                    orderItemEdit(
-                                                        order_item.id,
-                                                        order_item.type
-                                                    )
-                                                "
-                                                ><i
-                                                    class="bx bxs-pencil text-success"
-                                                ></i
-                                            ></a>
+                                                <a
+                                                    href=""
+                                                    style="font-size: 20px"
+                                                    @click.prevent="
+                                                        orderItemEdit(
+                                                            order_item.id,
+                                                            order_item.type
+                                                        )
+                                                    "
+                                                    ><i
+                                                        class="bx bxs-pencil text-success"
+                                                    ></i
+                                                ></a>
+                                            </span>
                                         </td>
                                     </tr>
                                 </tbody>
