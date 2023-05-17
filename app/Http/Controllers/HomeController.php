@@ -38,8 +38,8 @@ class HomeController extends Controller
      */
     public function notifications()
     {
-        $notifications = auth()->user()->notifications->where('created_at', '>=' . NOW());
-        $notifications = $notifications->sortByDesc('id')->take(5);
+        $notifications = DB::table('notifications')->whereDate('created_at', '=', now());
+        $notifications = $notifications->orderByDesc('id')->take(5)->get();
         $count_notifications = $notifications->count();
 
         return response()->json([
