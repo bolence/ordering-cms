@@ -8,7 +8,7 @@
                             class="d-flex flex-column align-items-center text-center"
                         >
                             <img
-                                src="/assets/images/avatars/avatar-2.png"
+                                src="/images/avatar.png"
                                 alt="Admin"
                                 class="rounded-circle p-1 bg-primary"
                                 width="110"
@@ -371,7 +371,10 @@
                                             </td>
 
                                             <td class="fw-bold">
-                                                {{ order.order_date }}
+                                                {{
+                                                    order.order_date
+                                                        | formatDate
+                                                }}
                                             </td>
                                             <td class="fw-bold">
                                                 {{ order.delivery_type }}

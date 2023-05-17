@@ -79,14 +79,6 @@
                         <td>{{ $order?->order_from }}</td>
                     </tr>
 
-
-                    @if ($order->price)
-                        <tr>
-                            <td class="fw-bold w-25">Suma</td>
-                            <td>{{ number_format($order->price, 2) }} RSD.</td>
-                        </tr>
-                    @endif
-
                     @if ($order->customer->phone)
                         <tr>
                             <td class="fw-bold w-25">Broj telefona</td>
@@ -139,12 +131,11 @@
 
                         @foreach ($order->order_items as $item)
                             <tr>
-                                <th>{{ ucfirst($item->type) }}</th>
-                                <th>{{ ucfirst($item->badge_size ?? $item->tshirt_size) }}</th>
+                                <td>{{ ucfirst($item->type) }}</td>
+                                <td>{{ ucfirst($item->badge_size ?? $item->tshirt_size) }}</td>
                                 <td>{{ $item->tip_kacenja ?? $item->tshirt_color }}</td>
                                 <td>{{ ucfirst($item->plastifikacija ?? $item->tshirt_type) }}</td>
-                                <td>{{ $item->quantity }}
-                                </td>
+                                <td>{{ $item->quantity }}</td>
                             </tr>
                         @endforeach
                     </tbody>
