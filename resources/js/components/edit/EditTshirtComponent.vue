@@ -69,8 +69,8 @@
                             >
 
                             <a
-                                v-else
                                 class="btn btn-success px-4 mt-4 float-end"
+                                v-if="formValid"
                                 @click.prevent="
                                     addMoreBadgeToExistingOrder(
                                         orderItem.order_id
@@ -105,6 +105,15 @@ export default {
             type: "order/type",
             formType: "order/formType",
         }),
+
+        formValid() {
+            return !this.orderItem.tshirt_color ||
+                !this.orderItem.tshirt_size ||
+                !this.orderItem.tshirt_type ||
+                !this.orderItem.quantity
+                ? false
+                : true;
+        },
     },
 
     methods: {
@@ -113,7 +122,7 @@ export default {
         }),
         ...mapMutations({
             setType: "order/setType",
-            setOrder: "order/setOrder",
+            setFormType: "order/setFormType",
         }),
         orderItemUpdate(orderItemId, orderId) {
             axios
@@ -122,7 +131,7 @@ export default {
                     this.$awn.success(resp.data.message);
                     this.getOrder({ id: orderId });
                     this.setType("");
-                    this.orderItem = {};
+                    // this.orderItem = {};
                 })
                 .catch((error) => {
                     this.$awn.alert(error.response.data.message);

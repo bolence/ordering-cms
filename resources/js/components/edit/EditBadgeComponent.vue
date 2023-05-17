@@ -80,6 +80,7 @@
                     <div class="col-md-12 text-secondary" v-else>
                         <a
                             class="btn btn-success px-4 mt-4 float-end"
+                            v-if="formValid"
                             @click.prevent="
                                 addMoreBadgeToExistingOrder(orderItem.order_id)
                             "
@@ -112,6 +113,15 @@ export default {
             type: "order/type",
             formType: "order/formType",
         }),
+
+        formValid() {
+            return !this.orderItem.badge_size ||
+                !this.orderItem.tip_kacenja ||
+                !this.orderItem.plastifikacija ||
+                !this.orderItem.quantity
+                ? false
+                : true;
+        },
     },
 
     methods: {
@@ -130,7 +140,7 @@ export default {
                     this.$awn.success(resp.data.message);
                     this.getOrder({ id: orderId });
                     this.setType("");
-                    this.orderItem = {};
+                    // this.orderItem = {};
                 })
                 .catch((error) => {
                     this.$awn.alert(error.response.data.message);
