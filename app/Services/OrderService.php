@@ -23,7 +23,7 @@ class OrderService  extends GlobalService
     public function get()
     {
         return response()->json([
-            'orders' => Order::all()
+            'orders' => Order::with('order_items')->get()
         ], 200);
     }
 
@@ -138,6 +138,7 @@ class OrderService  extends GlobalService
                 $request->only(
                     [
                         'order_date',
+                        'delivery_date',
                         'delivery_type',
                         'order_from',
                         'napomena',

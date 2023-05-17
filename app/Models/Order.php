@@ -129,20 +129,20 @@ class Order extends Model
      *
      * @return void
      */
-    public function getOrderDateAttribute()
-    {
-        return Carbon::parse($this->attributes['order_date'])->format('d.m.Y');
-    }
+    // public function getOrderDateAttribute()
+    // {
+    //     return Carbon::parse($this->attributes['order_date'])->format('d.m.Y');
+    // }
 
     /**
      * Undocumented function
      *
      * @return void
      */
-    public function getDeliveryDateAttribute()
-    {
-        return Carbon::parse($this->attributes['delivery_date'])->format('d.m.Y');
-    }
+    // public function getDeliveryDateAttribute()
+    // {
+    //     return Carbon::parse($this->attributes['delivery_date'])->format('d.m.Y');
+    // }
 
     /**
      * Undocumented function

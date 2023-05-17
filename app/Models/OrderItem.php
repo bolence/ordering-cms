@@ -17,11 +17,6 @@ class OrderItem extends Model
      */
     protected $guarded = ['id'];
 
-
-    protected $casts = [
-        'tip_kacenja' => 'json'
-    ];
-
     /**
      * The attributes that should be mutated to dates.
      *

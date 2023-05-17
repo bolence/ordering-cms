@@ -19,16 +19,9 @@ class DeliveryService
         if ($request->delivery) {
             $order->delivery()->updateOrCreate(['order_id' => $order->id], $request->delivery);
         }
-    }
 
-    /**
-     * Delete delivery if person delivery choosen
-     *
-     * @param [type] $orderId
-     * @return Eloquent
-     */
-    protected static function deleteDelivery($orderId)
-    {
-        Delivery::whereOrderId($orderId)->delete();
+        if ($request->delivery_type !== 'Dostava') {
+            $order->delivery->delete();
+        }
     }
 }
