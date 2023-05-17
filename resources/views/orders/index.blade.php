@@ -47,6 +47,7 @@
                     <table class="table table-bordered table-striped table-hover" id="tshirt">
                         <thead class="table-light">
                             <tr>
+                                <th>ID</th>
                                 <th>Poručio</th>
                                 <th>Broj porudžbine</th>
                                 <th>Tip dostave</th>
@@ -62,6 +63,7 @@
 
                             @foreach ($orders as $order)
                                 <tr>
+                                    <td>{{ $order->id }}</td>
                                     <td>{{ $order->customer?->name }}</td>
                                     <td>{{ $order->order_number }}</td>
 
@@ -105,7 +107,7 @@
 
             $('#tshirt').DataTable({
                 order: [
-                    [6, 'asc']
+                    [0, 'desc']
                 ],
                 responsive: {
                     details: {
