@@ -131,7 +131,7 @@ export default {
 
         cancelEditing() {
             this.setType("");
-            this.setOrder({});
+            this.setFormType("");
         },
 
         addMoreBadgeToExistingOrder() {
