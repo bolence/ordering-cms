@@ -140,7 +140,7 @@
                         @foreach ($order->order_items as $item)
                             <tr>
                                 <th>{{ ucfirst($item->type) }}</th>
-                                <th>{{ $item->badge_size ?? $item->tshirt_size }}</th>
+                                <th>{{ ucfirst($item->badge_size ?? $item->tshirt_size) }}</th>
                                 <td>{{ $item->tip_kacenja ?? $item->tshirt_color }}</td>
                                 <td>{{ ucfirst($item->plastifikacija ?? $item->tshirt_type) }}</td>
                                 <td>{{ $item->quantity }}

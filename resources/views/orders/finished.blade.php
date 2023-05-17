@@ -78,6 +78,10 @@
                                             <b-icon icon="eye" variant="success" font-scale="1"></b-icon>
                                         </a>
 
+                                        <a href="/pdf/order/{{ $order->id }}">
+                                            <b-icon icon="printer-fill" variant="info" font-scale="1"></b-icon>
+                                        </a>
+
                                     </td>
                                 </tr>
                             @endforeach
