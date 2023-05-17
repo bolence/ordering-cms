@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Customer;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -38,7 +39,7 @@ class HomeController extends Controller
      */
     public function notifications()
     {
-        $notifications = DB::table('notifications')->whereDate('created_at', '=', now());
+        $notifications = DB::table('notifications')->where('notifiable_id', Auth::id())->whereDate('created_at', '=', now());
         $notifications = $notifications->orderByDesc('id')->take(5)->get();
         $count_notifications = $notifications->count();
 
